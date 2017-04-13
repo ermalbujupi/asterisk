@@ -14,17 +14,19 @@
 <body cz-shortcut-listen="true">
 <header>
     <nav class="top-nav blue">
+        <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
         <ul id="dropdown1" class="dropdown-content">
             <li><a href="#!">one</a></li>
             <li><a href="#!">two</a></li>
         </ul>
             <div class="nav-wrapper ">
+                <h4 class="brand-logo center">@yield('page')</h4>
                 <ul class="right">
                     <a class='dropdown-button ' href='#' data-activates='dropdown1'>Info</a>
                 </ul>
             </div>
     </nav>
-    <div class="container"><a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+    <div class="container"></div>
     <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
         <li class="logo"><a id="logo-container" href="#" class="brand-logo">
             <h1>logo </h1>
@@ -35,10 +37,11 @@
     </ul>
 </header>
 <main>
-    <div class="container-fluid">
-        @yield('content')
-        @yield('modals')
-    </div>
+    <main>
+        <div class="container">
+            @yield('content')
+            @yield('modals')
+        </div>
 </main>
 <script type="text/javascript">
     var baseUrl = "{{ URL::to('/') }}";

@@ -7,8 +7,12 @@
 @section('styles')
 @endsection
 
-@section('content')
+@section('page')
+    Dashboard
+@endsection
 
+@section('content')
+awdwa
 @endsection
 
 @section('modals')
