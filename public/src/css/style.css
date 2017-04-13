@@ -9,8 +9,45 @@
 .fa {
     display: inherit !important;
 }
+
+.user-menu{
+    margin-right: 15px;
+}
+
+#toast-container {
+    top: auto !important;
+    right: auto !important;
+    bottom: 10%;
+    left:7%;
+}
+
+.loader {
+    position: absolute;
+    top :0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.loading_modal{
+    background: transparent !important;
+    box-shadow: none !important;
+    height: 100%;
+    overflow: hidden !important;
+}
+
+
 @media only screen and (min-width: 768px) {
     main .container{
-        padding-left: 150px;
+        margin-left: 350px;
+        margin-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .user-menu{
+        margin-right: 15px;
+        margin-top: 18px;
     }
 }
