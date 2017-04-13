@@ -15,14 +15,15 @@
 <header>
     <nav class="top-nav blue">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-        </ul>
             <div class="nav-wrapper ">
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="{{route('logout')}}">Log Out</a></li>
+                    <li><a href="#!">Account</a></li>
+                </ul>
                 <h4 class="brand-logo center">@yield('page')</h4>
-                <ul class="right">
-                    <a class='dropdown-button ' href='#' data-activates='dropdown1'>Info</a>
+                <ul class="right user-menu">
+                    <li><i class="fa fa-user fa-fw dropdown-button" href='#' data-activates='dropdown1'></i></li>
+                    <li><i class="fa fa-caret-down dropdown-button"  data-activates='dropdown1'></i></li>
                 </ul>
             </div>
     </nav>
@@ -30,31 +31,41 @@
     <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
         <li class="logo"><a id="logo-container" href="#" class="brand-logo">
             <h1>logo </h1>
-        <li class="bold"><a href="#" class="waves-effect waves-teal"><i class="fa fa-bar-chart menu-item"></i>Dashboard  </a></li>
-        <li class="bold"><a href="#" class="waves-effect waves-teal"><i class="fa fa-rocket"></i>Products</a></li>
-        <li class="bold"><a href="#" class="waves-effect waves-teal"><i class="fa fa-users"></i>Users</a></li>
-        <li class="bold"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>
+        <li class="bold {{Request::is('/') ? 'active':''}}"><a href="{{route('index')}}" class="waves-effect waves-teal"><i class="fa fa-bar-chart menu-item"></i>Dashboard  </a></li>
+        <li class="bold {{Request::is('stock') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-rocket"></i>Products</a></li>
+        <li class="bold {{Request::is('users') ? 'active':''}}"><a href="{{route('users')}}" class="waves-effect waves-teal"><i class="fa fa-users"></i>Users</a></li>
+        <li class="bold {{Request::is('log') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>
     </ul>
 </header>
 <main>
-    <main>
         <div class="container">
             @yield('content')
             @yield('modals')
+            <div id="loading_modal" class="modal loading_modal">
+                <div class="modal-content">
+                    <div class="preloader-wrapper active loader">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 </main>
 <script type="text/javascript">
     var baseUrl = "{{ URL::to('/') }}";
     var token = "{{ csrf_token() }}";
 </script>
-<script type="text/javascript" src="{{URL::asset('src/js/jquery-2.2.3.min.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('src/bootstrap/js/bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('src/js/jquery-3.1.1.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('src/js/materialize.js')}}"></script>
 <script>
-
     $('.button-collapse').sideNav();
-
-
     function ajax(method, url, params, callback, callbackParams) {
         var xhttp;
 
@@ -91,6 +102,18 @@
         xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xhttp.send(params + "&_token=" + token);
     }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.modal').modal({
+            dismissible: false
+        });
+
+        $('.test').click(function () {
+            $('#loading_modal').modal('open');
+        });
+    })
 </script>
 @yield('scripts')
 </body>

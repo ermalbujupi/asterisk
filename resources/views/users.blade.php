@@ -8,7 +8,7 @@
 @endsection
 
 @section('page')
-    Dashboard
+    Users
 @endsection
 
 @section('content')

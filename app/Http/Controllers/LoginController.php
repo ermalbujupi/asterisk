@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,10 +22,10 @@ class LoginController extends Controller
 
         if(!Auth::attempt(['username' => $request['username'], 'password' => $request['password']]))
         {
-            return redirect()->back()->with(['fail' => 'Error']);
+            return Response::json(['message'=>'Email or Password Incorrect'],400);
         }
         else{
-            return redirect()->route('index');
+            return Response::json(['message'=>'OK'],200);
         }
     }
 
