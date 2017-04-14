@@ -1,10 +1,10 @@
 $(function(){
-
   //Shtimi i produktion me onclick dhe validimi i fushave
    $('#save_product').on('click',function(){
       saveProduct();
-
    });
+
+
 });
 
 //metod per shtimin e produktit

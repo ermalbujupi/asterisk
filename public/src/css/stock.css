@@ -1,0 +1,15 @@
+.fixed-action-btn{
+    position: relative !important;
+    padding: 0;
+    bottom: auto;
+    right: auto;
+}
+
+.fixed-action-btn.horizontal{
+    padding:0;
+}
+
+.fixed-action-btn.horizontal ul{
+    right: 80px;
+    top:16%;
+}

@@ -32,7 +32,7 @@
         <li class="logo"><a id="logo-container" href="#" class="brand-logo">
             <h1>logo </h1>
         <li class="bold {{Request::is('/') ? 'active':''}}"><a href="{{route('index')}}" class="waves-effect waves-teal"><i class="fa fa-bar-chart menu-item"></i>Dashboard  </a></li>
-        <li class="bold {{Request::is('stock') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-rocket"></i>Products</a></li>
+        <li class="bold {{Request::is('stock') ? 'active':''}}"><a href="{{route('stock')}}" class="waves-effect waves-teal"><i class="fa fa-rocket"></i>Products</a></li>
         <li class="bold {{Request::is('users') ? 'active':''}}"><a href="{{route('users')}}" class="waves-effect waves-teal"><i class="fa fa-users"></i>Users</a></li>
         <li class="bold {{Request::is('log') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>
     </ul>
