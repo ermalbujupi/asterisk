@@ -47,10 +47,25 @@ Route::group(['middleware' => ['auth']], function () {
        'as' => 'stock.edit_product'
    ]);
 
-
    Route::post('/stock/delete_product',[
             'uses' => 'StockController@deleteProduct',
             'as' =>'stock.delete_product'
     ]);
+
+    Route::any('/users/save_user',[
+        'uses' =>'UsersController@saveUser',
+        'as' => 'users.save_user'
+    ]);
+
+    Route::post('/users/get_user',[
+        'uses' =>'UsersController@getUser',
+        'as' => 'users.get_user'
+    ]);
+
+
+    Route::post('/users/edit_user',[
+       'uses' => 'UsersController@editUser',
+       'as' => 'users.edit_user'
+   ]);
 
 });

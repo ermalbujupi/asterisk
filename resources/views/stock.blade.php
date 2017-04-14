@@ -215,7 +215,7 @@
 
 @section('scripts')
   <script type="text/javascript">
-      $('.modal').modal();
+
   </script>
   <script type="text/javascript" src="{{URL::asset('src/js/stock.js')}}"></script>
 @endsection

@@ -113,6 +113,8 @@
         $('.test').click(function () {
             $('#loading_modal').modal('open');
         });
+
+        
     })
 </script>
 @yield('scripts')
