@@ -159,6 +159,20 @@
 </div>
 <!--/Edit  User Modal-->
 
+<!-- Delete User Modal -->
+<div id="deleteProductModal" class="modal">
+  <div class="modal-content">
+    <h4>Delete User</h4>
+
+    <p>Are you sure you want to delete this user</p>
+  </div>
+      <div class="modal-footer">
+        <button  type="submit" id="delete_user" href="#!" class="modal-action modal-close waves-effect waves-green btn "><i class="fa fa-check right"></i> Yes</button>
+          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>No</a>
+      </div>
+    </div>
+  </div>
+  <!-- /Delet user modal-->
 
 @endsection
 

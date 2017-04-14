@@ -68,4 +68,9 @@ Route::group(['middleware' => ['auth']], function () {
        'as' => 'users.edit_user'
    ]);
 
+   Route::post('/users/delete_user',[
+       'uses' =>'UsersController@deleteUser',
+       'as' =>'user.delete_user'
+   ]);
+
 });

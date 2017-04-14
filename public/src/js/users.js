@@ -16,6 +16,17 @@ $(function(){
       var id = $(this).val();
       edit_user(id);
    });
+//on-click trigger to delete user
+   $('.delete_user_trigger').on('click',function(){
+       var id = $(this).attr('id');
+       $('#delete_user').val(id);
+   })
+
+//Delete user
+   $('#delete_user').on('click',function(){
+     var user_id = this.value;
+      ajax("POST","/users/delete_user","id="+user_id,userDeleted,"");
+   });
 
 
 });
@@ -117,5 +128,15 @@ function userEdited(params,success,responseObj){
     }
     else{
         Materialize.toast(responseObj.message,3000,'red');
+    }
+}
+
+
+function userDeleted(params,success,responseObj){
+    if(success){
+        Materialize.toast(responseObj.message,3000,'green');
+        location.reload();
+    }else{
+        alertify.error(responseObj.message,3000,'red');
     }
 }

@@ -62,4 +62,15 @@ class UsersController extends Controller
             return Response::json(['message'=>'Error Editing User'],400);
         }
     }
+
+    public function deleteUser(Request $req){
+        $id = $req['id'];
+        $user = User::find($id);
+        $user->system_deleted = 1;
+        if($user->save()){
+            return Response::json(['message' =>'User Deleted Successfully'],200);
+        }else{
+            return Response::json(['message'=>'Error Deleting User'],400);
+        }
+    }
 }
