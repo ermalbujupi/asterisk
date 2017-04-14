@@ -48,7 +48,7 @@
                     <td>{{$product->imei}}</td>
                     <td>
                         <div class="fixed-action-btn horizontal">
-                            <a id="action" class="btn-floating btn-small teal">
+                            <a id="action" class="btn-floating btn-small blue-grey darken-1">
                                 <i class="fa fa-bars"></i>
                             </a>
                             <ul>
@@ -123,8 +123,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect waves-green btn "><i class="fa fa-check right"></i> Save</button>
-          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>Cancel</a>
+        <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
+          <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
       </div>
     </div>
     </div>
@@ -186,8 +186,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button  type="submit" id="edit_product" href="#!" class="modal-action waves-effect waves-green btn "><i class="fa fa-check right"></i> Save</button>
-          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>Cancel</a>
+        <button  type="submit" id="edit_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
+          <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
       </div>
     </div>
     </div>
@@ -203,8 +203,8 @@
     <p>Are you sure you want to delete this product</p>
   </div>
       <div class="modal-footer">
-        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "><i class="fa fa-check right"></i> Yes</button>
-          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>No</a>
+        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Yes</button>
+          <a class="modal-action modal-close waves-effect waves-light btn">No</a>
       </div>
     </div>
   </div>
