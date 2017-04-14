@@ -10,10 +10,23 @@ $(function(){
        $('#edit_product').val(id);
    });
 
+//Edit Product
    $('#edit_product').on('click',function(){
       var id = $(this).val();
       editProduct(id);
    });
+
+//Give id to the submit button
+   $('.delete_product_trigger').on('click',function(){
+     var id = $(this).attr('id');
+     $('#delete_product').val(id);
+   });
+//Delete Product
+   $('#delete_product').on('click',function(){
+     ajax("POST","/stock/delete_product","id="+this.value,productDeleted,"");
+     $('#deleteProductModal').hide();
+   });
+
 });
 
 
@@ -201,4 +214,15 @@ function productEdited(params,success,responseObj){
     }
     else
         Materialize.toast(responseObj.message,3000,'green');
+}
+
+
+function productDeleted(params,success,responseObj){
+    if(success){
+      Materialize.toast(responseObj.message,3000,'green');
+      location.reload();
+
+    }else{
+        alertify.error(responseObj.message,3000,'red');
+    }
 }

@@ -47,4 +47,10 @@ Route::group(['middleware' => ['auth']], function () {
        'as' => 'stock.edit_product'
    ]);
 
+
+   Route::post('/stock/delete_product',[
+            'uses' => 'StockController@deleteProduct',
+            'as' =>'stock.delete_product'
+    ]);
+
 });

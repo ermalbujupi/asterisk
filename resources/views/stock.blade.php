@@ -54,7 +54,7 @@
                             <ul>
                                 <li><a id="{{$product->id}}"   href="#editProductModal"  data-target="modal1" class="btn-floating tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Edit Product"><i class="fa fa-pencil"></i></a></li>
                                 <!--<li><a id="" class="btn-floating yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="Sell Product"><i class="fa fa-dollar"></i></a></li>-->
-                                <li><a id="{{$product->id}}"     class="btn-floating red tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Delete Product"><i class="fa fa-trash-o"></i></a></li>
+                                <li><a id="{{$product->id}}"  href="#deleteProductModal" class="btn-floating red tooltipped delete_product_trigger" data-position="top" data-delay="50" data-tooltip="Delete Product"><i class="fa fa-trash-o"></i></a></li>
                             </ul>
                         </div>
                     </td>
@@ -158,7 +158,7 @@
           </select>
         </div>
 
-        <div class="col s12">
+        <div class="row">
             <div class="col s12 ">
               <div class="input-field col s12">
                 <input name="edit_name"  id="edit_name" type="text" class="validate">
@@ -195,8 +195,22 @@
 <!--</form>-->
 </div>
 </div>
-<!--Edit Product Modal-->
+<!--Delete Product Modal-->
+<div id="deleteProductModal" class="modal">
+  <div class="modal-content">
+    <h4>Delete Product</h4>
 
+    <p>Are you sure you want to delete this product</p>
+  </div>
+      <div class="modal-footer">
+        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "><i class="fa fa-check right"></i> Yes</button>
+          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>No</a>
+      </div>
+    </div>
+  </div>
+<!--Delete Product Modal-->
+
+<!--/Delete Product Modal-->
 @endsection
 
 @section('scripts')

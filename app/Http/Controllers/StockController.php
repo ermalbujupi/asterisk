@@ -16,7 +16,14 @@ class StockController extends Controller
     }
 
     public function getAllProducts(){
-        $products = DB::table('products')->join('categories','categories.id','=','products.category_id')->join('brands','brands.id','=','products.brand_id')->where('products.quantity','>','0')->select('products.*','categories.name as category','brands.name as brand')->get();
+        $products = DB::table('products')
+            ->join('categories','categories.id','=','products.category_id')
+            ->join('brands','brands.id','=','products.brand_id')
+            ->where('products.quantity','>','0')
+            ->where('system_deleted','=','0')
+            ->select('products.*','categories.name as category','brands.name as brand')
+            ->get();
+
         $brands = Brand::all();
         $categories = Category::all();
         return view('stock',['products'=>$products,'brands'=>$brands,'categories'=>$categories]);
@@ -48,7 +55,6 @@ class StockController extends Controller
     }
 
     public function getProduct(Request $request){
-    
        $id = $request['product_id'];
        $product = Product::find($id);
        return Response::json(['product'=>$product],200);
@@ -72,4 +78,18 @@ class StockController extends Controller
        }
 
    }
+
+
+   public function deleteProduct(Request $req){
+      $id  = $req['id'];
+      $product = Product::find($id);
+      $product->system_deleted = 1;
+      if($product->save()){
+          return Response::json(['message'=>'Product Successfully Deleted']);
+      }else{
+          return Response::json(['message'=>'Couldn\'t Delet Product']);
+      }
+  }
+
+
 }
