@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
@@ -46,4 +46,30 @@ class StockController extends Controller
         }
         return Response::json(['message'=>'Error'],400);
     }
+
+    public function getProduct(Request $request){
+    
+       $id = $request['product_id'];
+       $product = Product::find($id);
+       return Response::json(['product'=>$product],200);
+   }
+
+    public function editProduct(Request $request){
+       $id = $request['id'];
+       $product = Product::find($id);
+       $product->name = $request['name'];
+       $product->category_id = $request['category'];
+       $product->brand_id = $request['brand'];
+       $product->price = $request['price'];
+       $product->quantity = $request['quantity'];
+       $product->imei = $request['imei'];
+       $product->description = $request['description'];
+       if($product->save()){
+           return Response::json(['message'=>'Product Edited']);
+       }
+       else{
+           return Response::json(['message'=>'Error Product editing']);
+       }
+
+   }
 }

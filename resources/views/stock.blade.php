@@ -20,7 +20,7 @@
 
         <div class="card-content">
           <div class="right-align">
-              <a class="waves-effect waves-light btn" href="#modal1">Add New Product</a>
+              <a class="waves-effect waves-light btn" href="#addNewProductModal">Add New Product</a>
           </div>
             <table border="1" class="responsive-table striped ">
 
@@ -48,14 +48,13 @@
                     <td>{{$product->imei}}</td>
                     <td>
                         <div class="fixed-action-btn horizontal">
-                            <a class="btn-floating btn-small teal">
+                            <a id="action" class="btn-floating btn-small teal">
                                 <i class="fa fa-bars"></i>
                             </a>
                             <ul>
-                                <li><a class="btn-floating tooltipped" data-position="top" data-delay="50" data-tooltip="Edit Product"><i class="fa fa-pencil"></i></a></li>
-                                <li><a class="btn-floating yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="Sell Product"><i class="fa fa-dollar"></i></a></li>
-                                <li><a class="btn-floating red tooltipped" data-position="top" data-delay="50" data-tooltip="Delete Product"><i class="fa fa-trash-o"></i></a></li>
-
+                                <li><a id="{{$product->id}}"   href="#editProductModal"  data-target="modal1" class="btn-floating tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Edit Product"><i class="fa fa-pencil"></i></a></li>
+                                <!--<li><a id="" class="btn-floating yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="Sell Product"><i class="fa fa-dollar"></i></a></li>-->
+                                <li><a id="{{$product->id}}"     class="btn-floating red tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Delete Product"><i class="fa fa-trash-o"></i></a></li>
                             </ul>
                         </div>
                     </td>
@@ -73,7 +72,7 @@
 
 @section('modals')
 <!--Add New Product -->
-<div id="modal1" class="modal modal-sm modal-fixed-footer">
+<div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
   <div class="modal-content">
     <h4>Add New Product</h4>
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
@@ -133,6 +132,71 @@
 <!--</form>-->
 </div>
 </div>
+<!--/Add new Product Modal-->
+
+<!--Edit Product Modal-->
+<div id="editProductModal" class="modal modal-sm modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Edit Product</h4>
+    <!--<form action="{{route('stock.save_product')}}" method="POST">-->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <div class="input-field col s6">
+          <select name="edit_category" id="edit_category" class="browser-default">
+            <option value="0" disabled selected>Choose your Category</option>
+            @foreach($categories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="input-field col s6">
+          <select name="brand" id="edit_brand" class="browser-default">
+            <option value="0" disabled selected>Choose your Brand</option>
+            @foreach($brands as $brand)
+            <option value="{{$brand->id}}">{{$brand->name}}</option>
+            @endforeach
+          </select>
+        </div>
+
+        <div class="col s12">
+            <div class="col s12 ">
+              <div class="input-field col s12">
+                <input name="edit_name"  id="edit_name" type="text" class="validate">
+                <label class="active" for="first_name">Product Name</label>
+              </div>
+
+
+            <div class="input-field col s6">
+                <input id="edit_price" name="price" type="number" class="validate">
+                <label class="active" for="last_name">Price</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="edit_quantity" name="quantity" type="number" class="validate">
+                <label class="active" for="last_name">Quantity</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="edit_imei" type="text" name="imei" class="validate">
+                <label class="active" for="last_name">IMEI</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea id="edit_description" name="description" class="materialize-textarea"></textarea>
+              <label class="active" for="textarea1">Description</label>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button  type="submit" id="edit_product" href="#!" class="modal-action waves-effect waves-green btn "><i class="fa fa-check right"></i> Save</button>
+          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>Cancel</a>
+      </div>
+    </div>
+    </div>
+
+<!--</form>-->
+</div>
+</div>
+<!--Edit Product Modal-->
+
 @endsection
 
 @section('scripts')

@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
         'uses'=>'HomeController@getIndex',
         'as'=>'index'
     ]);
-    
+
     Route::get('/users',[
         'uses'=>'UsersController@getUsers',
         'as'=>'users'
@@ -36,5 +36,15 @@ Route::group(['middleware' => ['auth']], function () {
        'uses'=>'StockController@saveProduct',
        'as'=>'stock.save_product'
    ]);
-    
+
+   Route::post('/stock/get_product/',[
+        'uses' => 'StockController@getProduct',
+        'as' => 'stock.get_product'
+    ]);
+
+   Route::post('/stock/edit_product',[
+       'uses' => 'StockController@editProduct',
+       'as' => 'stock.edit_product'
+   ]);
+
 });
