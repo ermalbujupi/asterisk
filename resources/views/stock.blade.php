@@ -54,8 +54,8 @@
                                 <li><a id="{{$product->id}}"  href="#deleteProductModal" class="btn-floating red tooltipped delete_product_trigger" data-position="top" data-delay="50" data-tooltip="Delete Product"><i class="fa fa-trash-o"></i></a></li>
                             </ul>
                             -->
-                        <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
-                        <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
+                        <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
+                        <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
 
 
                     </td>

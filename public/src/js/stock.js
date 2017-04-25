@@ -108,7 +108,25 @@ function saveProduct()
       },
       success:function(responseObj){
         Materialize.toast(responseObj.message,3000,'green');
-        location.reload();
+
+        var product = responseObj.product;
+        var brand = responseObj.brand;
+        var category = responseObj.category
+
+        $('tbody').append(
+        '<tr class="none-top-border">'
+        +'<td>'+product.id+'</td>'
+        +'<td>'+product.name+'</td>'
+        +'<td>'+brand.name+'</td>'
+        +'<td>'+category.name+'</td>'
+        +'<td>'+product.price+'</td>'
+        +'<td>'+product.quantity+'</td>'
+        +'<td>'+product.imei+'</td>'
+        +'<td>'
+          +'<a id="'+product.id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
+          +'<a id="'+product.id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+        +'</td>'
+        +'</tr>');
       },
       error:function(responseObj){
           Materialize.toast(responseObj.message,3000,'red');

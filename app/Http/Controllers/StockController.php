@@ -49,7 +49,9 @@ class StockController extends Controller
         $product->system_deleted = "0";
         if($product->save())
         {
-            return Response::json(['message'=>'Product Added'],200);
+           $brand = Brand::find($product->brand_id);
+           $category = Category::find($product->category_id);
+            return Response::json(['message'=>'Product Added','product'=>$product,'brand'=>$brand,'category'=>$category],200);
         }
         return Response::json(['message'=>'Error'],400);
     }
