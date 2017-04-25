@@ -13,3 +13,13 @@
     right: 80px;
     top:16%;
 }
+
+.action_button{
+    height:30px;
+    width:30px;
+    padding-top:7px;
+}
+
+.stock_table td{
+    padding: 5px!important;
+}
