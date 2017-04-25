@@ -78,45 +78,49 @@
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <div class="input-field col s6">
-          <select name="category" id="category" class="browser-default">
-            <option value="0" disabled selected>Choose your Category</option>
-            @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="input-field col s6">
-          <select name="brand" id="brand" class="browser-default">
-            <option value="0" disabled selected>Choose your Brand</option>
-            @foreach($brands as $brand)
-            <option value="{{$brand->id}}">{{$brand->name}}</option>
-            @endforeach
-          </select>
-        </div>
-
         <div class="col s12">
+            
+            <div class="col s6">
+                <h6>Category</h6>
+                <select name="category" id="category" class="browser-default">
+                    <option value="0" disabled selected>Choose your Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col s6">
+                <h6>Brand</h6>
+                <select name="brand" id="brand" class="browser-default">
+                    <option value="0" disabled selected>Choose your Brand</option>
+                    @foreach($brands as $brand)
+                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="col s12 ">
+                <br>
               <div class="input-field col s12">
-                <input name="name"  id="name" type="text" class="validate">
+                <input name="name"  id="name" type="text" class="validate" placeholder="">
                 <label for="first_name">Product Name</label>
               </div>
 
-
             <div class="input-field col s6">
-                <input id="price" name="price" type="number" class="validate">
+                <input id="price" name="price" type="number" class="validate" placeholder="">
                 <label for="last_name">Price</label>
             </div>
             <div class="input-field col s6">
-                <input id="quantity" name="quantity" type="number" class="validate">
+                <input id="quantity" name="quantity" type="number" class="validate" placeholder="">
                 <label for="last_name">Quantity</label>
             </div>
             <div class="input-field col s12">
-                <input id="imei" type="text" name="imei" class="validate">
+                <input id="imei" type="text" name="imei" class="validate" placeholder="">
                 <label for="last_name">IMEI</label>
             </div>
             <div class="input-field col s12">
-              <textarea id="description" name="description" class="materialize-textarea"></textarea>
+              <textarea id="description" name="description" class="materialize-textarea" placeholder=""></textarea>
               <label for="textarea1">Description</label>
             </div>
         </div>
@@ -141,7 +145,7 @@
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <div class="input-field col s6">
+        <!--<div class="input-field col s6">
           <select name="edit_category" id="edit_category" class="browser-default">
             <option value="0" disabled selected>Choose your Category</option>
             @foreach($categories as $category)
@@ -156,8 +160,7 @@
             <option value="{{$brand->id}}">{{$brand->name}}</option>
             @endforeach
           </select>
-        </div>
-
+        </div>-->
         <div class="row">
             <div class="col s12 ">
               <div class="input-field col s12">
@@ -214,8 +217,5 @@
 @endsection
 
 @section('scripts')
-  <script type="text/javascript">
-
-  </script>
   <script type="text/javascript" src="{{URL::asset('src/js/stock.js')}}"></script>
 @endsection

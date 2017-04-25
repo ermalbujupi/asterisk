@@ -27,6 +27,8 @@ $(function(){
      $('#deleteProductModal').hide();
    });
 
+    $('select').material_select();
+
 });
 
 
