@@ -23,7 +23,7 @@
       <div class="right-align">
           <a class="waves-effect waves-light btn" href="#addNewUserModal">Add New User</a>
       </div>
-        <table border="1" class="responsive-table striped ">
+        <table border="1" class="responsive-table striped users_table">
 
             <thead>
             <tr class="primary-color">
@@ -44,16 +44,8 @@
                 <td>{{$user->email}}</td>
                 <td>{{$user->role}}</td>
                 <td>
-                    <div class="fixed-action-btn horizontal">
-                        <a id="action" class="btn-floating btn-small teal">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                        <ul>
-                            <li><a id="{{$user->id}}"   href="#editUserModal"   class="btn-floating tooltipped edit_user_trigger" data-position="top" data-delay="50" data-tooltip="Edit User"><i class="fa fa-pencil"></i></a></li>
-                            <!--<li><a id="" class="btn-floating yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="Sell Product"><i class="fa fa-dollar"></i></a></li>-->
-                            <li><a id="{{$user->id}}"  href="#deleteProductModal" class="btn-floating red tooltipped delete_user_trigger" data-position="top" data-delay="50" data-tooltip="Delete User"><i class="fa fa-trash-o"></i></a></li>
-                        </ul>
-                    </div>
+                    <a id="{{$user->id}}"   href="#editUserModal"   class="btn btn-floating blue tooltipped edit_user_trigger action_button" data-position="top" data-delay="50" data-tooltip="Edit User"><span class="fa fa-pencil"></span></a></li>
+                    <a id="{{$user->id}}"  href="#deleteProductModal" class="btn btn-floating red tooltipped delete_user_trigger action_button" data-position="top" data-delay="50" data-tooltip="Delete User"><span class="fa fa-trash-o"></span></a></li>
                 </td>
             </tr>
             @endforeach
