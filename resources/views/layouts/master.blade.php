@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{URL::asset('src/font-awesome-4.7.0/css/font-awesome.css')}}">
     <link rel="stylesheet" href="{{URL::asset('src/css/materialize.css')}}">
     <link rel="stylesheet" href="{{URL::asset('src/css/style.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('src/material-icons/iconfont/material-icons.css')}}">
 
     @yield('styles')
 </head>
@@ -109,12 +110,6 @@
         $('.modal').modal({
             dismissible: false
         });
-
-        $('.test').click(function () {
-            $('#loading_modal').modal('open');
-        });
-
-        
     })
 </script>
 @yield('scripts')
