@@ -64,6 +64,10 @@
             overflow: hidden !important;
         }
 
+        #send_email{
+          margin-left: 11px;
+        }
+
 
     </style>
 </head>
@@ -103,7 +107,7 @@
                             <label for='password'>Password</label>
                         </div>
                         <label style='float: right;'>
-                            <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                            <a class='pink-text' href='#passwordForgetModal'><b>Forgot Password?</b></a>
                         </label>
                     </div>
 
@@ -119,6 +123,24 @@
             </div>
         </div>
     </div>
+    <!--Password Forget Modal -->
+    <div id="passwordForgetModal" class="modal">
+      <div class="modal-content">
+        <h4>Reset Password</h4>
+        <div class="row">
+            <div class="col s12">
+                <label>Email:</label>
+                <input type="text" id="password_reset_email"/>
+            </div>
+        </div>
+      </div>
+          <div class="modal-footer">
+            <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect waves-green btn "> Send Email</button>
+            <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
+          </div>
+        </div>
+      </div>
+    <!--/password Forget Modal -->
 
     <!-- Modal Structure -->
     <div id="loading_modal" class="modal loading_modal">
@@ -211,4 +233,5 @@
 
 
 </script>
+<script type="text/javascript" src="{{URL::asset('src/js/password_reset.js')}}"></script>
 </body></html>
