@@ -262,12 +262,19 @@ function productEdited(params,success,responseObj){
     if(success)
     {
       var product = responseObj.product;
+      var brand = responseObj.brand;
+      var category = responseObj.category;
 
-       $('tbody td:first-child').each(function(){
+       $('tbody tr').each(function(){
 
-          if($(this).text() == product.id){
+          if($(this).find('td:first-child').text() == product.id){
 
-            $(this).parent();
+             $(this).find('td:nth-child(2)').text(product.name);
+             $(this).find('td:nth-child(3)').text(brand.name);
+             $(this).find('td:nth-child(4)').text(category.name);
+             $(this).find('td:nth-child(6)').text(product.price);
+             $(this).find('td:nth-child(5)').text(product.quantity);
+             $(this).find('td:nth-child(7)').text(product.imei);
           }
        });
         Materialize.toast(responseObj.message,3000,'green');

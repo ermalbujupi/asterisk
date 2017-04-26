@@ -179,8 +179,8 @@
                 <label class="active" for="last_name">Quantity</label>
             </div>
             <div class="input-field col s12">
-                <input id="imei" type="number" name="imei" minlength="16" maxlength="16"  placeholder="" data-length="16"   >
-                <label for="last_name">IMEI</label>
+                <input id="edit_imei" type="text" name="imei" class="validate">
+                <label class="active" for="last_name">IMEI</label>
             </div>
             <div class="input-field col s12">
               <textarea id="edit_description" name="description" class="materialize-textarea"></textarea>
