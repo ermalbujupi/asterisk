@@ -22,7 +22,7 @@
           <div class="right-align">
               <a class="waves-effect waves-light btn" href="#addNewProductModal">Add New Product</a>
           </div>
-            <table border="1" class="responsive-table striped stock_table">
+            <table id="stock_table" border="1" class="responsive-table striped stock_table">
 
                 <thead>
                 <tr class="primary-color">
@@ -47,7 +47,7 @@
                     <td>{{$product->quantity}}</td>
                     <td>{{$product->imei}}</td>
 
-                    <td>
+                    <td class="btn_info">
                           <!--
                             <ul>
                                 <li><a id="{{$product->id}}"   href="#editProductModal"  data-target="modal1" class="btn-floating tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Edit Product"><i class="fa fa-pencil"></i></a></li>
@@ -56,8 +56,6 @@
                             -->
                         <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
-
-
                     </td>
 
 
@@ -82,7 +80,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <div class="col s12">
-            
+
             <div class="col s6">
                 <h6>Category</h6>
                 <select name="category" id="category" class="browser-default">
@@ -148,7 +146,7 @@
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!--<div class="input-field col s6">
+        <div class="input-field col s6">
           <select name="edit_category" id="edit_category" class="browser-default">
             <option value="0" disabled selected>Choose your Category</option>
             @foreach($categories as $category)
@@ -163,7 +161,7 @@
             <option value="{{$brand->id}}">{{$brand->name}}</option>
             @endforeach
           </select>
-        </div>-->
+        </div>
         <div class="row">
             <div class="col s12 ">
               <div class="input-field col s12">
@@ -181,8 +179,8 @@
                 <label class="active" for="last_name">Quantity</label>
             </div>
             <div class="input-field col s12">
-                <input id="edit_imei" type="text" name="imei" class="validate">
-                <label class="active" for="last_name">IMEI</label>
+                <input id="imei" type="number" name="imei" minlength="16" maxlength="16"  placeholder="" data-length="16"   >
+                <label for="last_name">IMEI</label>
             </div>
             <div class="input-field col s12">
               <textarea id="edit_description" name="description" class="materialize-textarea"></textarea>

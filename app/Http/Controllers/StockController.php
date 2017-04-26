@@ -73,7 +73,7 @@ class StockController extends Controller
        $product->imei = $request['imei'];
        $product->description = $request['description'];
        if($product->save()){
-           return Response::json(['message'=>'Product Edited']);
+           return Response::json(['message'=>'Product Edited','product'=>$product]);
        }
        else{
            return Response::json(['message'=>'Error Product editing']);
