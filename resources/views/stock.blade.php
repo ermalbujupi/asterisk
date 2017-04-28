@@ -19,9 +19,19 @@
 
 
         <div class="card-content">
-          <div class="right-align">
-              <a class="waves-effect waves-light btn" href="#addNewProductModal">Add New Product</a>
-          </div>
+
+
+
+              <div class="left-align col s6">
+                  <a class="left-align waves-effect waves-light btn" href="#addNewProductModal">Add New Product</a>
+              </div>
+
+              <div class="right-align">
+                <input type="text" class="col s3"  id="name_search" placeholder="Search">
+              </div>
+
+
+
             <table id="stock_table" border="1" class="responsive-table striped stock_table">
 
                 <thead>
@@ -48,12 +58,6 @@
                     <td>{{$product->imei}}</td>
 
                     <td class="btn_info">
-                          <!--
-                            <ul>
-                                <li><a id="{{$product->id}}"   href="#editProductModal"  data-target="modal1" class="btn-floating tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Edit Product"><i class="fa fa-pencil"></i></a></li>
-                                <li><a id="{{$product->id}}"  href="#deleteProductModal" class="btn-floating red tooltipped delete_product_trigger" data-position="top" data-delay="50" data-tooltip="Delete Product"><i class="fa fa-trash-o"></i></a></li>
-                            </ul>
-                            -->
                         <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
                     </td>

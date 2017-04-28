@@ -18,7 +18,8 @@
     top: auto !important;
     right: auto !important;
     bottom: 10%;
-    left:7%;
+
+    float:right;
 }
 
 .loader {
@@ -64,4 +65,11 @@
     height:30px;
     width:30px;
     padding-top:7px;
+}
+
+#toast-container {
+    top: auto !important;
+    left: auto !important;
+    bottom: 10%;
+    right:7%;
 }

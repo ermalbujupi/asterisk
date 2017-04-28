@@ -44,10 +44,77 @@ $(function(){
                event.preventDefault();
        }
    });
+
+   $('#name_search').on('keyup',function(){
+        
+       var word  = $(this).val();
+
+       if(word.trim() === ""){
+            ajax("GET","/stock/get_all_products",productSearched,"")
+       }
+
+       ajax("POST","/stock/search_word","word="+word,productSearched,"")
+   });
+
+
+
+    $('#category').on('change',function(){
+       if($('#category option:selected').val() == 1 || $('#category option:selected').val() == 2) {
+           $('#quantity').prop('disabled',true);
+           $('#quantity').val(1);
+       }
+        else{
+           $('#quantity').prop('disabled',false);
+           $('#quantity').val('');
+           $('#imei').prop('disabled',true);
+       }
+    });
+
+    $('#edit_category').on('change',function(){
+        if($('#edit_category option:selected').val() == 1 || $('#edit_category option:selected').val() == 2) {
+            $('#edit_quantity').prop('disabled',true);
+            $('#edit_quantity').val(1);
+        }
+        else{
+            $('#edit_quantity').prop('disabled',false);
+            $('#edit_quantity').val('');
+            $('#edit_imei').prop('disabled',true);
+        }
+    });
    //--Kody yt ermal
 
 
 });
+
+function productSearched(params,success,responseObj){
+
+    if(success){
+
+        var products = responseObj.products;
+
+        $('tbody tr').remove();
+
+        for(var i = 0 ; i< products.length ; i++){
+            $('tbody').append(
+                '<tr class="none-top-border">'
+                +'<td>'+products[i].id+'</td>'
+                +'<td>'+products[i].name+'</td>'
+                +'<td>'+products[i].brand+'</td>'
+                +'<td>'+products[i].category+'</td>'
+                +'<td>'+products[i].price+'</td>'
+                +'<td>'+products[i].quantity+'</td>'
+                +'<td>'+products[i].imei+'</td>'
+                +'<td>'
+                +'<a id="'+products[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
+                +'<a id="'+products[i].id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'</td>'
+                +'</tr>');
+        }
+
+
+
+    }
+}
 
 
 
@@ -272,8 +339,8 @@ function productEdited(params,success,responseObj){
              $(this).find('td:nth-child(2)').text(product.name);
              $(this).find('td:nth-child(3)').text(brand.name);
              $(this).find('td:nth-child(4)').text(category.name);
-             $(this).find('td:nth-child(6)').text(product.price);
              $(this).find('td:nth-child(5)').text(product.quantity);
+             $(this).find('td:nth-child(6)').text(product.price);
              $(this).find('td:nth-child(7)').text(product.imei);
           }
        });

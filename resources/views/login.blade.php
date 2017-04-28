@@ -41,12 +41,7 @@
             margin-left: 35%;
         }
 
-        #toast-container {
-            top: auto !important;
-            left: auto !important;
-            bottom: 10%;
-            right:7%;
-        }
+
 
         .loader {
             position: absolute;

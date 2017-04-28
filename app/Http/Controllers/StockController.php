@@ -60,7 +60,17 @@ class StockController extends Controller
        $id = $request['product_id'];
        $product = Product::find($id);
        return Response::json(['product'=>$product],200);
-   }
+    }
+
+    public function  getProducts(){
+        $products = DB::table('products')
+            ->join('categories','categories.id','=','products.category_id')
+            ->join('brands','brands.id','=','products.brand_id')
+            ->where('products.quantity','>','0')
+            ->where('system_deleted','=','0')
+            ->select('products.*','categories.name as category','brands.name as brand')
+            ->get();
+    }
 
     public function editProduct(Request $request){
        $id = $request['id'];
@@ -93,7 +103,22 @@ class StockController extends Controller
       }else{
           return Response::json(['message'=>'Couldn\'t Delet Product']);
       }
-  }
+   }
+
+
+    public function search(Request $req){
+        $word = $req['word'];
+
+        $products = DB::table('products')
+            ->join('categories','categories.id','=','products.category_id')
+            ->join('brands','brands.id','=','products.brand_id')
+            ->where('products.system_deleted','=','0')
+            ->where('products.name','like','%'.$word.'%')
+            ->select('products.*','categories.name as category','brands.name as brand ')
+            ->get();
+
+        Return Response::json(['products'=>$products],200);
+    }
 
 
 }
