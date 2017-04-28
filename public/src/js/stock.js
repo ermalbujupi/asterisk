@@ -3,11 +3,11 @@ $(function(){
    $('#save_product').on('click',function(){
       saveProduct();
    });
-   //Fill EditProduct Modal
-   $('.edit_product_trigger').on('click',function(){
-       var id = $(this).attr('id');
-       ajax("POST","/stock/get_product","product_id="+id,fillEditModal,"");
-       $('#edit_product').val(id);
+
+   $('tbody').on('click','.edit_product_trigger',function(){
+     var id = $(this).attr('id');
+     ajax("POST","/stock/get_product","product_id="+id,fillEditModal,"");
+     $('#edit_product').val(id);
    });
 
 //Edit Product
@@ -17,7 +17,7 @@ $(function(){
    });
 
 //Give id to the submit button
-   $('.delete_product_trigger').on('click',function(){
+   $('tbody').on('click','.delete_product_trigger',function(){
      var id = $(this).attr('id');
      $('#delete_product').val(id);
    });
@@ -28,6 +28,24 @@ $(function(){
    });
 
     $('select').material_select();
+
+
+    //Kody yt ermal
+    $('#imei').on('keydown',function(event){
+      if($(this).val().length>=16){
+          if(event.keyCode !=8)
+           event.preventDefault();
+      }
+   });
+
+   $('#edit_imei').on('keydown',function(event){
+       if($(this).val().length>=16){
+           if(event.keyCode !=8 || event.keyCode != 9)
+               event.preventDefault();
+       }
+   });
+   //--Kody yt ermal
+
 
 });
 
@@ -56,6 +74,15 @@ function saveProduct()
             return false;
         }
     }
+
+    if(category !=3)
+    {
+       if(imei.length != 16){
+           Materialize.toast("IMEI length should be 16",3000,'red');
+           return false;
+      }
+   }
+
     if(name =="" || name.length <3 )
     {
         Materialize.toast("Please Write Name (Minimum 3 Characters)",3000,'red');
@@ -125,10 +152,15 @@ function saveProduct()
         +'<td>'+product.quantity+'</td>'
         +'<td>'+product.imei+'</td>'
         +'<td>'
-          +'<a id="'+product.id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
-          +'<a id="'+product.id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+          +'<a id="'+product.id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
+          +'<a id="'+product.id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
         +'</td>'
         +'</tr>');
+
+
+
+
+
       },
       error:function(responseObj){
           Materialize.toast(responseObj.message,3000,'red');
@@ -229,8 +261,24 @@ function editProduct(id){
 function productEdited(params,success,responseObj){
     if(success)
     {
+      var product = responseObj.product;
+      var brand = responseObj.brand;
+      var category = responseObj.category;
+
+       $('tbody tr').each(function(){
+
+          if($(this).find('td:first-child').text() == product.id){
+
+             $(this).find('td:nth-child(2)').text(product.name);
+             $(this).find('td:nth-child(3)').text(brand.name);
+             $(this).find('td:nth-child(4)').text(category.name);
+             $(this).find('td:nth-child(6)').text(product.price);
+             $(this).find('td:nth-child(5)').text(product.quantity);
+             $(this).find('td:nth-child(7)').text(product.imei);
+          }
+       });
         Materialize.toast(responseObj.message,3000,'green');
-        location.reload();
+
     }
     else
         Materialize.toast(responseObj.message,3000,'green');

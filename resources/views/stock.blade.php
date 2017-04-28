@@ -22,7 +22,7 @@
           <div class="right-align">
               <a class="waves-effect waves-light btn blue" href="#addNewProductModal"><i class="material-icons left">library_add</i> Add New Product</a>
           </div>
-            <table border="1" class="responsive-table striped stock_table">
+            <table id="stock_table" border="1" class="responsive-table striped stock_table">
 
                 <thead>
                 <tr class="primary-color">
@@ -47,7 +47,7 @@
                     <td>{{$product->quantity}}</td>
                     <td>{{$product->imei}}</td>
 
-                    <td>
+                    <td class="btn_info">
                           <!--
                             <ul>
                                 <li><a id="{{$product->id}}"   href="#editProductModal"  data-target="modal1" class="btn-floating tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Edit Product"><i class="fa fa-pencil"></i></a></li>
@@ -56,8 +56,6 @@
                             -->
                         <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
-
-
                     </td>
 
 
@@ -87,7 +85,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <div class="col s12">
-            
+
             <div class="col s6">
                 <h6>Category</h6>
                 <select name="category" id="category" class="browser-default">
@@ -108,6 +106,7 @@
                 </select>
             </div>
 
+
             <div class="col s12 ">
                 <br>
               <div class="input-field col s12">
@@ -116,7 +115,7 @@
               </div>
 
             <div class="input-field col s6">
-                <input id="price" name="price" type="number" class="validate" placeholder="">
+                <input id="price" name="price" type="number" step="any" class="validate" placeholder="">
                 <label for="last_name">Price</label>
             </div>
             <div class="input-field col s6">
@@ -124,7 +123,7 @@
                 <label for="last_name">Quantity</label>
             </div>
             <div class="input-field col s12">
-                <input id="imei" type="text" name="imei" class="validate" placeholder="">
+                <input id="imei" type="number" name="imei" minlength="16" maxlength="16"  placeholder="" data-length="16"   >
                 <label for="last_name">IMEI</label>
             </div>
             <div class="input-field col s12">
@@ -153,23 +152,27 @@
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!--<div class="input-field col s6">
-          <select name="edit_category" id="edit_category" class="browser-default">
-            <option value="0" disabled selected>Choose your Category</option>
-            @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="input-field col s6">
-          <select name="brand" id="edit_brand" class="browser-default">
-            <option value="0" disabled selected>Choose your Brand</option>
-            @foreach($brands as $brand)
-            <option value="{{$brand->id}}">{{$brand->name}}</option>
-            @endforeach
-          </select>
-        </div>-->
         <div class="row">
+          <div class="col s6">
+              <h6>Category</h6>
+              <select name="category" id="edit_category" class="browser-default">
+                  <option value="0" disabled selected>Choose your Category</option>
+                  @foreach($categories as $category)
+                      <option value="{{$category->id}}">{{$category->name}}</option>
+                  @endforeach
+              </select>
+          </div>
+
+          <div class="col s6">
+              <h6>Brand</h6>
+              <select name="brand" id="edit_brand" class="browser-default">
+                  <option value="0" disabled selected>Choose your Brand</option>
+                  @foreach($brands as $brand)
+                      <option value="{{$brand->id}}">{{$brand->name}}</option>
+                  @endforeach
+              </select>
+          </div>
+          <div class="col s12"><br></div>
             <div class="col s12 ">
               <div class="input-field col s12">
                 <input name="edit_name"  id="edit_name" type="text" class="validate">
@@ -178,7 +181,7 @@
 
 
             <div class="input-field col s6">
-                <input id="edit_price" name="price" type="number" class="validate">
+                <input id="edit_price" name="price" type="number" >
                 <label class="active" for="last_name">Price</label>
             </div>
             <div class="input-field col s6">
