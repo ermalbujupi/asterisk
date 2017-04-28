@@ -16,12 +16,13 @@
 <header>
     <nav class="top-nav blue">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
-            <div class="nav-wrapper ">
+        <div class="nav-wrapper ">
                 <ul id="dropdown1" class="dropdown-content">
-                    <li><a href="{{route('logout')}}">Log Out</a></li>
                     <li><a href="#!">Account</a></li>
+                    <li><a href="{{route('logout')}}">Log Out</a></li>
                 </ul>
                 <h4 class="brand-logo center">@yield('page')</h4>
+
                 <ul class="right user-menu">
                     <li><i class="fa fa-user fa-fw dropdown-button" href='#' data-activates='dropdown1'></i></li>
                     <li><i class="fa fa-caret-down dropdown-button"  data-activates='dropdown1'></i></li>

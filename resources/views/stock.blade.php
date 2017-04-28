@@ -171,7 +171,7 @@
 
 
             <div class="input-field col s6">
-                <input id="edit_price" name="price" type="number" class="validate">
+                <input id="edit_price" name="price" type="number" >
                 <label class="active" for="last_name">Price</label>
             </div>
             <div class="input-field col s6">
