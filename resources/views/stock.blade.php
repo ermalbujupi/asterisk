@@ -20,7 +20,7 @@
 
         <div class="card-content">
           <div class="right-align">
-              <a class="waves-effect waves-light btn" href="#addNewProductModal">Add New Product</a>
+              <a class="waves-effect waves-light btn blue" href="#addNewProductModal"><i class="material-icons left">library_add</i> Add New Product</a>
           </div>
             <table border="1" class="responsive-table striped stock_table">
 
@@ -76,8 +76,13 @@
 @section('modals')
 <!--Add New Product -->
 <div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
+
+    <div class="modal-header blue">
+        <h4>Add New Product</h4>
+    </div>
+
+
   <div class="modal-content">
-    <h4>Add New Product</h4>
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
