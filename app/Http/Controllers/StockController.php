@@ -20,7 +20,7 @@ class StockController extends Controller
             ->join('categories','categories.id','=','products.category_id')
             ->join('brands','brands.id','=','products.brand_id')
             ->where('products.quantity','>','0')
-            ->where('system_deleted','=','0')
+            ->where('products.system_deleted','=','0')
             ->select('products.*','categories.name as category','brands.name as brand')
             ->get();
 

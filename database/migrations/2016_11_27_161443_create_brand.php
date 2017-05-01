@@ -18,6 +18,7 @@ class CreateBrand extends Migration
             $table->string('info')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
+            $table->integer('system_deleted');
             $table->timestamps();
         });
     }

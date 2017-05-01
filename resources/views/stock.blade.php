@@ -76,7 +76,7 @@
 <div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
 
     <div class="modal-header blue">
-        <h4>Add New Product</h4>
+        <h4 class="white-text">Add New Product</h4>
     </div>
 
 
@@ -88,22 +88,24 @@
 
             <div class="col s6">
                 <h6>Category</h6>
-                <select name="category" id="category" class="browser-default">
+                <select  name="category" id="category" class="browser-default col s9">
                     <option value="0" disabled selected>Choose your Category</option>
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>
+                <div class="col s2"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
             </div>
 
             <div class="col s6">
                 <h6>Brand</h6>
-                <select name="brand" id="brand" class="browser-default">
+                <select name="brand" id="brand" class="browser-default col s9">
                     <option value="0" disabled selected>Choose your Brand</option>
                     @foreach($brands as $brand)
                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach
                 </select>
+                <div class="col s2"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
             </div>
 
 
@@ -147,8 +149,10 @@
 
 <!--Edit Product Modal-->
 <div id="editProductModal" class="modal modal-sm modal-fixed-footer">
+  <div class="modal-header blue">
+    <h4 class="white-text">Edit Product</h4>
+  </div>
   <div class="modal-content">
-    <h4>Edit Product</h4>
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -193,8 +197,8 @@
                 <label class="active" for="last_name">IMEI</label>
             </div>
             <div class="input-field col s12">
-              <textarea id="edit_description" name="description" class="materialize-textarea"></textarea>
-              <label class="active" for="textarea1">Description</label>
+              <textarea id="edit_description" name="description" class="materialize-textarea" placeholder=""></textarea>
+              <label for="textarea1">Description</label>
             </div>
         </div>
         </div>
@@ -211,20 +215,65 @@
 </div>
 <!--Delete Product Modal-->
 <div id="deleteProductModal" class="modal">
+  <div class="modal-header blue">
+    <h4 class="white-text">Delete Product</h4>
+  </div>
   <div class="modal-content">
-    <h4>Delete Product</h4>
-
     <p>Are you sure you want to delete this product</p>
   </div>
       <div class="modal-footer">
-        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Yes</button>
           <a class="modal-action modal-close waves-effect waves-light btn">No</a>
+          <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Yes</button>
       </div>
     </div>
   </div>
-<!--Delete Product Modal-->
-
 <!--/Delete Product Modal-->
+
+<!-- Add New Category Modal -->
+<div id="addNewCategoryModal" class="modal modal-md">
+  <div class="modal-header blue">
+    <h4 class="white-text">Add New Category</h4>
+  </div>
+  <div class="modal-content">
+  <div class="row">
+        <div class="input-field col s12">
+          <input id="brand_name" type="text" class="validate" placeholder="">
+          <label for="first_name">Name</label>
+        </div>
+  </div>
+  </div>
+      <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-light btn">Save</a>
+        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Close</button>
+      </div>
+    </div>
+  </div>
+<!--/Add New Category Modal -->
+
+<!-- Add New Brand Modal -->
+<div id="addNewBrandModal" class="modal">
+  <div class="modal-header blue">
+    <h4 class="white-text">Add New Brand</h4>
+  </div>
+  <div class="modal-content">
+  <div class="row">
+        <div class="input-field col s12">
+          <input type="text" class="validate" placeholder="">
+          <label for="first_name">Name</label>
+        </div>
+        <div class="input-field col s12">
+              <textarea id="edit_description" name="description" class="materialize-textarea" placeholder=""></textarea>
+              <label>Info</label>
+        </div>
+  </div>
+  </div>
+      <div class="modal-footer">
+        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Save</button>
+          <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
+      </div>
+    </div>
+  </div>
+<!--/Add New Barnd Modal -->
 @endsection
 
 @section('scripts')
