@@ -121,4 +121,49 @@ class StockController extends Controller
     }
 
 
+    public function addNewBrand(Request $req){
+
+      $name = $req['name'];
+      $info = $req['info'];
+
+      $brand = Brand::where('name','like',$name)->first();
+
+      if($brand != null){
+          return Response::json(['message'=>'Brand with this name already exists'],400);
+      }
+
+      $brand = new Brand();
+      $brand->name = $name;
+      $brand->info = $info;
+      $brand->system_deleted = 1;
+
+      if($brand->save()){
+        return Response::json(['message'=>'Brand Added Successfully','brand'=>$brand],200);
+      }else{
+        return Response::json(['message'=>'Error Adding Brand'],400);
+      }
+    }
+
+    public function addNewCategory(Request $req){
+
+      $name = $req['name'];
+
+      $category = Category::where('name','like',$name)->first();
+
+      if($category != null){
+          return Response::json(['message'=>'Category with this name already exists'],400);
+      }
+
+      $category = new Category();
+      $category->name = $name;
+      $category->system_deleted = 0;
+
+      if($category->save()){
+        return Response::json(['message'=>'Category Added Successfully','category'=>$category],200);
+      }else{
+        return Response::json(['message'=>'Error Adding Category'],400);
+      }
+    }
+
+
 }

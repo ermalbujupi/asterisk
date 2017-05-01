@@ -83,4 +83,14 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'getAllProducts'
     ]);
 
+    Route::post('/stock/add_brand',[
+      'uses'=>'StockController@addNewBrand',
+      'as'=>'stock.add_brand'
+    ]);
+
+    Route::post('/stock/add_category',[
+      'uses'=>'StockController@addNewCategory',
+      'as'=>'stock.add_category'
+    ]);
+
 });

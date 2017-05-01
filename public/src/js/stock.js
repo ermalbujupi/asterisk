@@ -46,7 +46,7 @@ $(function(){
    });
 
    $('#name_search').on('keyup',function(){
-        
+
        var word  = $(this).val();
 
        if(word.trim() === ""){
@@ -83,8 +83,62 @@ $(function(){
     });
    //--Kody yt ermal
 
+   //Shtimi i brand-it
+   $('#save_brand').on('click',function(){
+
+      var name = $('#brand_name').val();
+      var info = $('#brand_info').val();
+
+      if(name == ""){
+        Materialize.toast('Please write brand name',3000,'red');
+        return false;
+      }
+
+         ajax("POST","/stock/add_brand","name="+name+'&info='+info,brandAdded,"");
+   });
+
+   $('#save_category').on('click',function(){
+
+      var name = $('#category_name').val();
+
+      if(name == ""){
+        Materialize.toast('Please write brand name',3000,'red');
+        return false;
+      }
+
+         ajax("POST","/stock/add_category","name="+name,categoryAdded,"");
+   });
+
+
 
 });
+
+function categoryAdded(params,success,responseObj){
+
+  if(success){
+    var category = responseObj.category;
+
+    $('#category').append('<option id="'+category.id+'">'+category.name+'</option>');
+    Materialize.toast(responseObj.message,3000,'green');
+
+  }else{
+    Materialize.toast(responseObj.message,3000,'red');
+  }
+}
+
+
+function brandAdded(params,success,responseObj){
+
+  if(success){
+    var brand = responseObj.brand;
+
+    $('#brand').append('<option id="'+brand.id+'">'+brand.name+'</option>');
+    Materialize.toast(responseObj.message,3000,'green');
+
+  }else{
+    Materialize.toast(responseObj.message,3000,'red');
+  }
+}
 
 function productSearched(params,success,responseObj){
 

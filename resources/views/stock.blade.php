@@ -240,14 +240,14 @@
   <div class="modal-content">
   <div class="row">
         <div class="input-field col s12">
-          <input id="brand_name" type="text" class="validate" placeholder="">
+          <input id="category_name" type="text" class="validate" placeholder="">
           <label for="first_name">Name</label>
         </div>
   </div>
   </div>
       <div class="modal-footer">
-          <a class="modal-action modal-close waves-effect waves-light btn">Save</a>
-        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Close</button>
+          <a id="save_category" class="modal-action  waves-effect waves-light btn">Save</a>
+        <button  type="submit"  href="#!" class="modal-action modal-close waves-effect waves-green btn "> Close</button>
       </div>
     </div>
   </div>
@@ -261,17 +261,17 @@
   <div class="modal-content">
   <div class="row">
         <div class="input-field col s12">
-          <input type="text" class="validate" placeholder="">
+          <input id="brand_name" type="text" class="validate" placeholder="">
           <label for="first_name">Name</label>
         </div>
         <div class="input-field col s12">
-              <textarea id="edit_description" name="description" class="materialize-textarea" placeholder=""></textarea>
+              <textarea id="brand_info" name="description" class="materialize-textarea" placeholder=""></textarea>
               <label>Info</label>
         </div>
   </div>
   </div>
       <div class="modal-footer">
-        <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Save</button>
+        <button  type="submit" id="save_brand" class="modal-action waves-effect waves-green btn "> Save</button>
           <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
       </div>
     </div>
