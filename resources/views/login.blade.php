@@ -41,12 +41,7 @@
             margin-left: 35%;
         }
 
-        #toast-container {
-            top: auto !important;
-            left: auto !important;
-            bottom: 10%;
-            right:7%;
-        }
+
 
         .loader {
             position: absolute;
@@ -96,7 +91,7 @@
 
                     <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' placeholder="Please writ your username" type='text' name='username' id='username' />
+                            <input class='validate' placeholder="Please write your username" type='text' name='username' id='username' />
                             <label for='email'>Username</label>
                         </div>
                     </div>

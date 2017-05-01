@@ -23,3 +23,12 @@
 .stock_table td{
     padding: 5px!important;
 }
+
+#toast-container {
+    top: auto !important;
+    right: auto !important;
+    bottom: 10%;
+
+    float:right;
+}
+

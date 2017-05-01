@@ -19,9 +19,21 @@
 
 
         <div class="card-content">
-          <div class="right-align">
-              <a class="waves-effect waves-light btn blue" href="#addNewProductModal"><i class="material-icons left">library_add</i> Add New Product</a>
-          </div>
+
+
+
+              <div class="left-align col s6">
+                  <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
+              </div>
+            <div class="col s2">
+                </div>
+
+              <div class="right-align col s4" id="search">
+                <input type="text" class="col s12 "  id="name_search" placeholder="Search">
+              </div>
+
+
+
             <table id="stock_table" border="1" class="responsive-table striped stock_table">
 
                 <thead>
@@ -48,12 +60,6 @@
                     <td>{{$product->imei}}</td>
 
                     <td class="btn_info">
-                          <!--
-                            <ul>
-                                <li><a id="{{$product->id}}"   href="#editProductModal"  data-target="modal1" class="btn-floating tooltipped edit_product_trigger" data-position="top" data-delay="50" data-tooltip="Edit Product"><i class="fa fa-pencil"></i></a></li>
-                                <li><a id="{{$product->id}}"  href="#deleteProductModal" class="btn-floating red tooltipped delete_product_trigger" data-position="top" data-delay="50" data-tooltip="Delete Product"><i class="fa fa-trash-o"></i></a></li>
-                            </ul>
-                            -->
                         <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
                     </td>
@@ -75,36 +81,34 @@
 <!--Add New Product -->
 <div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
 
+
     <div class="modal-header blue">
         <h4 class="white-text">Add New Product</h4>
     </div>
 
-
   <div class="modal-content">
-    <!--<form action="{{route('stock.save_product')}}" method="POST">-->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <div class="col s12">
 
             <div class="col s6">
-                <h6>Category</h6>
                 <select  name="category" id="category" class="browser-default col s9">
                     <option value="0" disabled selected>Choose your Category</option>
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>
+
                 <div class="col s2"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
             </div>
 
             <div class="col s6">
-                <h6>Brand</h6>
                 <select name="brand" id="brand" class="browser-default col s9">
                     <option value="0" disabled selected>Choose your Brand</option>
                     @foreach($brands as $brand)
                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach
                 </select>
+
                 <div class="col s2"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
             </div>
 
@@ -142,7 +146,6 @@
     </div>
     </div>
 
-<!--</form>-->
 </div>
 </div>
 <!--/Add new Product Modal-->

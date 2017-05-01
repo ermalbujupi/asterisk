@@ -52,6 +52,11 @@ Route::group(['middleware' => ['auth']], function () {
             'as' =>'stock.delete_product'
     ]);
 
+    Route::post('/stock/search_word',[
+        'uses' => 'StockController@search',
+        'as' => 'stock.search_word'
+    ]);
+
     Route::any('/users/save_user',[
         'uses' =>'UsersController@saveUser',
         'as' => 'users.save_user'
@@ -72,5 +77,10 @@ Route::group(['middleware' => ['auth']], function () {
        'uses' =>'UsersController@deleteUser',
        'as' =>'user.delete_user'
    ]);
+
+    Route::get('/stock/get_all_products',[
+       'uses' => 'StockController@getProducts',
+        'as' => 'getAllProducts'
+    ]);
 
 });
