@@ -25,9 +25,11 @@
               <div class="left-align col s6">
                   <a class="left-align waves-effect waves-light btn" href="#addNewProductModal">Add New Product</a>
               </div>
+            <div class="col s2">
+                </div>
 
-              <div class="right-align">
-                <input type="text" class="col s3"  id="name_search" placeholder="Search">
+              <div class="right-align col s4" id="search">
+                <input type="text" class="col s12"  id="name_search" placeholder="Search">
               </div>
 
 
