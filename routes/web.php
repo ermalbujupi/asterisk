@@ -104,11 +104,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-
-    Route::get('/todo',function(){
-        return view('todo');
-
-    })->name('todo');
+    Route::get('/todo',[
+       'uses'=>'TasksController@getTaskPage',
+        'as'=>'todo'
+    ]);
 
 
 });
