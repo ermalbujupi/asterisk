@@ -52,21 +52,26 @@ class LoginController extends Controller
     {
         $email = $request['email'];
         $user = User::where('email','=',$email)->first();
-      
-        $id = $user->id;
 
-        if($user ==null)
+        if($user == null)
         {
             return Response::json(['message'=>'Error ! No User Registered with the provided E-Mail'],400);
         }
+        else{
+            $random_password = $this->generateRandomString(10);
+            $id = $user->id;
 
-        $password_reset = new PasswordReset();
-        $password_reset->password_code =  $this->generateRandomString(10);
+            Mail::send('emails.password_reset',['password'=>$random_password] , function ($message) use($user) {
+                $message->to($user->email,$user->full_name);
+                $message->subject("Asterisk Password Reset");});
+            
+                return Response::json(['message'=>'Email with generated password has been sent'],200);
 
-        Mail::send('emails.password_reset',['password'=>$password_reset->password_code] , function ($message) use($user) {
-            $message->to($user->email,$user->full_name);
-            $message->subject("Asterisk Password Reset");
-        });
-        return Response::json(['message'=>'OK'],200);
+        }
+
+        //$password_reset = new PasswordReset();
+        //$password_reset->password_code =  $this->generateRandomString(10);
+        return Response::json(['message'=>'Something went wrong, Please try again !'],400);
+
     }
 }
