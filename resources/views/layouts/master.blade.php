@@ -37,6 +37,7 @@
         <li class="bold {{Request::is('stock') ? 'active':''}}"><a href="{{route('stock')}}" class="waves-effect waves-teal"><i class="fa fa-rocket"></i>Products</a></li>
         <li class="bold {{Request::is('users') ? 'active':''}}"><a href="{{route('users')}}" class="waves-effect waves-teal"><i class="fa fa-users"></i>Users</a></li>
         <li class="bold {{Request::is('log') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>
+        <li class="bold {{Request::is('todo') ? 'active':''}}"><a href="{{route('todo')}}" class="waves-effect waves-teal"><i class="fa fa-tasks"></i>To Do List</a></li>
     </ul>
 </header>
 <main>

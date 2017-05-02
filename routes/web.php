@@ -93,4 +93,10 @@ Route::group(['middleware' => ['auth']], function () {
       'as'=>'stock.add_category'
     ]);
 
+    Route::get('/todo',function(){
+        return view('todo');
+
+    })->name('todo');
+
+
 });

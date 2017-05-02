@@ -25,8 +25,9 @@
               <div class="left-align col s6">
                   <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
               </div>
-            <div class="col s2">
-                </div>
+              <div class="col s2">
+
+              </div>
 
               <div class="right-align col s4" id="search">
                 <input type="text" class="col s12 "  id="name_search" placeholder="Search">
@@ -78,72 +79,73 @@
 @endsection
 
 @section('modals')
-<!--Add New Product -->
-<div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
+    <!--Add New Product -->
+        <div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
 
 
-    <div class="modal-header blue">
-        <h4 class="white-text">Add New Product</h4>
-    </div>
-
-  <div class="modal-content">
-
-        <div class="col s12">
-
-            <div class="col s6">
-                <select  name="category" id="category" class="browser-default col s9">
-                    <option value="0" disabled selected>Choose your Category</option>
-                    @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
-                    @endforeach
-                </select>
-
-                <div class="col s2"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
+            <div class="modal-header blue">
+                <h4 class="white-text">Add New Product</h4>
             </div>
 
-            <div class="col s6">
-                <select name="brand" id="brand" class="browser-default col s9">
-                    <option value="0" disabled selected>Choose your Brand</option>
-                    @foreach($brands as $brand)
-                        <option value="{{$brand->id}}">{{$brand->name}}</option>
-                    @endforeach
-                </select>
+            <div class="modal-content">
 
-                <div class="col s2"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
+                <div class="col s12">
+
+                    <div class="col s6">
+                        <select  name="category" id="category" class="browser-default col s9">
+                            <option value="0" disabled selected>Choose your Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+
+                        <div class="col s2"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
+                    </div>
+
+                    <div class="col s6">
+                        <select name="brand" id="brand" class="browser-default col s9">
+                            <option value="0" disabled selected>Choose your Brand</option>
+                            @foreach($brands as $brand)
+                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                            @endforeach
+                        </select>
+
+                        <div class="col s2"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
+                    </div>
+
+
+                    <div class="col s12 ">
+                        <br>
+                      <div class="input-field col s12">
+                        <input name="name"  id="name" type="text" class="validate" placeholder="">
+                        <label for="first_name">Product Name</label>
+                      </div>
+
+                    <div class="input-field col s6">
+                        <input id="price" name="price" type="number" step="any" class="validate" placeholder="">
+                        <label for="last_name">Price</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="quantity" name="quantity" type="number" class="validate" placeholder="">
+                        <label for="last_name">Quantity</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="imei" type="number" name="imei" minlength="16" maxlength="16"  placeholder="" data-length="16"   >
+                        <label for="last_name">IMEI</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <textarea id="description" name="description" class="materialize-textarea" placeholder=""></textarea>
+                      <label for="textarea1">Description</label>
+                    </div>
+                </div>
+                </div>
             </div>
 
-
-            <div class="col s12 ">
-                <br>
-              <div class="input-field col s12">
-                <input name="name"  id="name" type="text" class="validate" placeholder="">
-                <label for="first_name">Product Name</label>
-              </div>
-
-            <div class="input-field col s6">
-                <input id="price" name="price" type="number" step="any" class="validate" placeholder="">
-                <label for="last_name">Price</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="quantity" name="quantity" type="number" class="validate" placeholder="">
-                <label for="last_name">Quantity</label>
-            </div>
-            <div class="input-field col s12">
-                <input id="imei" type="number" name="imei" minlength="16" maxlength="16"  placeholder="" data-length="16"   >
-                <label for="last_name">IMEI</label>
-            </div>
-            <div class="input-field col s12">
-              <textarea id="description" name="description" class="materialize-textarea" placeholder=""></textarea>
-              <label for="textarea1">Description</label>
+            <div class="modal-footer">
+                <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
+                  <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
             </div>
         </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
-          <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
-      </div>
-    </div>
     </div>
 
 </div>
@@ -239,7 +241,7 @@
   </div>
   <div class="modal-content">
   <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
           <input id="category_name" type="text" class="validate" placeholder="">
           <label for="first_name">Name</label>
         </div>
@@ -247,7 +249,7 @@
   </div>
       <div class="modal-footer">
           <a id="save_category" class="modal-action  waves-effect waves-light btn">Save</a>
-        <button  type="submit"  href="#!" class="modal-action modal-close waves-effect waves-green btn "> Close</button>
+        <button  type="submit"  href="#!" class="modal-action modal-close waves-effect waves-green btn ">Close</button>
       </div>
     </div>
   </div>
@@ -260,7 +262,7 @@
   </div>
   <div class="modal-content">
   <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
           <input id="brand_name" type="text" class="validate" placeholder="">
           <label for="first_name">Name</label>
         </div>
