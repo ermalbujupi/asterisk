@@ -19,7 +19,7 @@ Route::get('/password_reset',function(){
     return view('password_reset');
 });
 
-Route::post('/password_reset/send_mail',[
+Route::any('/password_reset/send_mail',[
   'uses'=>'LoginController@sendMailForPasswordReset',
   'as' =>'password_reset.send_mail'
 ]);
