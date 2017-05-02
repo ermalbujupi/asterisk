@@ -66,21 +66,21 @@
         <div class="col s12">
             <div class="col s12 ">
               <div class="input-field col s12">
-                <input  id="fullName" type="text" class="validate">
+                <input  id="fullName" placeholder="" type="text" class="validate">
                 <label for="first_name">Full Name</label>
               </div>
 
 
             <div class="input-field col s6">
-                <input id="username" type="text" class="validate">
+                <input id="username" placeholder="" type="text" class="validate">
                 <label for="last_name">Username</label>
             </div>
             <div class="input-field col s6">
-                <input id="password"  type="password" class="validate">
+                <input id="password" placeholder="" type="password" class="validate">
                 <label for="last_name">Password</label>
             </div>
             <div class="input-field col s12">
-                <input id="email" type="text" class="validate">
+                <input id="email" placeholder="" type="text" class="validate">
                 <label for="last_name">Email</label>
             </div>
             <div class="input-field col s6">

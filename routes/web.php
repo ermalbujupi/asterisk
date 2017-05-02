@@ -15,6 +15,15 @@ Route::any('logout',[
     'as'=>'logout'
 ]);
 
+Route::get('/password_reset',function(){
+    return view('password_reset');
+});
+
+Route::post('/password_reset/send_mail',[
+  'uses'=>'LoginController@sendMailForPasswordReset',
+  'as' =>'password_reset.send_mail'
+]);
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/',[
@@ -57,6 +66,21 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'stock.search_word'
     ]);
 
+    Route::get('/stock/get_all_products',[
+       'uses' => 'StockController@getProducts',
+        'as' => 'getAllProducts'
+    ]);
+
+    Route::post('/stock/add_brand',[
+      'uses'=>'StockController@addNewBrand',
+      'as'=>'stock.add_brand'
+    ]);
+
+    Route::post('/stock/add_category',[
+      'uses'=>'StockController@addNewCategory',
+      'as'=>'stock.add_category'
+    ]);
+
     Route::any('/users/save_user',[
         'uses' =>'UsersController@saveUser',
         'as' => 'users.save_user'
@@ -78,19 +102,7 @@ Route::group(['middleware' => ['auth']], function () {
        'as' =>'user.delete_user'
    ]);
 
-    Route::get('/stock/get_all_products',[
-       'uses' => 'StockController@getProducts',
-        'as' => 'getAllProducts'
-    ]);
 
-    Route::post('/stock/add_brand',[
-      'uses'=>'StockController@addNewBrand',
-      'as'=>'stock.add_brand'
-    ]);
 
-    Route::post('/stock/add_category',[
-      'uses'=>'StockController@addNewCategory',
-      'as'=>'stock.add_category'
-    ]);
 
 });

@@ -14,5 +14,18 @@ $(function(){
           Materialize.toast("Email not valid",3000,'red');
           return false;
         }
+
+       ajax("POST","/password_reset/send_mail","email="+email,emailSent,"");
     });
 });
+
+function emailSent(params,success,responseObj){
+
+    if(success){
+      Materialize.toast(responseObj.message,3000,'green');
+
+    }else{
+      
+      Materialize.toast(responseObj.message,3000,'red');
+    }
+}
