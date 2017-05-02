@@ -77,7 +77,7 @@
             <h3>Asterisk</h3>
         </div>
 
-        <h5 class="indigo-text">Please, login into your account</h5>
+        <h5 class="indigo-text">Password Reset</h5>
         <div class="section"></div>
 
         <div class="">
@@ -91,27 +91,25 @@
 
                     <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' placeholder="Please enter your username" type='text' name='username' id='username' />
-                            <label for='email'>Username</label>
+                            <input class='validate' placeholder="" type='text' name='username' id='username' />
+                            <label for='email'>New Passowrd</label>
                         </div>
                     </div>
 
                     <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' placeholder="Please enter password" type='password' name='password' id='password' />
-                            <label for='password'>Password</label>
+                            <input class='validate' placeholder="" type='password' name='password' id='password' />
+                            <label for='password'>Repeat New Password</label>
                         </div>
-                        <label style='float: right;'>
-                            <a class='pink-text' href='#passwordForgetModal'><b>Forgot Password?</b></a>
-                        </label>
+
                     </div>
 
-                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+
 
                     <br />
                     <center>
                         <div class='row'>
-                            <button type='button' name='btn_login' class='col s12 btn btn-large waves-effect blue login_btn'>Login</button>
+                            <button type='button' name='btn_login' class='col s12 btn btn-large waves-effect blue login_btn'>Confirm</button>
                         </div>
                     </center>
                 <!--</form>-->
@@ -159,74 +157,6 @@
 </main>
 <script type="text/javascript" src="{{URL::asset('src/js/jquery-3.1.1.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('src/js/materialize.js')}}"></script>
-<script type="text/javascript">
-    var baseUrl = "{{ URL::to('/') }}";
-    var token= "{{ Session::token() }}";
-</script>
 <script>
-    function ajax(method, url, params, callback, callbackParams) {
-        var xhttp;
-
-        if(window.XMLHttpRequest) {
-            xhttp = new XMLHttpRequest();
-        } else {
-            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xhttp.onreadystatechange = function() {
-            if(xhttp.readyState == XMLHttpRequest.DONE) {
-                if(xhttp.status == 200) {
-                    var obj = JSON.parse(xhttp.responseText);
-                    callback(callbackParams, true, obj);
-                }
-                else if (xhttp.status == 400) {
-                    var obj = JSON.parse(xhttp.responseText);
-                    callback(callbackParams, false, obj);
-                }
-                else {
-                    var obj = JSON.parse(xhttp.responseText);
-                    if (obj.message) {
-                        alert(obj.message);
-                    }
-                    else
-                    {
-                        alert("kontrollo edhe niher");
-                    }
-                }
-            }
-        };
-        xhttp.open(method, baseUrl + url, true);
-        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhttp.send(params + "&_token=" + token);
-    }
-
-    $(document).ready(function () {
-        $('.modal').modal({
-                    dismissible: false
-                }
-        );
-    });
-
-    $('.login_btn').click(function () {
-        var username = $('#username').val();
-        var password = $('#password').val();
-        $('#loading_modal').modal('open');
-        ajax("POST",'/login',"username="+username+"&password="+password,onSuccess,'')
-    });
-
-    function onSuccess(params,success,responseObj){
-        $('#loading_modal').modal('close');
-        if(success){
-            window.location=baseUrl+'/';
-        }
-        else{
-            Materialize.toast(responseObj.message,3000,'red');
-        }
-
-    }
-
-
 </script>
-<script type="text/javascript" src="{{URL::asset('src/js/password_reset.js')}}"></script>
 </body></html>
