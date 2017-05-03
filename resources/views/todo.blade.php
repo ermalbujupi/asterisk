@@ -18,11 +18,12 @@
         <div class="card-panel large" style="height:400px;">
 
             <div class="input-field col s3" style="margin-left:60px;">
-                <input type="text" id="add_new_task" class="validate" placeholder="Add New Task">
+                <input type="text" id="task" name="task" class="validate" placeholder="Add New Task">
+                <meta name="csrf-token" content="{{ csrf_token() }}">
             </div>
 
             <div class="input-field col s3" style="padding-left:20px;">
-                <select>
+                <select name="priority" id="priority">
                     <option value="" disabled selected>Priority</option>
                     <option value="1">Low</option>
                     <option value="2">Normal</option>
@@ -31,12 +32,12 @@
             </div>
 
             <div class="input-field col s3" style="margin-left:20px;">
-                <a class="btn waves-effect waves-light">Add Task</a>
+                <button type="submit" href="#!" id="save_task" class="btn waves-effect waves-light">Add Task</button>
             </div>
 
             <table border="1" class="highlight">
                 <thead>
-                <tr class="responsive">
+                <tr>
                     <th>Task</th>
                     <th>Priority</th>
                     <th>Status</th>
@@ -44,21 +45,13 @@
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>Alvin</td>
-                    <td>Eclair</td>
-                    <td>$0.87</td>
-                </tr>
-                <tr>
-                    <td>Alan</td>
-                    <td>Jellybean</td>
-                    <td>$3.76</td>
-                </tr>
-                <tr>
-                    <td>Jonathan</td>
-                    <td>Lollipop</td>
-                    <td>$7.00</td>
-                </tr>
+                @foreach($tasks as $task)
+                    <tr class="none-top-border">
+                        <td>{{$task->name}}</td>
+                        <td>{{$task->priority}}</td>
+                        <td>{{$task->status}}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

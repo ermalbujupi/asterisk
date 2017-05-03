@@ -31,7 +31,7 @@ class CreateProducts extends Migration
 
     /**
      * Reverse the migrations.
-     *
+     *x`
      * @return void
      */
     public function down()
