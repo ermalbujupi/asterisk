@@ -61,10 +61,14 @@ class LoginController extends Controller
             $random_password = $this->generateRandomString(10);
             $id = $user->id;
 
+            $user = User::find($id);
+            $user->password = $random_password;
+            $user->save();
+
             Mail::send('emails.password_reset',['password'=>$random_password] , function ($message) use($user) {
                 $message->to($user->email,$user->full_name);
                 $message->subject("Asterisk Password Reset");});
-            
+
                 return Response::json(['message'=>'Email with generated password has been sent'],200);
 
         }
@@ -72,6 +76,12 @@ class LoginController extends Controller
         //$password_reset = new PasswordReset();
         //$password_reset->password_code =  $this->generateRandomString(10);
         return Response::json(['message'=>'Something went wrong, Please try again !'],400);
+
+    }
+
+
+    public function resetPassword(Request $req){
+
 
     }
 }
