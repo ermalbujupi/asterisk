@@ -105,9 +105,15 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/todo',[
-       'uses'=>'TasksController@getTaskPage',
+       'uses'=>'TasksController@getAllTasks',
         'as'=>'todo'
     ]);
+
+    Route::post('/todo/save_task',[
+        'uses'=>'TasksController@saveTask',
+        'as'=>'todo.save_task'
+    ]);
+
 
 
 });

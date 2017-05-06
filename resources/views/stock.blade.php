@@ -64,8 +64,6 @@
                         <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
                     </td>
-
-
                 </tr>
                 @endforeach
                 </tbody>
@@ -82,7 +80,7 @@
     <!--Add New Product -->
         <div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
 
-
+            <meta name="csrf-token" content="{{ csrf_token() }}">
             <div class="modal-header blue">
                 <h4 class="white-text">Add New Product</h4>
             </div>
@@ -210,7 +208,7 @@
       </div>
       <div class="modal-footer">
         <button  type="submit" id="edit_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
-          <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
+        <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
       </div>
     </div>
     </div>
