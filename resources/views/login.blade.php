@@ -59,7 +59,7 @@
             overflow: hidden !important;
         }
 
-        #send_email{
+        #send_email,#password_reset_confirm_code{
           margin-left: 11px;
         }
 
@@ -120,20 +120,39 @@
     </div>
     <!--Password Forget Modal -->
     <div id="passwordForgetModal" class="modal">
-      <div class="modal-content">
-        <h4>Reset Password</h4>
-        <div class="row">
-            <div class="col s12">
-                <label>Email:</label>
-                <input type="text" id="password_reset_email"/>
+      <div id="password_forget_modal" class="col s12">
+        <form action="{{route('password_reset.send_mail')}}">
+          <div class="modal-content">
+            <h4>Reset Password</h4>
+            <div class="row">
+                <div class="col s12">
+                    <label>Email:</label>
+                    <input name="email" type="text" id="password_reset_email"/>
+                </div>
+            </div>
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          </div>
+            <div class="modal-footer">
+              <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect waves-green btn "> Send Email</button>
+              <a  class="modal-action modal-close waves-effect waves-light btn">Close</a>
+            </div>
+          </form>
+        </div>
+        <div id="confirm_code_modal" class="col s12" style="display:none;">
+            <div class="modal-content">
+                  <h4>Enter Code</h4>
+                  <div class="col s12">
+                      <label>Code:</label>
+                      <input type="text" id="password_reset_code"/>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button  type="submit" id="password_reset_confirm_code" href="#!" class="modal-action  waves-effect waves-green btn "> Confirm</button>
+              <a  id="close_password_forget_modal" class="modal-action modal-close waves-effect waves-light btn">Close</a>
             </div>
         </div>
       </div>
-          <div class="modal-footer">
-            <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect waves-green btn "> Send Email</button>
-            <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
-          </div>
-        </div>
       </div>
     <!--/password Forget Modal -->
 
@@ -246,19 +265,29 @@
 
     });
 
+
+
     function emailSent(params,success,responseObj){
         $('#loading_modal').modal('close');
 
         if(success){
-            $('#passwordForgetModal').modal('close');
             Materialize.toast(responseObj.message,5000,'green');
-
+            closePasswordForget();
         }else{
-
             Materialize.toast(responseObj.message,5000,'red');
+            closePasswordConfirm();
         }
     }
 
+    function closePasswordForget(){
+      $('#password_forget_modal').show();
+      $('#confirm_code_modal').hide();
+    }
 
+    function closePasswordConfirm(){
+      $('#password_forget_modal').hide();
+      $('#confirm_code_modal').show();
+    }
+//# sourceURL=login.js
 </script>
 </body></html>
