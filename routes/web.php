@@ -102,6 +102,11 @@ Route::group(['middleware' => ['auth']], function () {
        'as' =>'user.delete_user'
    ]);
 
+    Route::any('/user/change_password',[
+        'uses'=>'LoginController@changePassword',
+        'as' =>'user.change_password'
+    ]);
+
 
 
     Route::get('/todo',[

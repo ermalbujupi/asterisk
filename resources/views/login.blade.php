@@ -122,6 +122,7 @@
     <div id="passwordForgetModal" class="modal">
       <div id="password_forget_modal" class="col s12">
         <form action="{{route('password_reset.send_mail')}}">
+          {{ csrf_field() }}
           <div class="modal-content">
             <h4>Reset Password</h4>
             <div class="row">
@@ -131,7 +132,6 @@
                 </div>
             </div>
 
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
           </div>
             <div class="modal-footer">
               <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect waves-green btn "> Send Email</button>

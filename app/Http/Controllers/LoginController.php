@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\PasswordReset;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -66,6 +67,7 @@ class LoginController extends Controller
             $user->save();
 
             Mail::send('emails.password_reset',['password'=>$random_password] , function ($message) use($user) {
+                $message->from('bicajfidan@gmail.com','Fidan Bicaj');
                 $message->to($user->email,$user->full_name);
                 $message->subject("Asterisk Password Reset");});
 
@@ -76,12 +78,28 @@ class LoginController extends Controller
         //$password_reset = new PasswordReset();
         //$password_reset->password_code =  $this->generateRandomString(10);
         return Response::json(['message'=>'Something went wrong, Please try again !'],400);
+    }
+
+
+    public function changePassword(Request $req){
+        $actual_password = $req['actual_password'];
+        $new_password = bcrypt($req['password']);
+
+        $user = User::find(Auth::user()->id);
+        
+
+        if(!Hash::check($actual_password,$user->password)){
+            return Response::json(['message'=>'Password incorrect'],400);
+
+        }else{
+            $user->password = $new_password;
+            if($user->save()) {
+                return Response::json(['message' => 'Password Changed Successfully'], 200);
+            }
+        }
 
     }
 
 
-    public function resetPassword(Request $req){
 
-
-    }
 }

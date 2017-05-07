@@ -19,6 +19,7 @@
         <div class="nav-wrapper ">
                 <ul id="dropdown1" class="dropdown-content">
                     <li><a href="#!">Account</a></li>
+                    <li><a href="#change_password_modal">Change Password</a></li>
                     <li><a href="{{route('logout')}}">Log Out</a></li>
                 </ul>
                 <h4 class="brand-logo center">@yield('page')</h4>
@@ -44,6 +45,35 @@
         <div class="container">
             @yield('content')
             @yield('modals')
+
+            <div id="change_password_modal" class="modal">
+              <div  class="col s12">
+                  <div class="modal-content">
+                    <h4>Change Password</h4>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label>Actual Password:</label>
+                            <input name="email" type="password" placeholder="" id="actual_password"/>
+                        </div>
+                        <div class="input-field col s12">
+                            <label>New Password:</label>
+                            <input placeholder="" name="email" type="password" id="new_password"/>
+                        </div>
+                        <div class="input-field col s12">
+                            <label>Repeat New Password:</label>
+                            <input placeholder="" name="email" type="password" id="repeat_new_password"/>
+                            <span id="alert_password_error">Password doesn't match<i class="fa fa-times" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+
+                  </div>
+                    <div class="modal-footer">
+                      <button  type="submit" id="submit" href="#!" class="modal-action  waves-effect waves-green btn ">Submit</button>
+                      <a  class="modal-action modal-close waves-effect waves-light btn">Close</a>
+                    </div>
+                </div>
+            </div>
+
             <div id="loading_modal" class="modal loading_modal">
                 <div class="modal-content">
                     <div class="preloader-wrapper active loader">
@@ -113,6 +143,44 @@
             dismissible: false
         });
     })
+</script>
+<script type="text/javascript">
+  $(function(){
+
+    $('#repeat_new_password').on('keyup',function(){
+
+       var repeatPassword = $(this).val();
+       var password = $('#new_password').val();
+
+
+       if(repeatPassword != password){
+          $('#alert_password_error').show();
+       }else{
+         $('#alert_password_error').hide();
+       }
+
+    });
+
+      $('#submit').on('click',function(){
+
+          var actual_password = $('#actual_password').val();
+          var password = $('#repeat_new_password').val();
+          //   ajax("POST","/stock/delete_product","id="+this.value,productDeleted,"");
+          ajax('POST','/user/change_password','password='+password+'&actual_password='+actual_password,passwordChanged,"");
+          //# sourceURL=password_change.js
+      });
+
+    });
+
+function passwordChanged(params,success,responseObj){
+
+    if(success){
+        Materialize.toast(responseObj.message,4000,'green');
+    }else{
+        Materialize.toast(responseObj.message,4000,'red');
+    }
+}
+
 </script>
 @yield('scripts')
 </body>
