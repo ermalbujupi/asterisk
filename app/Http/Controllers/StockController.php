@@ -22,6 +22,7 @@ class StockController extends Controller
             ->where('products.quantity','>','0')
             ->where('products.system_deleted','=','0')
             ->select('products.*','categories.name as category','brands.name as brand')
+            ->orderBy('products.id','desc')
             ->get();
 
         $brands = Brand::all();

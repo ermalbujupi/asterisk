@@ -86,7 +86,7 @@ class LoginController extends Controller
         $new_password = bcrypt($req['password']);
 
         $user = User::find(Auth::user()->id);
-        
+
 
         if(!Hash::check($actual_password,$user->password)){
             return Response::json(['message'=>'Password incorrect'],400);

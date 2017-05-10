@@ -5,7 +5,12 @@
 @endsection
 
 @section('styles')
+
     <link rel="stylesheet" href="{{URL::asset('src/css/stock.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{URL::asset('src/css/datatable.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{URL::asset('src/css/datatable-materialize.css')}}" type="text/css">
+
+
 @endsection
 
 @section('page')
@@ -281,4 +286,18 @@
 
 @section('scripts')
   <script type="text/javascript" src="{{URL::asset('src/js/stock.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('src/js/datatabels.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('src/js/datatables-materialize.js')}}"></script>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('#stock_table').DataTable( {
+              columnDefs: [
+                  {
+                      targets: [ 0, 1, 2 ],
+                      className: 'mdl-data-table__cell--non-numeric'
+                  }
+              ]
+          } );
+      } );
+  </script>
 @endsection

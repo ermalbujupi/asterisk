@@ -119,6 +119,22 @@ Route::group(['middleware' => ['auth']], function () {
         'as'=>'todo.save_task'
     ]);
 
+    Route::get('/categories_brands',[
+        'uses' =>'CatBrandsController@getAll',
+        'as' => 'categories_brands'
+    ]);
+
+
+
+    Route::post('/categories_brands/get_brand',[
+        'uses' =>'CatBrandsController@findBrand',
+        'as' =>'categories_brands.get_brand'
+    ]);
+
+    Route::post('/categories_brands/get_category',[
+        'uses' =>'CatBrandsController@findCategorys',
+        'as' =>'categories_brands.get_category'
+    ]);
 
 
 });
