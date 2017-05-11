@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBrand extends Migration
+class CreateTableSellings extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +13,13 @@ class CreateBrand extends Migration
      */
     public function up()
     {
-        Schema::create('brands',function(Blueprint $table){
+        Schema::create('sellings',function(Blueprint $table){
             $table->increments('id');
-            $table->string('name');
-            $table->string('info')->nullable();
-            $table->string('country')->nullable();
-            $table->string('city')->nullable();
-            $table->integer('system_deleted')->default('0');
+            $table->integer('product');
+            $table->integer('seller');
+            $table->double('price_sold');
+            $table->integer('quantity_sold');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateBrand extends Migration
      */
     public function down()
     {
-        Schema::drop('brands');
+        Schema::drop('sellings');
     }
 }

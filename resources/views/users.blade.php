@@ -20,10 +20,11 @@
 
 
     <div class="card-content">
-      <div class="right-align">
-          <a class="waves-effect waves-light btn" href="#addNewUserModal">Add New User</a>
+      <div class="left-align">
+          <a href="#addNewUserModal"  data-position="top"  data-tooltip="Add New User" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
       </div>
-        <table border="1" class="responsive-table striped users_table">
+      <div class="col s12"><br></div>
+        <table border="1" class="bordered responsive-table  users_table">
 
             <thead>
             <tr class="primary-color">

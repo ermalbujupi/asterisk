@@ -132,8 +132,33 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::post('/categories_brands/get_category',[
-        'uses' =>'CatBrandsController@findCategorys',
+        'uses' =>'CatBrandsController@findCategory',
         'as' =>'categories_brands.get_category'
+    ]);
+
+    Route::post('/categories_brands/edit_category',[
+        'uses' =>'CatBrandsController@editCategory',
+        'as' =>'categories_brands.edit_category'
+    ]);
+
+    Route::post('/categories_brands/edit_brand',[
+        'uses' =>'CatBrandsController@editBrand',
+        'as' =>'categories_brands.edit_brand'
+    ]);
+
+    Route::post('/categories_brands/delete_brand',[
+        'uses' => 'CatBrandsController@deleteBrand',
+        'as' => 'categories_brands.delete_brand'
+    ]);
+
+    Route::post('/categories_brands/delete_category',[
+        'uses' => 'CatBrandsController@deleteCategory',
+        'as' => 'categories_brands.delete_category'
+    ]);
+
+    Route::post('/sellings',[
+        'uses'=>'SellingController@getAll',
+        'as' => 'sellings'
     ]);
 
 
