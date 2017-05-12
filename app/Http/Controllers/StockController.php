@@ -102,7 +102,7 @@ class StockController extends Controller
       if($product->save()){
           return Response::json(['message'=>'Product Successfully Deleted']);
       }else{
-          return Response::json(['message'=>'Couldn\'t Delet Product']);
+          return Response::json(['message'=>'Couldn\'t Delete Product']);
       }
    }
 

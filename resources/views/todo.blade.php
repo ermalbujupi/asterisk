@@ -15,7 +15,7 @@
 @section('content')
     <div class="row">
 
-        <div class="card-panel large" style="height:400px;">
+        <div class="card-panel large" style="height:auto;">
 
             <div class="input-field col s3" style="margin-left:60px;">
                 <input type="text" id="task" name="task" class="validate" placeholder="Add New Task">
@@ -41,6 +41,8 @@
                     <th>Task</th>
                     <th>Priority</th>
                     <th>Status</th>
+                    <th></th>
+                    <th>Action</th>
                 </tr>
                 </thead>
 
@@ -50,6 +52,14 @@
                         <td>{{$task->name}}</td>
                         <td>{{$task->priority}}</td>
                         <td>{{$task->status}}</td>
+                        <td class="status_buttons">
+                            <input id="{{$task->id}}" type="checkbox" class="filled-in">
+                            <label for="{{$task->id}}"></label>
+                        </td>
+                        <td>
+                            <a id="{{$task->id}}" href="#deleteTaskModal" class="btn btn-floating waves-effect waves-light red tooltipped action_button delete_task_trigger" data-tooltip="Delete Task" data-position="top"><span class="fa fa-trash"></span></a>
+                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>
@@ -59,7 +69,20 @@
 @endsection
 
 @section('modals')
-
+    <!--Delete Task Modal -->
+    <div id="deleteTaskModal" class="modal">
+        <div class="modal-header blue">
+            <h4 class="white-text">Delete Task</h4>
+        </div>
+        <div class="modal-content">
+            <p>Are you sure you want to delete this task?</p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-light btn">No</a>
+            <button  type="submit" id="delete_task" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Yes</button>
+        </div>
+    </div>
+    </div>
 @endsection
 
 @section('scripts')

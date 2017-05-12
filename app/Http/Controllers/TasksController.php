@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Task;
 
 class TasksController extends Controller
@@ -16,8 +17,11 @@ class TasksController extends Controller
     }
 
     public function saveTask(Request $request){
-       // $task = new Task();
-        return Response::json('awd',200);
+        $task = new Task();
+        $task->name = $request['task'];
+        $task->priority = $request['priority'];
+        $task->status = '0';
+
 
         if($task->save()){
             return Response::json(['message'=>'Task Added','task'=>$task],200);
@@ -26,5 +30,17 @@ class TasksController extends Controller
             return Response::json(['message'=>'Error'],400);
         }
 
+    }
+
+    public function deleteTask(Request $req){
+        $id = $req['id'];
+        $task = Task::find($id);
+        $task->system_deleted = 1;
+        if($task->save()){
+            return Response::json(['message'=>'Task Successfully Deleted'],200);
+        }
+        else{
+            return Response::json(['message'=>'Task wasnt deleted'],400);
+        }
     }
 }

@@ -114,7 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
         'as'=>'todo'
     ]);
 
-    Route::post('/todo/save_task',[
+    Route::any('/todo/save_task',[
         'uses'=>'TasksController@saveTask',
         'as'=>'todo.save_task'
     ]);
@@ -134,6 +134,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/categories_brands/get_category',[
         'uses' =>'CatBrandsController@findCategorys',
         'as' =>'categories_brands.get_category'
+    ]);
+
+    Route::post('/todo/delete_task',[
+        'uses' => 'TaskController@deleteTask',
+        'as' =>'tasks.delete_task'
     ]);
 
 
