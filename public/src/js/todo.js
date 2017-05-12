@@ -16,6 +16,8 @@ $('.datepicker').pickadate({
     selectYears: 15 // Creates a dropdown of 15 years to control year
 });
 
+$('')
+
 $('tbody').on('click','.delete_task_trigger',function(){
    var id = $(this).attr('id');
     $('#delete_task').val(id);
