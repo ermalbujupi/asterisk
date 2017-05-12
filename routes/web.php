@@ -114,7 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
         'as'=>'todo'
     ]);
 
-    Route::post('/todo/save_task',[
+    Route::any('/todo/save_task',[
         'uses'=>'TasksController@saveTask',
         'as'=>'todo.save_task'
     ]);
@@ -132,9 +132,10 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::post('/categories_brands/get_category',[
-        'uses' =>'CatBrandsController@findCategory',
+        'uses' =>'CatBrandsController@findCategorys',
         'as' =>'categories_brands.get_category'
     ]);
+
 
     Route::post('/categories_brands/edit_category',[
         'uses' =>'CatBrandsController@editCategory',
@@ -158,7 +159,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/sales',[
         'uses'=>'SellingController@getAll',
-        'as' => 'sellings'
+        'as' => 'sellings']);
+
+    Route::post('/todo/delete_task',[
+        'uses' => 'TaskController@deleteTask',
+        'as' =>'tasks.delete_task'
     ]);
 
     Route::post('/stock/sell_product',[

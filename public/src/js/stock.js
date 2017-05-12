@@ -10,18 +10,18 @@ $(function(){
      $('#edit_product').val(id);
    });
 
-//Edit Product
+    //Edit Product
    $('#edit_product').on('click',function(){
       var id = $(this).val();
       editProduct(id);
    });
 
-//Give id to the submit button
+    //Give id to the submit button
    $('tbody').on('click','.delete_product_trigger',function(){
      var id = $(this).attr('id');
      $('#delete_product').val(id);
    });
-//Delete Product
+    //Delete Product
    $('#delete_product').on('click',function(){
      ajax("POST","/stock/delete_product","id="+this.value,productDeleted,"");
      $('#deleteProductModal').hide();
@@ -365,17 +365,16 @@ function saveProduct()
     $('#addNewProduct').modal('hide');
 }
 
-//clear all fields
-function clearAddProduct()
-{
-    $('#category').val(0);
-    $('#brand').val(0);
-    $('#name').val("");
-    $('#price').val("");
-    $('#quantity').val("");
-    $('#imei').val("");
-    $('#description').val("");
-}
+    //clear all fields
+    function clearAddProduct(){
+        $('#category').val(0);
+        $('#brand').val(0);
+        $('#name').val("");
+        $('#price').val("");
+        $('#quantity').val("");
+        $('#imei').val("");
+        $('#description').val("");
+    }
 
 //Metod per mbushjen e fushave te modalit
 function fillEditModal(params,success,responseObj)
@@ -439,10 +438,8 @@ function editProduct(id){
         Materialize.toast("Only numeric values allowed for Quantity",3000,'red');
         return false;
     }
-    if(category !=3)
-    {
-        if(imei=="" || imei==0)
-        {
+    if(category !=3){
+        if(imei=="" || imei==0){
             Materialize.toast("Please Write IMEI",3000,'red');
             return false;
         }

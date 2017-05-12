@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->string('name');
             $table->integer('priority');
             $table->boolean('status');
+            $table->integer('system_deleted')->default('0');
             $table->timestamps();
         });
     }

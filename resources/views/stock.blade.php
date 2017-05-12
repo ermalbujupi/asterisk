@@ -229,7 +229,7 @@
     <h4 class="white-text">Delete Product</h4>
   </div>
   <div class="modal-content">
-    <p>Are you sure you want to delete this product</p>
+    <p>Are you sure you want to delete this product?</p>
   </div>
       <div class="modal-footer">
           <a class="modal-action modal-close waves-effect waves-light btn">No</a>
