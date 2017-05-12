@@ -50,7 +50,15 @@
                 @foreach($tasks as $task)
                     <tr class="none-top-border">
                         <td>{{$task->name}}</td>
-                        <td>{{$task->priority}}</td>
+                        <td>
+                            @if(($task->priority) === 1)
+                                Low
+                            @elseif(($task->priority) === 2)
+                                Normal
+                            @else
+                                High
+                            @endif
+                        </td>
                         <td>{{$task->status}}</td>
                         <td class="status_buttons">
                             <input id="{{$task->id}}" type="checkbox" class="filled-in">
@@ -75,6 +83,7 @@
             <h4 class="white-text">Delete Task</h4>
         </div>
         <div class="modal-content">
+            <meta name="csrf-token2" content="{{ csrf_token() }}">
             <p>Are you sure you want to delete this task?</p>
         </div>
         <div class="modal-footer">

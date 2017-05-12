@@ -23,7 +23,7 @@ class StockController extends Controller
             ->where('products.system_deleted','=','0')
             ->select('products.*','categories.name as category','brands.name as brand')
             ->orderBy('products.id','desc')
-            ->get();
+            ->paginate(10);
 
         $brands = Brand::all();
         $categories = Category::all();
@@ -164,6 +164,11 @@ class StockController extends Controller
       }else{
         return Response::json(['message'=>'Error Adding Category'],400);
       }
+    }
+
+
+    public function sellProduct(Request $request){
+
     }
 
 

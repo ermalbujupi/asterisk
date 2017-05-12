@@ -11,7 +11,7 @@ class TasksController extends Controller
 {
     //
     public function getAllTasks(){
-        $tasks = DB::table('tasks')->get();
+        $tasks = DB::table('tasks')->where('system_deleted','=','0')->get();
 
         return view('todo',['tasks'=>$tasks]);
     }
@@ -34,6 +34,7 @@ class TasksController extends Controller
 
     public function deleteTask(Request $req){
         $id = $req['id'];
+
         $task = Task::find($id);
         $task->system_deleted = 1;
         if($task->save()){

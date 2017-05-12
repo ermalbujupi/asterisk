@@ -7,8 +7,7 @@
 @section('styles')
 
     <link rel="stylesheet" href="{{URL::asset('src/css/stock.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{URL::asset('src/css/datatable.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{URL::asset('src/css/datatable-materialize.css')}}" type="text/css">
+
 
 
 @endsection
@@ -17,7 +16,7 @@
   Products
 @endsection
 @section('content')
-    <div class="row">
+<div class="row">
         <div class="col s12 m12 lg12">
 
         <div class="card-panel large ">
@@ -40,7 +39,7 @@
 
 
 
-            <table id="stock_table" border="1" class="responsive-table striped stock_table">
+            <table id="stock_table" border="1" class="bordered striped stock_table">
 
                 <thead>
                 <tr class="primary-color">
@@ -68,6 +67,7 @@
                     <td class="btn_info">
                         <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
+                        <a id="{{$product->id}}" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>
                     </td>
                 </tr>
                 @endforeach
@@ -75,6 +75,9 @@
 
             </table>
         </div>
+        </div>
+        </div>
+</div>
 
 
   <!-- Modal Structure -->
@@ -149,10 +152,10 @@
                   <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
             </div>
         </div>
-    </div>
 
-</div>
-</div>
+
+
+
 <!--/Add new Product Modal-->
 
 <!--Edit Product Modal-->
@@ -219,8 +222,7 @@
     </div>
 
 <!--</form>-->
-</div>
-</div>
+
 <!--Delete Product Modal-->
 <div id="deleteProductModal" class="modal">
   <div class="modal-header blue">
@@ -254,8 +256,7 @@
           <a id="save_category" class="modal-action  waves-effect waves-light btn">Save</a>
         <button  type="submit"  href="#!" class="modal-action modal-close waves-effect waves-green btn ">Close</button>
       </div>
-    </div>
-  </div>
+</div>
 <!--/Add New Category Modal -->
 
 <!-- Add New Brand Modal -->
@@ -279,25 +280,11 @@
         <button  type="submit" id="save_brand" class="modal-action waves-effect waves-green btn "> Save</button>
           <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
       </div>
-    </div>
-  </div>
+</div>
 <!--/Add New Barnd Modal -->
 @endsection
 
 @section('scripts')
   <script type="text/javascript" src="{{URL::asset('src/js/stock.js')}}"></script>
-  <script type="text/javascript" src="{{URL::asset('src/js/datatabels.js')}}"></script>
-  <script type="text/javascript" src="{{URL::asset('src/js/datatables-materialize.js')}}"></script>
-  <script type="text/javascript">
-      $(document).ready(function() {
-          $('#stock_table').DataTable( {
-              columnDefs: [
-                  {
-                      targets: [ 0, 1, 2 ],
-                      className: 'mdl-data-table__cell--non-numeric'
-                  }
-              ]
-          } );
-      } );
-  </script>
+
 @endsection

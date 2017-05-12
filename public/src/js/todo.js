@@ -16,14 +16,33 @@ $('.datepicker').pickadate({
     selectYears: 15 // Creates a dropdown of 15 years to control year
 });
 
-$('tbody').on('click','.delete_product_trigger',function(){
+$('tbody').on('click','.delete_task_trigger',function(){
    var id = $(this).attr('id');
     $('#delete_task').val(id);
 });
 //Delete task
 $('#delete_task').on('click',function(){
-    ajax("POST","/todo/delete_task","id="+this.value,taskDeleted,"");
-    $('#deleteTaskModal').hide();
+     var id = $(this).val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token2"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url:'/todo/delete_task',
+        type:'POST',
+        data:{
+            id:id
+        },
+        success: function (response) {
+            Materialize.toast(response.message,3000,'green');
+        },
+        error:function(response){
+            Materialize.toast(response.message,3000,'red');
+        }
+    });
 });
 
 function saveTask()
@@ -57,8 +76,8 @@ $.ajax({
                 +'<td>'+tasks.priority+'</td>'
                 +'<td>'+tasks.status+'</td>'
                 +'<td>'+ '</td>'
-                +'<td>'+
-                '<a id="'+tasks.id+'" href="#deleteTaskModal" class="btn btn-floating waves-effect waves-light RED action_button tooltipped delete_product_trigger" data-tooltip="Delete Task" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'<td>'
+                +'<a id="'+tasks.id+'" href="#deleteTaskModal" class="btn btn-floating waves-effect waves-light RED action_button tooltipped delete_product_trigger" data-tooltip="Delete Task" data-position="top"><span class="fa fa-trash"></span></a>'
                 +'</td>'
                 +'</tr>'
             );
@@ -67,6 +86,14 @@ $.ajax({
             Materialize.toast(responseObj.message,3000,'red');
         }
     });
+
+    clearFields();
+
+}
+
+function clearFields(){
+    $('#task').val('');
+    $('#priority').val(0);
 }
 
 function taskDeleted(params,success,responseObj){
