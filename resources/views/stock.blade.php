@@ -282,6 +282,60 @@
       </div>
 </div>
 <!--/Add New Barnd Modal -->
+<div id="sellProductModal" class="modal modal-sm modal-fixed-footer">
+    <div class="modal-header blue">
+        <h4 class="white-text">Edit Product</h4>
+    </div>
+    <div class="modal-content">
+        <!--<form action="{{route('stock.save_product')}}" method="POST">-->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <div class="row">
+            <div class="col s6">
+                <h6>Category</h6>
+                <select disabled name="category" id="sell_category" class="browser-default">
+                    <option value="0" disabled selected>Choose your Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col s6">
+                <h6>Brand</h6>
+                <select disabled name="brand" id="sell_brand" class="browser-default">
+                    <option value="0" disabled selected>Choose your Brand</option>
+                    @foreach($brands as $brand)
+                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col s12"><br></div>
+            <div class="col s12 ">
+                <div class="input-field col s12">
+                    <input name="edit_name" placeholder="" disabled  id="sell_name" type="text" class="validate">
+                    <label class="active" for="first_name">Product Name</label>
+                </div>
+
+
+                <div class="input-field col s6">
+                    <input id="sell_price" placeholder=""  name="price" type="number" >
+                    <label class="active" for="last_name">Price</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="sell_quantity" name="quantity" placeholder="" type="number" class="validate">
+                    <label class="active" for="last_name">Quantity</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
+        <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
+    </div>
+</div>
+
+
 @endsection
 
 @section('scripts')
