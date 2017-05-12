@@ -109,9 +109,86 @@ $(function(){
          ajax("POST","/stock/add_category","name="+name,categoryAdded,"");
    });
 
+    // Sell trigger
+   $('tbody').on('click','.sell_product_trigger',function(){
+
+       var id = $(this).attr('id');
+       $('#sell_product').val(id);
+
+       ajax("POST","/stock/get_product","product_id="+id,fillSellModal,"");
+   });
+
+   //Sell Product
+    $('#sell_product').on('click',function(){
+        var id = $(this).val();
+        sellProduct(id);
+    });
+
 
 
 });
+
+function sellProduct(id){
+
+   var category = $('#sell_category').val();
+   var brand =  $('#sell_brand').val();
+   var name = $('#sell_name').val();
+   var price =  $('#sell_price').val();
+   var quantity = $('#sell_quantity').val();
+
+   if(price === ""){
+       Materialize.toast('Please Write Price',3000,'red');
+       return false;
+   }
+
+   if(quantity ===""){
+       Materialize.toast("Please Write Quantity",3000,'red');
+       return false;
+   }
+
+   ajax("POST","/stock/sell_product","id="+id+"&price="+price+"&quantity="+quantity,productSold,"");
+
+
+
+}
+
+function productSold(params,success,responseObj){
+
+    var message = responseObj.message;
+
+    if(success){
+        Materialize.toast(message,3000,'green');
+    }else{
+        Materialize.toast(message,3000,'red');
+    }
+}
+
+function fillSellModal(params,success,responseObj){
+
+    if(success){
+
+        var product = responseObj.product;
+
+        $('#sell_category').val(product.category_id);
+        $('#sell_brand').val(product.brand_id);
+        $('#sell_name').val(product.name);
+        $('#sell_price').val(product.price);
+        $('#sell_quantity').val(product.quantity);
+
+        if($('#sell_category option:selected').val() == 1 || $('#sell_category option:selected').val() == 2) {
+             $('#sell_quantity').prop('disabled',true);
+             $('#sell_quantity').val(1);
+        }
+        else{
+             $('#sell_quantity').prop('disabled',false);
+             $('#sell_quantity').val(product.quantity);
+        }
+
+
+
+        Materialize.updateTextFields();
+    }
+}
 
 function categoryAdded(params,success,responseObj){
 
@@ -194,15 +271,11 @@ function saveProduct()
             Materialize.toast("Please Choose Brand",3000,'red');
             return false;
         }
+        if(imei.length != 16){
+            Materialize.toast("IMEI length should be 16",3000,'red');
+            return false;
+        }
     }
-
-    if(category !=3)
-    {
-       if(imei.length != 16){
-           Materialize.toast("IMEI length should be 16",3000,'red');
-           return false;
-      }
-   }
 
     if(name =="" || name.length <3 )
     {
@@ -242,7 +315,7 @@ function saveProduct()
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-});
+    });
 
     $.ajax({
       url:'/stock/save_product',

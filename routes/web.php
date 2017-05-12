@@ -156,9 +156,14 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'categories_brands.delete_category'
     ]);
 
-    Route::post('/sellings',[
+    Route::get('/sales',[
         'uses'=>'SellingController@getAll',
         'as' => 'sellings'
+    ]);
+
+    Route::post('/stock/sell_product',[
+        'uses' => 'StockController@sellProduct',
+        'as' => 'stock.sell_product'
     ]);
 
 

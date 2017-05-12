@@ -40,7 +40,7 @@
         <li class="bold {{Request::is('log') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>
         <li class="bold {{Request::is('todo') ? 'active':''}}"><a href="{{route('todo')}}" class="waves-effect waves-teal"><i class="fa fa-tasks"></i>To Do List</a></li>
         <li class="bold {{Request::is('categories_brands') ? 'active':''}} "><a href="{{route('categories_brands')}}" class="waves-effect waves-teal"><i class="fa fa-tasks"></i>Categories & Brands</a></li>
-        <li class="bold"><a href="#"><i class="fa fa-eur" aria-hidden="true"></i>Sales</a></li>
+        <li class="bold {{Request::is('sellings') ? 'active':''}}"><a href="{{route('sellings')}}"><i class="fa fa-eur" aria-hidden="true"></i>Sales</a></li>
     </ul>
 </header>
 <main>

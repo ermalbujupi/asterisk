@@ -284,7 +284,7 @@
 <!--/Add New Barnd Modal -->
 <div id="sellProductModal" class="modal modal-sm modal-fixed-footer">
     <div class="modal-header blue">
-        <h4 class="white-text">Edit Product</h4>
+        <h4 class="white-text">Sell Product</h4>
     </div>
     <div class="modal-content">
         <!--<form action="{{route('stock.save_product')}}" method="POST">-->

@@ -13,7 +13,7 @@
 @endsection
 
 @section('page')
-    Products
+    Sales
 @endsection
 @section('content')
     <div class="row">
@@ -26,16 +26,14 @@
 
 
 
-                    <div class="left-align col s6">
-                        <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
-                    </div>
+
                     <div class="col s2">
 
                     </div>
 
-                    <div class="right-align col s4" id="search">
-                        <input type="text" class="col s12 "  id="name_search" placeholder="Search">
-                    </div>
+
+
+                    
 
 
 
@@ -43,26 +41,26 @@
 
                         <thead>
                         <tr class="primary-color">
-                            <th>ID</th>
-                            <th>Product Name</th>
+                            <th>User</th>
+                            <th>Product</th>
                             <th>Brand</th>
                             <th>Category</th>
-                            <th>Price</th>
                             <th>Quantity</th>
-                            <th>IMEI</th>
-                            <th>Action</th>
+                            <th>Price</th>
+                            <th>Date Sold</th>
                         </tr>
+
                         </thead>
                         <tbody>
-                        @foreach($sellings as $product)
-                            <tr class="none-top-border">
-                                <td>{{$product->id}}</td>
-                                <td>{{$product->product}}</td>
-                                <td>{{$product->brand}}</td>
-                                <td>{{$product->category}}</td>
-                                <td>{{$product->price_sold}}</td>
-                                <td>{{$product->quantity_sold}}</td>
-                                <td>{{$product->description}}</td>
+                        @foreach($sellings as $sell)
+                            <tr>
+                                <td>{{$sell->user}}</td>
+                                <td>{{$sell->product}}</td>
+                                <td>{{$sell->brand}} </td>
+                                <td>{{$sell->category}}</td>
+                                <td>{{$sell->quantity_sold}}</td>
+                                <td >{{$sell->price_sold}} &euro;</td>
+                                <td>{{$sell->created_at}}</td>
                             </tr>
                         @endforeach
                         </tbody>

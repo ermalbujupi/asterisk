@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use App\Brand;
 use App\Category;
 use App\Product;
+use App\Sellings;
 
 class StockController extends Controller
 {
@@ -168,6 +170,35 @@ class StockController extends Controller
 
 
     public function sellProduct(Request $request){
+
+        $id = $request['id'];
+        $product = Product::find($id);
+        $quantity = $request['quantity'];
+        $price = $request['price'];
+
+        if($quantity > $product->quantity){
+            return Response::json(["message"=>"You can't sell the product with higher quantity!"],400);
+        }
+
+        $product->quantity -= $quantity;
+
+        if($product->quantity == 0){
+            $product->system_deleted = 1;
+        }
+
+        $sell = new Sellings();
+        $sell->product = $id;
+        $sell->seller = Auth::user()->id;
+        $sell->price_sold = $price;
+        $sell->quantity_sold = $quantity;
+
+        if($product->save()){
+            if($sell->save()){
+                return Response::json(['message'=>'Product Sold'],200);
+            }else{
+                return Response::json(['message'=>'Error Selling Product'],400);
+            }
+        }
 
     }
 
