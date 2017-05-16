@@ -35,3 +35,16 @@
 .white-text{
     height:60px;
 }
+
+#category_search{
+    margin-top:0px;
+}
+
+#brand_search{
+    margin-top:0px;
+}
+
+#refresh_button{
+    padding-left:0px;
+    padding-right:0px;
+}
