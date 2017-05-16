@@ -16,6 +16,14 @@ $(function(){
       editProduct(id);
    });
 
+
+    //refresh button
+    $('#refresh_button').on('click',function(){
+        $('#loading_modal').modal('open');
+       ajax('GET','/stock/get_all','',searchResultByCategoryOrBrand,'');
+
+    });
+
     //Give id to the submit button
    $('tbody').on('click','.delete_product_trigger',function(){
      var id = $(this).attr('id');

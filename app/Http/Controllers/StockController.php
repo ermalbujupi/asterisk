@@ -240,5 +240,18 @@ class StockController extends Controller
         return Response::json(['products'=>$products],200);
     }
 
+    public function getAll(){
+        $products = DB::table('products')
+            ->join('categories','categories.id','=','products.category_id')
+            ->join('brands','brands.id','=','products.brand_id')
+            ->where('products.quantity','>','0')
+            ->where('products.system_deleted','=','0')
+            ->where('brands.system_deleted','=','0')
+            ->select('products.*','categories.name as category','brands.name as brand')
+            ->orderBy('products.id','desc')->get();
+
+        return Response::json(['products'=>$products],200);
+    }
+
 
 }
