@@ -23,12 +23,6 @@
 
 
 
-                 <div class="left-align">
-                         <a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
-
-                 </div>
-                 <div class="col s12"><br></div>
-
                  <table id="category_table" border="1" class="responsive-table striped stock_table">
 
                      <thead>

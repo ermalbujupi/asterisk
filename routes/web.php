@@ -176,5 +176,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/getsize/{year}/{month}',['uses'=>'UsersController@getCountByDate','as'=>'getsize']);
 
+    Route::any('stock/search_category_brand',['uses'=>'StockController@getProductsByBrandOrCategory']);
 
 });

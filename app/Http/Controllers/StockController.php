@@ -204,4 +204,41 @@ class StockController extends Controller
     }
 
 
+    public function getProductsByBrandOrCategory(Request $req){
+
+        $brand = $req['brand'];
+        $category = $req['category'];
+
+        $products = null;
+
+        if(isset($brand) && isset($category) && $brand != '' && $category != ''){
+            $products = DB::table('products')
+                ->select('products.*','categories.name as category','brands.name as brand')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->where('brands.name','=',$brand)
+                ->where('categories.name','=',$category)
+                ->get();
+
+        }else if(isset($brand) && $brand != ''){
+            $products = DB::table('products')
+                ->select('products.*','categories.name as category','brands.name as brand')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->where('brands.name','=',$brand)
+                ->get();
+
+        }else if(isset($category) && $category != ''){
+            $products = DB::table('products')
+                ->select('products.*','categories.name as category','brands.name as brand')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->where('categories.name','=',$category)
+                ->get();
+        }
+
+        return Response::json(['products'=>$products],200);
+    }
+
+
 }

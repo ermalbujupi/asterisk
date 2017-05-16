@@ -125,8 +125,58 @@ $(function(){
     });
 
 
+    //Search By Category
+
+    $('#category_search').on('change',function(){
+        var brandName = '';
+        var categoryName =  $('#category_search option:selected').text();
+        if($('#brand_search option:selected').val() != 0){
+            brandName = $('#brand_search option:selected').text();
+        }
+
+        $('#loading_modal').modal('open');
+        ajax("POST","/stock/search_category_brand","category="+categoryName+'&brand='+brandName,searchResultByCategoryOrBrand,'');
+    });
+
+    //Search By Brand
+    $('#brand_search').on('change',function(){
+        var categoryName = '';
+        var brandName = $('#brand_search option:selected').text();
+        if($('#category_search option:selected').val() != 0){
+            categoryName = $('#category_search option:selected').text();
+        }
+        $('#loading_modal').modal('open');
+        ajax("POST","/stock/search_category_brand","category="+categoryName+'&brand='+brandName,searchResultByCategoryOrBrand,'');
+    });
+
+
 
 });
+
+function searchResultByCategoryOrBrand(params,success,responseObj){
+    if(success){
+
+        var products = responseObj.products;
+        $('tbody tr').remove();
+        for(var i =0 ; i< products.length ; i++){
+
+            $('tbody').append(
+                '<tr class="none-top-border">'
+                +'<td>'+products[i].id+'</td>'
+                +'<td>'+products[i].name+'</td>'
+                +'<td>'+products[i].brand+'</td>'
+                +'<td>'+products[i].category+'</td>'
+                +'<td>'+products[i].price+'</td>'
+                +'<td>'+products[i].quantity+'</td>'
+                +'<td>'
+                +'<a id="'+products[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
+                +'<a id="'+products[i].id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'</td>'
+                +'</tr>');
+        }
+        $('#loading_modal').modal('close');
+    }
+}
 
 function sellProduct(id){
 
