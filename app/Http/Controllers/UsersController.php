@@ -74,5 +74,26 @@ class UsersController extends Controller
         }
     }
 
+    public function getDateOfCreatedUsers(){
+
+        $created = DB::table('users')->pluck('created_at');
+
+        foreach($created as $date){
+            
+        }
+
+        return Response::json(['dates'=>$created],200);
+    }
+
+    public function getCountByDate($year,$month){
+
+        $count = DB::table('users')
+            ->whereYear('users.created_at','=',$year)
+            ->whereMonth('users.created_at','=',$month)
+            ->count();
+
+        return Response::json(['count'=>$count],200);
+    }
+
 
 }

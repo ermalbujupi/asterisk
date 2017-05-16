@@ -49,7 +49,6 @@
                     <th>Category</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>IMEI</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -62,8 +61,6 @@
                     <td>{{$product->category}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>
-                    <td>{{$product->imei}}</td>
-
                     <td class="btn_info">
                         <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>

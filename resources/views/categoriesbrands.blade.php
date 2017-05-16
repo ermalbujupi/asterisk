@@ -140,7 +140,7 @@
          </div>
          <div class="modal-footer">
              <a id="edit_category" class="modal-action  waves-effect waves-light btn">Save</a>
-             <button  type="submit"  href="#!" class="modal-action  waves-effect waves-green btn ">Close</button>
+             <button  type="submit"  href="#!" class="modal-action  waves-effect waves-green btn close ">Close</button>
          </div>
      </div>
     <!--/Edit Category -->
@@ -154,7 +154,7 @@
          <p>Are you sure you want to delete this category</p>
      </div>
      <div class="modal-footer">
-         <a class="modal-action modal-close waves-effect waves-light btn">No</a>
+         <a class="modal-action modal-close waves-effect waves-light btn close">No</a>
          <button  type="submit" id="delete_category"  class="modal-action waves-effect waves-green btn "> Yes</button>
      </div>
  </div>
@@ -180,7 +180,7 @@
      </div>
      <div class="modal-footer">
          <button  type="submit" id="save_brand" class="modal-action waves-effect waves-green btn "> Save</button>
-         <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
+         <a class="modal-action modal-close waves-effect waves-light btn close">Close</a>
      </div>
  </div>
 <!--/ Add New Brand Modal-->
@@ -204,7 +204,7 @@
      </div>
      <div class="modal-footer">
          <button  type="submit" id="edit_brand" class="modal-action waves-effect waves-green btn "> Save</button>
-         <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
+         <a class="modal-action modal-close waves-effect waves-light btn close">Close</a>
      </div>
  </div>
 <!--/Edit Brand Modal-->
@@ -217,7 +217,7 @@
      <div class="modal-content">
          <p>Are you sure you want to delete this brand</p>
      </div>
-     <div class="modal-footer">
+     <div class="modal-footer">x`x`
          <a class="modal-action modal-close waves-effect waves-light btn">No</a>
          <button  type="submit" id="delete_brand"  class="modal-action  waves-effect waves-green btn">Yes</button>
      </div>

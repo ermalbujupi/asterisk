@@ -132,7 +132,7 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::post('/categories_brands/get_category',[
-        'uses' =>'CatBrandsController@findCategorys',
+        'uses' =>'CatBrandsController@findCategory',
         'as' =>'categories_brands.get_category'
     ]);
 
@@ -170,6 +170,11 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'StockController@sellProduct',
         'as' => 'stock.sell_product'
     ]);
+
+
+    Route::get('/get_dates',['uses'=>'UsersController@getDateOfCreatedUsers']);
+
+    Route::get('/getsize/{year}/{month}',['uses'=>'UsersController@getCountByDate','as'=>'getsize']);
 
 
 });
