@@ -68,7 +68,7 @@ $(function(){
     });
 
     //Trigger per editimin e kategorise
-    $('#category_table').on('click','.edit_category_trigger',function(){
+    $('#category_table_body').on('click','.edit_category_trigger',function(){
 
         var id = $(this).attr('id');
         $('#edit_category').val(id);
@@ -92,7 +92,7 @@ $(function(){
     });
 
     //Trigger per fshirje te brand-it
-    $('#category_table').on('click','.delete_category_trigger',function(){
+    $('#category_table_body').on('click','.delete_category_trigger',function(){
         var id = $(this).attr('id');
         $('#delete_category').val(id);
     });
@@ -228,7 +228,7 @@ function categoryAdded(params,success,responseObj){
             +'<td>'+category.name+'</td>'
             +'<td>'
                 +'<a id="'+category.id+'" href="#editCategoryModal"   class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_category_trigger" data-tooltip="Edit Category" data-position="top"><span class="fa fa-pencil"></span></a>'
-                +'<a id="'+category.id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_category_trigger" data-tooltip="Delete Category" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'<a id="'+category.id+'" href="#deleteCategoryModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_category_trigger" data-tooltip="Delete Category" data-position="top"><span class="fa fa-trash"></span></a>'
             +'<td>'
             +'</tr>');
 

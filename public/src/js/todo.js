@@ -40,9 +40,11 @@ $('#delete_task').on('click',function(){
         },
         success: function (response) {
             Materialize.toast(response.message,3000,'green');
+            location.reload();
         },
         error:function(response){
             Materialize.toast(response.message,3000,'red');
+            location.reload();
         }
     });
 });

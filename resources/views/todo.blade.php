@@ -69,7 +69,7 @@
                         <td class="status_buttons">
                             <input id="{{$task->id}}" type="checkbox" class="filled-in" >
                             <label for="{{$task->id}}"></label>
-                            
+
                         </td>
                         <td>
                             <a id="{{$task->id}}" href="#deleteTaskModal" class="btn btn-floating waves-effect waves-light red tooltipped action_button delete_task_trigger" data-tooltip="Delete Task" data-position="top"><span class="fa fa-trash"></span></a>

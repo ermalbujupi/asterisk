@@ -98,12 +98,14 @@
                 <div class="col s12">
 
                     <div class="col s6">
-                        <select  name="category" id="category" class="browser-default col s9">
-                            <option value="0" disabled selected>Choose your Category</option>
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col-md-9">
+                            <select  name="category" id="category" class="browser-default">
+                                <option value="0" disabled selected>Choose your Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="col s2"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
                     </div>

@@ -132,7 +132,7 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::post('/categories_brands/get_category',[
-        'uses' =>'CatBrandsController@findCategorys',
+        'uses' =>'CatBrandsController@findCategory',
         'as' =>'categories_brands.get_category'
     ]);
 
@@ -162,7 +162,7 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'sellings']);
 
     Route::post('/todo/delete_task',[
-        'uses' => 'TaskController@deleteTask',
+        'uses' => 'TasksController@deleteTask',
         'as' =>'tasks.delete_task'
     ]);
 

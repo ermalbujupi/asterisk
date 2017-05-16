@@ -23,12 +23,13 @@ class StockController extends Controller
             ->join('brands','brands.id','=','products.brand_id')
             ->where('products.quantity','>','0')
             ->where('products.system_deleted','=','0')
+            ->where('brands.system_deleted','=','0')
             ->select('products.*','categories.name as category','brands.name as brand')
             ->orderBy('products.id','desc')
             ->paginate(10);
 
-        $brands = Brand::all();
-        $categories = Category::all();
+        $brands = Brand::where('system_deleted','=','0')->get();
+        $categories = Category::where('system_deleted','=','0')->get();
         return view('stock',['products'=>$products,'brands'=>$brands,'categories'=>$categories]);
     }
 
