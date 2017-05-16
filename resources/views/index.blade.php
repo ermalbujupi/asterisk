@@ -27,7 +27,7 @@
                         <div id="myfirstchart"></div>
                     </div>
                     <div class="col-md-12">
-                        <h5 style="margin-left: 15px;">Users Added</h5>
+                        <h5 style="margin-left: 15px;">Sales</h5>
                         <!--<form action="{{route('getsize',['year'=>2017,'month'=>4])}}">-->
                             <button type="submit"  id="button1" >Get</button>
                         <!--</form>-->
@@ -35,31 +35,12 @@
                     </div>
                 </div>
 
-                <div class="card-action">
 
-
-                </div>
             </div>
 
         </div>
 
-        <div class="col s6 m6 lg6">
 
-            <div class="card-panel large ">
-
-
-                <div class="card-content">
-
-
-
-                    <div class="left-align">
-                        <a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
-                    </div>
-                    <div class="col s12"><br></div>
-
-                </div>
-            </div>
-        </div>
 </div>
 @endsection
 

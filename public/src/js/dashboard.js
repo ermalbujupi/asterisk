@@ -44,7 +44,12 @@ function showResult(params,success,responseObj){
             element: 'myfirstchart',
             // Chart data records -- each entry in this array corresponds to a point on
             // the chart.
-            data: data,
+            data: [
+                {year:'2015',value:1},
+                {year:'2016',value:2},
+                {year:'2017',value:3}
+
+            ],
             // The name of the data record attribute that contains x-values.
             xkey: 'year',
             // A list of names of data record attributes that contain y-values.

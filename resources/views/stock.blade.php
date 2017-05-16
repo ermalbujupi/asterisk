@@ -5,11 +5,7 @@
 @endsection
 
 @section('styles')
-
     <link rel="stylesheet" href="{{URL::asset('src/css/stock.css')}}" type="text/css">
-
-
-
 @endsection
 
 @section('page')
@@ -23,19 +19,40 @@
 
 
         <div class="card-content">
-
-
-
-              <div class="left-align col s6">
+            <div class="left-align">
                   <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
-              </div>
-              <div class="col s2">
+            </div>
 
-              </div>
+            <div class="col s12">
+                <br>
+            </div>
 
-              <div class="right-align col s4" id="search">
-                <input type="text" class="col s12 "  id="name_search" placeholder="Search">
-              </div>
+            <div class="col s1 " id="refresh_button">
+                <a class="btn-floating waves-effect blue tooltipped" data-position="top" data-tooltip="Refresh Table">
+                    <i class="large material-icons">loop</i>
+                </a>
+            </div>
+            <div class="input-field right-align col s3" id="category_search">
+                <select>
+                    <option value="" disabled selected>Search by Category</option>
+                    <option value="1">Apple</option>
+                    <option value="2">Samsung</option>
+                    <option value="3">Google</option>
+                </select>
+            </div>
+
+            <div class="input-field right-align col s3" id="brand_search">
+                <select>
+                    <option value="" disabled selected>Search by Brand</option>
+                    <option value="1">Mobile Phones</option>
+                    <option value="2">Tablets</option>
+                    <option value="3">Accessories</option>
+                </select>
+            </div>
+
+            <div class="right-align col s4" id="search">
+               <input type="text" class="col s12 "  id="name_search" placeholder="Search for a product">
+            </div>
 
 
 
