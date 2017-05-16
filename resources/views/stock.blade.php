@@ -34,19 +34,18 @@
             </div>
             <div class="input-field right-align col s3" id="category_search">
                 <select>
-                    <option value="" disabled selected>Search by Category</option>
-                    <option value="1">Apple</option>
-                    <option value="2">Samsung</option>
-                    <option value="3">Google</option>
+                    <option value="0" disabled selected>Choose your Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
                 </select>
             </div>
 
             <div class="input-field right-align col s3" id="brand_search">
                 <select>
-                    <option value="" disabled selected>Search by Brand</option>
-                    <option value="1">Mobile Phones</option>
-                    <option value="2">Tablets</option>
-                    <option value="3">Accessories</option>
+                    @foreach($brands as $brand)
+                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                    @endforeach
                 </select>
             </div>
 
