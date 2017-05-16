@@ -172,4 +172,9 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
 
+    Route::get('/get_dates',['uses'=>'UsersController@getDateOfCreatedUsers']);
+
+    Route::get('/getsize/{year}/{month}',['uses'=>'UsersController@getCountByDate','as'=>'getsize']);
+
+
 });
