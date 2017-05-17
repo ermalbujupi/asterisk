@@ -6,10 +6,6 @@
 
 @section('styles')
 
-    <link rel="stylesheet" href="{{URL::asset('src/css/stock.css')}}" type="text/css">
-
-
-
 @endsection
 
 @section('page')
@@ -23,22 +19,23 @@
 
 
                 <div class="card-content">
-                    <div class="col s1">
+
+                    <div class="form-group col s1 " id="refresh_button">
                         <br>
-                        <span id="refresh"><i class="fa  fa-lg fa-refresh"  title="Reload" style="color:#286090;cursor: pointer"></i></span>
+                        <a class="btn-floating waves-effect light-blue darken-4 tooltipped" data-position="top" data-tooltip="Refresh Table">
+                            <i class="large material-icons">loop</i>
+                        </a>
                     </div>
-                    <!--
-                       <div class="col-md-1">
-                       </div>-->
-                    <div class="form-group col s2">
-                        <label class="control-label">User:</label>
-                        <select class="form-control input-sm" id="user_select">
+
+                    <div class=" col s2">
+                        <label >User:</label>
+                        <select  id="user_select" class="browser-default">
                             <option value="0" selected>All</option>
-                           </select>
+                        </select>
                     </div>
                     <div class="form-group col s2">
-                        <label class="control-label">Year:</label>
-                        <select class="form-control input-sm" id="year_select">
+                        <label >Year:</label>
+                        <select class="browser-default" id="year_select">
                             <option disabled selected value="0">All</option><?php
                             $year = date("Y");
                             $year_temp= 2016;
@@ -51,7 +48,7 @@
                         </select>
                     </div>
                     <div class="form-group col s2">
-                        <label class="control-label">Month:</label>
+                        <label >Month:</label>
                         <select class="form-control input-sm" id="month_select" disabled>
                             <option value="0" disabled selected>All</option>
                             <option value="1" >January</option>
@@ -71,11 +68,7 @@
                     <div class="form-group col s3">
                         <div class="">
                             <label class = "control-label" for="name">Date:</label>
-                            <div class="input-group date form_datetime col-md-12"  data-date="{{ date("Y-m-d")}}" data-date-format="dd/mm/yyyy" data-link-field="delivery_time">
-                                <input class="form-control input-sm" size=""  type="text" value="" readonly id="date_select">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                            </div>
+                            <input type="date" class="datepicker" >
                             <input type="hidden" id="delivery_time" value="" /><br/>
                         </div>
                     </div>
@@ -120,6 +113,5 @@
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="{{URL::asset('src/js/stock.js')}}"></script>
-
+    <script type="text/javascript" src="{{URL::asset('src/js/sales.js')}}"></script>
 @endsection
