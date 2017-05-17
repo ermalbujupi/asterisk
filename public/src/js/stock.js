@@ -167,6 +167,7 @@ function searchResultByCategoryOrBrand(params,success,responseObj){
                 +'<td>'
                 +'<a id="'+products[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
                 +'<a id="'+products[i].id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'<a id="'+products[i].id+'" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>'
                 +'</td>'
                 +'</tr>');
         }
@@ -280,10 +281,10 @@ function productSearched(params,success,responseObj){
                 +'<td>'+products[i].category+'</td>'
                 +'<td>'+products[i].price+'</td>'
                 +'<td>'+products[i].quantity+'</td>'
-                +'<td>'+products[i].imei+'</td>'
                 +'<td>'
                 +'<a id="'+products[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
                 +'<a id="'+products[i].id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'<a id="'+products[i].id+'" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>'
                 +'</td>'
                 +'</tr>');
         }
@@ -367,26 +368,34 @@ function saveProduct()
 
         var product = responseObj.product;
         var brand = responseObj.brand;
-        var category = responseObj.category
+        var category = responseObj.category;
 
-        $('tbody').append(
-        '<tr class="none-top-border">'
-        +'<td>'+product.id+'</td>'
-        +'<td>'+product.name+'</td>'
-        +'<td>'+brand.name+'</td>'
-        +'<td>'+category.name+'</td>'
-        +'<td>'+product.price+'</td>'
-        +'<td>'+product.quantity+'</td>'
-        +'<td>'
-          +'<a id="'+product.id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
-          +'<a id="'+product.id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
-        +'</td>'
-        +'</tr>');
+        var productExists = false;
 
+        $('tbody tr').each(function(){
 
-
-
-
+              if($(this).find('td:first-child').text() == product.id){
+                  $(this).find('td:nth-child(6)').text(product.quantity);
+                  productExists = true;
+              }
+        });
+          
+        if(!productExists){
+            $('tbody').append(
+                '<tr class="none-top-border">'
+                +'<td>'+product.id+'</td>'
+                +'<td>'+product.name+'</td>'
+                +'<td>'+brand.name+'</td>'
+                +'<td>'+category.name+'</td>'
+                +'<td>'+product.price+'</td>'
+                +'<td>'+product.quantity+'</td>'
+                +'<td>'
+                +'<a id="'+product.id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
+                +'<a id="'+product.id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'<a id="'+product.id+'" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>'
+                +'</td>'
+                +'</tr>');
+        }
       },
       error:function(responseObj){
           Materialize.toast(responseObj.message,3000,'red');
@@ -468,7 +477,7 @@ function editProduct(id){
         return false;
     }
 
-    ajax("POST","/stock/edit_product","id="+p_id+"&category="+category+"&brand="+brand+"&name="+name+"&price="+price+"&quantity="+quantity+"&imei="+imei+"&description="+description,productEdited,"");
+    ajax("POST","/stock/edit_product","id="+p_id+"&category="+category+"&brand="+brand+"&name="+name+"&price="+price+"&quantity="+quantity+"&description="+description,productEdited,"");
     $('#editProduct').modal('hide');
     location.reload(true);
 }
@@ -487,9 +496,8 @@ function productEdited(params,success,responseObj){
              $(this).find('td:nth-child(2)').text(product.name);
              $(this).find('td:nth-child(3)').text(brand.name);
              $(this).find('td:nth-child(4)').text(category.name);
-             $(this).find('td:nth-child(5)').text(product.quantity);
-             $(this).find('td:nth-child(6)').text(product.price);
-             $(this).find('td:nth-child(7)').text(product.imei);
+             $(this).find('td:nth-child(5)').text(product.price);
+             $(this).find('td:nth-child(6)').text(product.quantity);
           }
        });
         Materialize.toast(responseObj.message,3000,'green');

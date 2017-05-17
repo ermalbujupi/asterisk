@@ -35,27 +35,42 @@ class StockController extends Controller
 
     public function saveProduct(Request $request)
     {
-        $product = new Product();
-        $product->name = $request['name'];
-        $product->category_id = $request['category'];
-        if($request['category']==3){
-            $product->brand_id=null;
+        $name = $request['name'];
+        $product = Product::where('name',$name)->first();
+
+        if($product == null){
+            $product = new Product();
+            $product->name = $request['name'];
+            $product->category_id = $request['category'];
+            if($request['category']==3){
+                $product->brand_id=null;
+            }
+            else
+            {
+                $product->brand_id=$request['brand'];
+            }
+            $product->quantity=$request['quantity'];
+            $product->price = $request['price'];
+            $product->description= $request['description'];
+            $product->system_deleted = "0";
+            if($product->save())
+            {
+                $brand = Brand::find($product->brand_id);
+                $category = Category::find($product->category_id);
+                return Response::json(['message'=>'Product Added','product'=>$product,'brand'=>$brand,'category'=>$category],200);
+            }else{
+                return Response::json(['message'=>'Error Adding Product'],400);
+            }
+        }else{
+            $product->quantity += $request['quantity'];
+
+            if($product->save()){
+                return Response::json(['message'=>'Product Added','product'=>$product,'brand'=>(Brand::find($product->brand_id)),'category'=>(Category::find($product->category_id))]);
+            }else{
+                return Response::json(['message'=>'Error Adding Product'],400);
+            }
         }
-        else
-        {
-            $product->brand_id=$request['brand'];
-        }
-        $product->quantity=$request['quantity'];
-        $product->price = $request['price'];
-        $product->description= $request['description'];
-        $product->system_deleted = "0";
-        if($product->save())
-        {
-           $brand = Brand::find($product->brand_id);
-           $category = Category::find($product->category_id);
-            return Response::json(['message'=>'Product Added','product'=>$product,'brand'=>$brand,'category'=>$category],200);
-        }
-        return Response::json(['message'=>'Error'],400);
+
     }
 
     public function getProduct(Request $request){

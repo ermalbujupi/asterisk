@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
       'as' =>'stock'
     ]);
 
-    Route::post('/stock/save_product',[
+    Route::any('/stock/save_product',[
        'uses'=>'StockController@saveProduct',
        'as'=>'stock.save_product'
    ]);
