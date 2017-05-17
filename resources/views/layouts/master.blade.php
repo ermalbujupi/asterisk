@@ -14,7 +14,7 @@
 
 <body cz-shortcut-listen="true">
 <header>
-    <nav class="top-nav blue">
+    <nav class="top-nav light-blue darken-4">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
         <div class="nav-wrapper ">
                 <ul id="dropdown1" class="dropdown-content">
@@ -39,7 +39,7 @@
         <li class="bold {{Request::is('users') ? 'active':''}}"><a href="{{route('users')}}" class="waves-effect waves-teal"><i class="fa fa-users"></i>Users</a></li>
         <li class="bold {{Request::is('log') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>
         <li class="bold {{Request::is('todo') ? 'active':''}}"><a href="{{route('todo')}}" class="waves-effect waves-teal"><i class="fa fa-tasks"></i>To Do List</a></li>
-        <li class="bold {{Request::is('categories_brands') ? 'active':''}} "><a href="{{route('categories_brands')}}" class="waves-effect waves-teal"><i class="fa fa-tasks"></i>Categories & Brands</a></li>
+        <li class="bold {{Request::is('categories_brands') ? 'active':''}} "><a href="{{route('categories_brands')}}" class="waves-effect waves-teal"><i class="fa fa-apple"></i>Categories & Brands</a></li>
         <li class="bold {{Request::is('sellings') ? 'active':''}}"><a href="{{route('sellings')}}"><i class="fa fa-eur" aria-hidden="true"></i>Sales</a></li>
     </ul>
 </header>

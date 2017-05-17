@@ -40,12 +40,10 @@ class StockController extends Controller
         $product->category_id = $request['category'];
         if($request['category']==3){
             $product->brand_id=null;
-            $product->imei=null;
         }
         else
         {
             $product->brand_id=$request['brand'];
-            $product->imei=$request['imei'];
         }
         $product->quantity=$request['quantity'];
         $product->price = $request['price'];
@@ -75,6 +73,7 @@ class StockController extends Controller
             ->select('products.*','categories.name as category','brands.name as brand')
             ->get();
     }
+
 
     public function editProduct(Request $request){
        $id = $request['id'];

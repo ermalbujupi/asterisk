@@ -39,19 +39,7 @@ $(function(){
 
 
     //Kody yt ermal
-    $('#imei').on('keydown',function(event){
-      if($(this).val().length>=16){
-          if(event.keyCode !=8)
-           event.preventDefault();
-      }
-   });
 
-   $('#edit_imei').on('keydown',function(event){
-       if($(this).val().length>=16){
-           if(event.keyCode !=8 || event.keyCode != 9)
-               event.preventDefault();
-       }
-   });
 
    $('#name_search').on('keyup',function(){
 
@@ -306,7 +294,6 @@ function productSearched(params,success,responseObj){
 }
 
 
-
 //metod per shtimin e produktit
 function saveProduct()
 {
@@ -315,7 +302,6 @@ function saveProduct()
     var name = $('#name').val();
     var price = $('#price').val();
     var quantity = $('#quantity').val();
-    var imei = $('#imei').val();
     var description = $('#description').val();
     if(category == 0)
     {
@@ -329,10 +315,7 @@ function saveProduct()
             Materialize.toast("Please Choose Brand",3000,'red');
             return false;
         }
-        if(imei.length != 16){
-            Materialize.toast("IMEI length should be 16",3000,'red');
-            return false;
-        }
+
     }
 
     if(name =="" || name.length <3 )
@@ -345,9 +328,9 @@ function saveProduct()
           Materialize.toast("Please Write Price",3000,'red');
         return false;
     }
-    if(isNaN(price))
+    if(isNaN(price) || price<0)
     {
-          Materialize.toast("Only numeric values allowed for Price",3000,'red');
+        Materialize.toast("Only numeric values allowed for Price",3000,'red');
         return false;
     }
     if(quantity == "" || quantity ==0)
@@ -360,14 +343,7 @@ function saveProduct()
         Materialize.toast("Only numeric values allowed for Quantity",3000,'red');
         return false;
     }
-    if(category !=3)
-    {
-        if(imei=="" || imei==0)
-        {
-            Materialize.toast("Please Write IMEI",3000,'red');
-            return false;
-        }
-    }
+
 
     $.ajaxSetup({
     headers: {
@@ -382,7 +358,6 @@ function saveProduct()
         name:name,
         category:category,
         brand:brand,
-        imei:imei,
         quantity:quantity,
         price:price,
         description:description
@@ -402,7 +377,6 @@ function saveProduct()
         +'<td>'+category.name+'</td>'
         +'<td>'+product.price+'</td>'
         +'<td>'+product.quantity+'</td>'
-        +'<td>'+product.imei+'</td>'
         +'<td>'
           +'<a id="'+product.id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
           +'<a id="'+product.id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
@@ -430,7 +404,6 @@ function saveProduct()
         $('#name').val("");
         $('#price').val("");
         $('#quantity').val("");
-        $('#imei').val("");
         $('#description').val("");
     }
 
@@ -442,7 +415,6 @@ function fillEditModal(params,success,responseObj)
     $('#edit_name').val(responseObj.product.name);
     $('#edit_price').val(responseObj.product.price);
     $('#edit_quantity').val(responseObj.product.quantity);
-    $('#edit_imei').val(responseObj.product.imei);
     $('#edit_description').val(responseObj.product.description);
 
     Materialize.updateTextFields();
@@ -456,7 +428,6 @@ function editProduct(id){
     var name = $('#edit_name').val();
     var price =  $('#edit_price').val();
     var quantity = $('#edit_quantity').val();
-    var imei =  $('#edit_imei').val();
     var description = $('#edit_description').val();
     if(category == 0)
     {
@@ -496,12 +467,7 @@ function editProduct(id){
         Materialize.toast("Only numeric values allowed for Quantity",3000,'red');
         return false;
     }
-    if(category !=3){
-        if(imei=="" || imei==0){
-            Materialize.toast("Please Write IMEI",3000,'red');
-            return false;
-        }
-    }
+
     ajax("POST","/stock/edit_product","id="+p_id+"&category="+category+"&brand="+brand+"&name="+name+"&price="+price+"&quantity="+quantity+"&imei="+imei+"&description="+description,productEdited,"");
     $('#editProduct').modal('hide');
     location.reload(true);

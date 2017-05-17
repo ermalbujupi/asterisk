@@ -14,34 +14,22 @@
 
 
 @section('content')
+    <div class="col s6 left-align" id="date" style="height:1px;"></div>
 
-<div class="row">
-
-        <div class="col s6 m6 lg6">
-
-            <div class="card-panel large ">
-
-
-                <div class="card-content">
-                    <div class="col-md-12">
-                        <div id="myfirstchart"></div>
-                    </div>
-                    <div class="col-md-12">
-                        <h5 style="margin-left: 15px;">Sales</h5>
-                        <!--<form action="{{route('getsize',['year'=>2017,'month'=>4])}}">-->
-                            <button type="submit"  id="button1" >Get</button>
-                        <!--</form>-->
-
-                    </div>
-                </div>
-
-
-            </div>
-
+    <div class="row">
+        <div class="col s6 right-align">
+            Hello
         </div>
+    </div>
+
+    <div class"row">
+        <div class="col-sm-6 text-center">
+            <label class="label label-success">Area Chart</label>
+            <div id="area-chart" ></div>
+        </div>
+    </div>
 
 
-</div>
 @endsection
 
 @section('modals')
@@ -52,4 +40,22 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <script type="text/javascript" src="{{URL::asset('src/js/dashboard.js')}}"></script>
+
+    <script>
+        function formatDate(date) {
+            var d = new Date(date),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+                    hour = d.getHours();
+
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        document.getElementById("date").innerHTML = formatDate(new Date());
+    </script>
 @endsection

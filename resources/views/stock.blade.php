@@ -20,7 +20,7 @@
 
         <div class="card-content">
             <div class="left-align">
-                  <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
+                  <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a>
             </div>
 
             <div class="col s12">
@@ -28,13 +28,13 @@
             </div>
 
             <div class="col s1 " id="refresh_button">
-                <a class="btn-floating waves-effect blue tooltipped" data-position="top" data-tooltip="Refresh Table">
+                <a class="btn-floating waves-effect light-blue darken-4 tooltipped" data-position="top" data-tooltip="Refresh Table">
                     <i class="large material-icons">loop</i>
                 </a>
             </div>
             <div class="input-field right-align col s3" id="category_search">
                 <select>
-                    <option value="0" disabled selected>Choose your Category</option>
+                    <option value="0" disabled selected>Select category</option>
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
@@ -43,6 +43,7 @@
 
             <div class="input-field right-align col s3" id="brand_search">
                 <select>
+                    <option value="0" disabled selected>Select brand</option>
                     @foreach($brands as $brand)
                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach
@@ -78,7 +79,7 @@
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>
                     <td class="btn_info">
-                        <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
+                        <a id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light light-blue darken-4 action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
                         <a id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
                         <a id="{{$product->id}}" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>
                     </td>
@@ -99,49 +100,49 @@
 
 @section('modals')
     <!--Add New Product -->
-        <div id="addNewProductModal" class="modal modal-sm modal-fixed-footer">
+        <div id="addNewProductModal" class="modal">
 
             <meta name="csrf-token" content="{{ csrf_token() }}">
-            <div class="modal-header blue">
+
+            <div class="modal-header light-blue darken-4">
+                <br>
                 <h4 class="white-text">Add New Product</h4>
             </div>
 
             <div class="modal-content">
-
-                <div class="col s12">
-
-                    <div class="col s6">
-                        <div class="col-md-9">
-                            <select  name="category" id="category" class="browser-default">
-                                <option value="0" disabled selected>Choose your Category</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col s2"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select  name="category" id="category" class="">
+                            <option value="0" disabled selected>Choose your Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
-                    <div class="col s6">
-                        <select name="brand" id="brand" class="browser-default col s9">
+                    <div class="col s6"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a></div>
+                    <br>
+                    <br>
+                    <br>
+                    <h1></h1>
+
+                    <div class="input-field col s12 m6">
+                        <select name="brand" id="brand" class="">
                             <option value="0" disabled selected>Choose your Brand</option>
                             @foreach($brands as $brand)
                                 <option value="{{$brand->id}}">{{$brand->name}}</option>
                             @endforeach
                         </select>
-
-                        <div class="col s2"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a></div>
                     </div>
-
-
-                    <div class="col s12 ">
-                        <br>
-                      <div class="input-field col s12">
+                    <div class="col s2"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a></div>
+                    <br>
+                    <br>
+                    <br>
+                    <h1></h1>
+                    <div class="input-field col s6">
                         <input name="name"  id="name" type="text" class="validate" placeholder="">
                         <label for="first_name">Product Name</label>
-                      </div>
-
+                    </div>
                     <div class="input-field col s6">
                         <input id="price" name="price" type="number" step="any" class="validate" placeholder="">
                         <label for="last_name">Price</label>
@@ -150,23 +151,25 @@
                         <input id="quantity" name="quantity" type="number" class="validate" placeholder="">
                         <label for="last_name">Quantity</label>
                     </div>
-                    <div class="input-field col s12">
-                        <input id="imei" type="number" name="imei" minlength="16" maxlength="16"  placeholder="" data-length="16"   >
-                        <label for="last_name">IMEI</label>
+                    <br>
+                    <h1></h1>
+                    <div class="input-field col s8">
+                        <textarea id="description" name="description" class="materialize-textarea" placeholder="Product Description"></textarea>
+                        <label for="textarea1">Description</label>
                     </div>
-                    <div class="input-field col s12">
-                      <textarea id="description" name="description" class="materialize-textarea" placeholder=""></textarea>
-                      <label for="textarea1">Description</label>
+                    <br>
+                    <br>
+                    <h1></h1>
+                    <div class="col s12">
+                        <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
+                        <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
                     </div>
-                </div>
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
-                  <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
-            </div>
         </div>
+
+
 
 
 
@@ -175,7 +178,7 @@
 
 <!--Edit Product Modal-->
 <div id="editProductModal" class="modal modal-sm modal-fixed-footer">
-  <div class="modal-header blue">
+  <div class="modal-header light-blue darken-4">
     <h4 class="white-text">Edit Product</h4>
   </div>
   <div class="modal-content">
@@ -214,19 +217,17 @@
                 <input id="edit_price" name="price" type="number" >
                 <label class="active" for="last_name">Price</label>
             </div>
-            <div class="input-field col s6">
+
+                <div class="input-field col s6">
                 <input id="edit_quantity" name="quantity" type="number" class="validate">
                 <label class="active" for="last_name">Quantity</label>
             </div>
-            <div class="input-field col s12">
-                <input id="edit_imei" type="text" name="imei" class="validate">
-                <label class="active" for="last_name">IMEI</label>
-            </div>
+
             <div class="input-field col s12">
               <textarea id="edit_description" name="description" class="materialize-textarea" placeholder=""></textarea>
               <label for="textarea1">Description</label>
             </div>
-        </div>
+            </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -296,6 +297,7 @@
           <a class="modal-action modal-close waves-effect waves-light btn">Close</a>
       </div>
 </div>
+
 <!--/Add New Barnd Modal -->
 <div id="sellProductModal" class="modal modal-sm modal-fixed-footer">
     <div class="modal-header blue">
