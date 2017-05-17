@@ -111,7 +111,7 @@
 
             <div class="modal-content">
                 <div class="row">
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s4">
                         <select  name="category" id="category" class="">
                             <option value="0" disabled selected>Choose your Category</option>
                             @foreach($categories as $category)
@@ -119,14 +119,10 @@
                             @endforeach
                         </select>
                     </div>
+                    <div style="padding-top:17px;" class="col s1 m1"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped" ><i class="material-icons">add</i></a></div>
 
-                    <div class="col s6"><a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a></div>
-                    <br>
-                    <br>
-                    <br>
-                    <h1></h1>
 
-                    <div class="input-field col s12 m6">
+                    <div class="input-field col s4 right-align" style="margin-left:60px;">
                         <select name="brand" id="brand" class="">
                             <option value="0" disabled selected>Choose your Brand</option>
                             @foreach($brands as $brand)
@@ -134,11 +130,9 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col s2"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a></div>
-                    <br>
-                    <br>
-                    <br>
-                    <h1></h1>
+
+                    <div style="padding-top:17px;" class="col s1 m1"><a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped" ><i class="material-icons">add</i></a></div>
+
                     <div class="input-field col s6">
                         <input name="name"  id="name" type="text" class="validate" placeholder="">
                         <label for="first_name">Product Name</label>
@@ -147,22 +141,22 @@
                         <input id="price" name="price" type="number" step="any" class="validate" placeholder="">
                         <label for="last_name">Price</label>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="input-field col s6" style="margin-left:5px;">
                         <input id="quantity" name="quantity" type="number" class="validate" placeholder="">
                         <label for="last_name">Quantity</label>
                     </div>
                     <br>
-                    <h1></h1>
-                    <div class="input-field col s8">
-                        <textarea id="description" name="description" class="materialize-textarea" placeholder="Product Description"></textarea>
+                    <div class="input-field col s6">
+                        <textarea id="description" name="description" class="materialize-textarea" ></textarea>
                         <label for="textarea1">Description</label>
                     </div>
                     <br>
                     <br>
                     <h1></h1>
-                    <div class="col s12">
-                        <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
-                        <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
+                    <h1></h1>
+                    <div class="col s6 right-align" style="margin-top:52px;">
+                        <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn tooltipped" data-position="top" data-tooltip="Save Product"> Save</button>
+                        <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
                     </div>
                 </div>
             </div>
