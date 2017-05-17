@@ -1,5 +1,10 @@
 $(function(){
 
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+
+
     $('#year_select').on('change',function () {
         var year = this.value;
 
