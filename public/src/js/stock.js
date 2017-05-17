@@ -44,7 +44,7 @@ $(function(){
    $('#name_search').on('keyup',function(){
 
        var word  = $(this).val();
-
+       $('#loading_modal').modal('open');
        if(word.trim() === ""){
             ajax("GET","/stock/get_all_products",productSearched,"")
        }
@@ -288,7 +288,7 @@ function productSearched(params,success,responseObj){
                 +'</td>'
                 +'</tr>');
         }
-
+        $('#loading_modal').modal('close');
 
 
     }
@@ -379,7 +379,7 @@ function saveProduct()
                   productExists = true;
               }
         });
-          
+
         if(!productExists){
             $('tbody').append(
                 '<tr class="none-top-border">'
