@@ -166,7 +166,20 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/sales',[
         'uses'=>'SellingController@getAll',
-        'as' => 'sellings']);
+        'as' => 'sellings'
+    ]);
+
+    Route::get('/sales/filter_date/{date}',[
+        'uses'=>'SellingController@filterDate'
+    ]);
+
+    Route::get('/sales/filter_user/{id}',[
+        'uses'=>'SellingController@filterUser'
+    ]);
+
+    Route::get('/sales/refresh_sales',[
+        'uses' => 'SellingController@getSales'
+    ]);
 
     Route::post('/todo/delete_task',[
         'uses' => 'TasksController@deleteTask',

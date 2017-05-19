@@ -17,6 +17,8 @@ $(function(){
    });
 
 
+
+
     //refresh button
     $('#refresh_button').on('click',function(){
         $('#loading_modal').modal('open');
@@ -221,17 +223,6 @@ function fillSellModal(params,success,responseObj){
         $('#sell_name').val(product.name);
         $('#sell_price').val(product.price);
         $('#sell_quantity').val(product.quantity);
-
-        if($('#sell_category option:selected').val() == 1 || $('#sell_category option:selected').val() == 2) {
-             $('#sell_quantity').prop('disabled',true);
-             $('#sell_quantity').val(1);
-        }
-        else{
-             $('#sell_quantity').prop('disabled',false);
-             $('#sell_quantity').val(product.quantity);
-        }
-
-
 
         Materialize.updateTextFields();
     }
@@ -514,6 +505,6 @@ function productDeleted(params,success,responseObj){
       location.reload();
 
     }else{
-        alertify.error(responseObj.message,3000,'red');
+      Materialize.toast(responseObj.message,3000,'red');
     }
 }

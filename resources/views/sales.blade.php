@@ -5,7 +5,7 @@
 @endsection
 
 @section('styles')
-
+    <link href="{{ URL::asset('src/datepicker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet">
 @endsection
 
 @section('page')
@@ -27,7 +27,9 @@
                     <div class="input-field col s2">
                         <select id="user_select">
                             <option value="0" selected>All</option>
-                            <option value="1">All2</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id}}">{{$user->username}}</option>
+                            @endforeach
                         </select>
                         <label>User</label>
                     </div>
@@ -48,7 +50,7 @@
                     </div>
 
                     <div class="input-field col s2">
-                        <select  id="month_select" disabled>
+                        <select  id="month_select">
                             <option value="0" disabled selected>All</option>
                             <option value="1" >January</option>
                             <option value="2" >February</option>
@@ -68,14 +70,15 @@
 
                     <div class="form-group col s3">
                         <label class = "control-label" for="name">Date:</label>
-                        <input type="date" class="datepicker" >
+                        <input type="date" id="date" value="<?= date('Y-m-d'); ?>"/>
                         <input type="hidden" id="delivery_time" value="">
                     </div>
 
-                    <table id="stock_table" border="1" class="bordered striped stock_table">
+                    <table id="sell_table" border="1" class="bordered striped stock_table">
 
                         <thead>
                         <tr class="primary-color">
+                            <th>ID</th>
                             <th>User</th>
                             <th>Product</th>
                             <th>Brand</th>
@@ -86,9 +89,10 @@
                         </tr>
 
                         </thead>
-                        <tbody>
+                        <tbody id="sales_tbody">
                         @foreach($sellings as $sell)
                             <tr>
+                                <td>{{$sell->id}}</td>
                                 <td>{{$sell->user}}</td>
                                 <td>{{$sell->product}}</td>
                                 <td>{{$sell->brand}} </td>
