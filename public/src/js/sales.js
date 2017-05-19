@@ -43,14 +43,16 @@ function reloadTable(params,success,responseObj){
         for(var i =0; i< sales.length; i++){
 
             $('#sales_tbody').append(
-               '<td>'+sales[i].id+'</td>'
-               +'<td>'+sales[i].user+'</td>'
-               +'<td>'+sales[i].product+'</td>'
-               +'<td>'+sales[i].brand+'</td>'
-               +'<td>'+sales[i].category+'</td>'
-               +'<td>'+sales[i].quantity_sold+'</td>'
-               +'<td>'+sales[i].price_sold+'&euro;</td>'
-               +'<td>'+sales[i].created_at+'</td>'
+                '<tr class="none-top-border">'
+                   +'<td>'+sales[i].id+'</td>'
+                   +'<td>'+sales[i].user+'</td>'
+                   +'<td>'+sales[i].product+'</td>'
+                   +'<td>'+sales[i].brand+'</td>'
+                   +'<td>'+sales[i].category+'</td>'
+                   +'<td>'+sales[i].quantity_sold+'</td>'
+                   +'<td>'+sales[i].price_sold+'&euro;</td>'
+                   +'<td>'+sales[i].created_at+'</td>'
+                +'</tr>'
             );
         }
 

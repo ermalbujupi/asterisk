@@ -11,6 +11,7 @@ use App\Category;
 use App\Product;
 use App\Sellings;
 
+
 class StockController extends Controller
 {
     public function getPage(){
@@ -209,10 +210,12 @@ class StockController extends Controller
 
         if($product->save()){
             if($sell->save()){
-                return Response::json(['message'=>'Product Sold'],200);
+                return Response::json(['message'=>'Product Sold','product'=>$product],200);
             }else{
                 return Response::json(['message'=>'Error Selling Product'],400);
             }
+        }else{
+            return Response::json(['message'=>'Error Selling Product 2',400]);
         }
 
     }

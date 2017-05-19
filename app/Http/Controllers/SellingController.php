@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use App\Sellings;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class SellingController extends Controller
 {
 
     public function getAll(){
 
         $sellings = DB::table('sellings')
-            ->select('sellings.id','users.username as user','products.name as product','brands.name as brand','categories.name as category','sellings.quantity_sold','sellings.price_sold','sellings.created_at')
+            ->select('sellings.id','users.username as user','products.name as product','brands.name as brand','categories.name as category','sellings.quantity_sold','sellings.price_sold',DB::raw('DATE_FORMAT(sellings.created_at, "%d-%m-%Y %h:%m:%s") as created_at'))
             ->join('products','products.id','=','sellings.product')
             ->join('users','users.id','=','sellings.seller')
             ->join('brands','brands.id','=','products.brand_id')
@@ -24,6 +24,9 @@ class SellingController extends Controller
             ->get();
 
         $users =  User::all();
+
+
+
 
         return view('sales',['sellings'=>$sellings,'users'=>$users]);
     }
@@ -60,16 +63,27 @@ class SellingController extends Controller
 
     public function filterUser($user){
 
+        if($user !=0){
+            $sellings = DB::table('sellings')
+                ->select('sellings.id','users.username as user','products.name as product','brands.name as brand','categories.name as category','sellings.quantity_sold','sellings.price_sold','sellings.created_at')
+                ->join('products','products.id','=','sellings.product')
+                ->join('users','users.id','=','sellings.seller')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->join('categories','categories.id','=','products.category_id')
+                ->where('users.id','=',$user)
+                ->orderBy('sellings.id','desc')
+                ->get();
+        }else{
+            $sellings = DB::table('sellings')
+                ->select('sellings.id','users.username as user','products.name as product','brands.name as brand','categories.name as category','sellings.quantity_sold','sellings.price_sold','sellings.created_at')
+                ->join('products','products.id','=','sellings.product')
+                ->join('users','users.id','=','sellings.seller')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->join('categories','categories.id','=','products.category_id')
+                ->orderBy('sellings.id','desc')
+                ->get();
+        }
 
-        $sellings = DB::table('sellings')
-            ->select('sellings.id','users.username as user','products.name as product','brands.name as brand','categories.name as category','sellings.quantity_sold','sellings.price_sold','sellings.created_at')
-            ->join('products','products.id','=','sellings.product')
-            ->join('users','users.id','=','sellings.seller')
-            ->join('brands','brands.id','=','products.brand_id')
-            ->join('categories','categories.id','=','products.category_id')
-            ->where('users.id','=',$user)
-            ->orderBy('sellings.id','desc')
-            ->get();
 
         return Response::json(['sales'=>$sellings],200);
     }
