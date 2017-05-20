@@ -27,7 +27,7 @@
             <label class="label label-success">Area Chart</label>
             <div id="area-chart" ></div>
         </div>
-    </div>
+     </div>
 
 
 @endsection
