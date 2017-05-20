@@ -14,9 +14,7 @@ class ProductSeeder extends Seeder
             'brand_id'=>'1',
             'category_id'=>'1',
             'price'=>'450',
-            'price_decreased' =>'410',
             'quantity'=>'1',
-            'imei'=>'123456789876543',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -24,9 +22,7 @@ class ProductSeeder extends Seeder
             'brand_id'=>'1',
             'category_id'=>'1',
             'price'=>'550',
-            'price_decreased' =>'510',
             'quantity'=>'1',
-            'imei'=>'123456789876543',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -35,7 +31,6 @@ class ProductSeeder extends Seeder
             'category_id'=>'1',
             'price'=>'420',
             'quantity'=>'1',
-            'imei'=>'123456789876543',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -44,7 +39,6 @@ class ProductSeeder extends Seeder
             'category_id'=>'2',
             'price'=>'420',
             'quantity'=>'1',
-            'imei'=>'123456789876543',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -52,9 +46,7 @@ class ProductSeeder extends Seeder
             'brand_id'=>'1',
             'category_id'=>'1',
             'price'=>'250',
-            'price_decreased'=>'220',
             'quantity'=>'1',
-            'imei'=>'1234567829876543',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -63,7 +55,6 @@ class ProductSeeder extends Seeder
             'category_id'=>'1',
             'price'=>'200',
             'quantity'=>'1',
-            'imei'=>'123456782928716543',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -72,7 +63,6 @@ class ProductSeeder extends Seeder
             'category_id'=>'3',
             'price'=>'15',
             'quantity'=>'2',
-            'imei'=>'',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -81,7 +71,6 @@ class ProductSeeder extends Seeder
             'category_id'=>'3',
             'price'=>'20',
             'quantity'=>'3',
-            'imei'=>'',
             'system_deleted'=>'0',
         ]);
         DB::table('products')->insert([
@@ -90,7 +79,6 @@ class ProductSeeder extends Seeder
             'category_id'=>'3',
             'price'=>'20',
             'quantity'=>'4',
-            'imei'=>'',
             'system_deleted'=>'0',
         ]);
     }
