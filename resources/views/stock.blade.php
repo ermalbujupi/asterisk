@@ -104,12 +104,10 @@
 
             <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            <div class="modal-header light-blue darken-4">
-                <br>
-                <h4 class="white-text">Add New Product</h4>
-            </div>
+
 
             <div class="modal-content">
+                <h4>Add New Product</h4>
                 <div class="row">
                     <div class="input-field col s4">
                         <select  name="category" id="category" class="">
@@ -150,10 +148,7 @@
                         <textarea id="description" name="description" class="materialize-textarea" ></textarea>
                         <label for="textarea1">Description</label>
                     </div>
-                    <br>
-                    <br>
-                    <h1></h1>
-                    <h1></h1>
+
                     <div class="col s6 right-align" style="margin-top:52px;">
                         <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn tooltipped" data-position="top" data-tooltip="Save Product"> Save</button>
                         <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
@@ -172,10 +167,8 @@
 
 <!--Edit Product Modal-->
 <div id="editProductModal" class="modal modal-sm modal-fixed-footer">
-  <div class="modal-header light-blue darken-4">
-    <h4 class="white-text">Edit Product</h4>
-  </div>
   <div class="modal-content">
+      <h4>Edit Product</h4>
     <!--<form action="{{route('stock.save_product')}}" method="POST">-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -225,8 +218,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button  type="submit" id="edit_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
-        <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
+          <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+          <button  type="submit" id="edit_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn "> Save</button>
       </div>
     </div>
     </div>
@@ -235,15 +228,14 @@
 
 <!--Delete Product Modal-->
 <div id="deleteProductModal" class="modal">
-  <div class="modal-header blue">
-    <h4 class="white-text">Delete Product</h4>
-  </div>
+
   <div class="modal-content">
+      <h4>Delete Product</h4>
     <p>Are you sure you want to delete this product?</p>
   </div>
       <div class="modal-footer">
-          <a class="modal-action modal-close waves-effect waves-light btn">No</a>
-          <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect waves-green btn "> Yes</button>
+          <a class="modal-action modal-close waves-effect red darken-4 btn">No</a>
+          <button  type="submit" id="delete_product" href="#!" class="modal-action modal-close waves-effect light-blue darken-4 btn "> Yes</button>
       </div>
     </div>
   </div>
@@ -251,10 +243,9 @@
 
 <!-- Add New Category Modal -->
 <div id="addNewCategoryModal" class="modal modal-md">
-  <div class="modal-header blue">
-    <h4 class="white-text">Add New Category</h4>
-  </div>
+
   <div class="modal-content">
+      <h4>Add New Category</h4>
   <div class="row">
         <div class="input-field col s6">
           <input id="category_name" type="text" class="validate" placeholder="">
@@ -263,18 +254,17 @@
   </div>
   </div>
       <div class="modal-footer">
-          <a id="save_category" class="modal-action  waves-effect waves-light btn">Save</a>
-        <button  type="submit"  href="#!" class="modal-action modal-close waves-effect waves-green btn ">Close</button>
+          <a id="save_category" class="modal-action  waves-effect light-blue darken-4 btn">Save</a>
+        <button  type="submit"  href="#!" class="modal-action modal-close waves-effect red darken-4 btn ">Close</button>
       </div>
 </div>
 <!--/Add New Category Modal -->
 
 <!-- Add New Brand Modal -->
 <div id="addNewBrandModal" class="modal">
-  <div class="modal-header blue">
-    <h4 class="white-text">Add New Brand</h4>
-  </div>
+
   <div class="modal-content">
+      <h4>Sell Product</h4>
   <div class="row">
         <div class="input-field col s6">
           <input id="brand_name" type="text" class="validate" placeholder="">
@@ -292,12 +282,11 @@
       </div>
 </div>
 
-<!--/Add New Barnd Modal -->
+<!--/Sell Product Modal -->
 <div id="sellProductModal" class="modal modal-sm modal-fixed-footer">
-    <div class="modal-header blue">
-        <h4 class="white-text">Sell Product</h4>
-    </div>
+
     <div class="modal-content">
+        <h4>Sell Product</h4>
         <!--<form action="{{route('stock.save_product')}}" method="POST">-->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -337,12 +326,17 @@
                     <input id="sell_quantity" name="quantity" placeholder="" type="number" class="validate">
                     <label class="active" for="last_name">Quantity</label>
                 </div>
+
+                <div class="input-field col s12">
+                    <input id="sell_description" name="description" placeholder="" type="text" class="validate">
+                    <label class="active" for="description">Description</label>
+                </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect waves-green btn "> Save</button>
-        <a class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
+        <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+        <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Save</button>
     </div>
 </div>
 

@@ -21,7 +21,7 @@
 
     <div class="card-content">
       <div class="left-align">
-          <a href="#addNewUserModal"  data-position="top"  data-tooltip="Add New User" class="btn-floating btn-sm waves-effect waves-light blue tooltipped"><i class="material-icons">add</i></a>
+          <a href="#addNewUserModal"  data-position="top"  data-tooltip="Add New User" class="btn-floating btn-sm waves-effect light-blue darken-4 tooltipped"><i class="material-icons">add</i></a>
       </div>
       <div class="col s12"><br></div>
         <table border="1" class="bordered responsive-table  users_table">
@@ -45,7 +45,7 @@
                 <td>{{$user->email}}</td>
                 <td>{{$user->role}}</td>
                 <td>
-                    <a id="{{$user->id}}"   href="#editUserModal"   class="btn btn-floating blue tooltipped edit_user_trigger action_button" data-position="top" data-delay="50" data-tooltip="Edit User"><span class="fa fa-pencil"></span></a></li>
+                    <a id="{{$user->id}}"   href="#editUserModal"   class="btn btn-floating light-blue darken-4 tooltipped edit_user_trigger action_button" data-position="top" data-delay="50" data-tooltip="Edit User"><span class="fa fa-pencil"></span></a></li>
                     <a id="{{$user->id}}"  href="#deleteProductModal" class="btn btn-floating red tooltipped delete_user_trigger action_button" data-position="top" data-delay="50" data-tooltip="Delete User"><span class="fa fa-trash-o"></span></a></li>
                 </td>
             </tr>
@@ -96,8 +96,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button  type="submit" id="save_user" href="#!" class="modal-action waves-effect waves-green btn "><i class="fa fa-check right"></i> Save</button>
-          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>Cancel</a>
+          <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+        <button  type="submit" id="save_user" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Save</button>
+
       </div>
     </div>
     </div>
@@ -141,8 +142,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button  type="submit" id="edit_user" href="#!" class="modal-action waves-effect waves-green btn "><i class="fa fa-check right"></i> Save</button>
-          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>Cancel</a>
+          <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+          <button  type="submit" id="edit_user" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Save</button>
       </div>
     </div>
     </div>
@@ -160,8 +161,8 @@
     <p>Are you sure you want to delete this user</p>
   </div>
       <div class="modal-footer">
-        <button  type="submit" id="delete_user" href="#!" class="modal-action modal-close waves-effect waves-green btn "><i class="fa fa-check right"></i> Yes</button>
-          <a class="modal-action modal-close waves-effect waves-light btn"><i class="fa fa-ban right"></i>No</a>
+        <button  type="submit" id="delete_user" href="#!" class="modal-action modal-close waves-effect light-blue darken-4 btn ">Yes</button>
+          <a class="modal-action modal-close waves-effect red darken-4 btn">No</a>
       </div>
     </div>
   </div>
