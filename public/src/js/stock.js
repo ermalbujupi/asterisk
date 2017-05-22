@@ -1,3 +1,6 @@
+
+var productsGlobal = null;
+
 $(function(){
   //Shtimi i produktion me onclick dhe validimi i fushave
    $('#save_product').on('click',function(){
@@ -42,16 +45,56 @@ $(function(){
 
     //Kody yt ermal
 
+//Search
 
-   $('#name_search').on('keyup',function(){
+    $('#name_search').on('keyup',function(e){
 
        var word  = $(this).val();
-       $('#loading_modal').modal('open');
-       if(word.trim() === ""){
-            ajax("GET","/stock/get_all_products",productSearched,"")
+       var category = $('#category_search option:selected').val();
+       var brand = $('#brand_search option:selected').val();
+
+       if(word.length == 0){
+           $('#loading_modal').modal('open');
+           filterSearch(category,brand,word);
        }
 
-       ajax("POST","/stock/search_word","word="+word,productSearched,"")
+       if(word.length == 2 && e.keyCode != 8){
+           $('#loading_modal').modal('open');
+           $('#name_search').prop('disabled',true);
+           filterSearch(category,brand,word);
+       }else{
+
+           if(productsGlobal !=  null){
+               $('tbody tr').remove();
+               for(var i = 0 ; i< productsGlobal.length; i++){
+
+                   word =  word.toLowerCase();
+                   var name = productsGlobal[i].name.toLowerCase();
+
+                   if(name.indexOf(word) != -1){
+
+                       $('tbody').append(
+                           '<tr class="none-top-border">'
+                           +'<td>'+productsGlobal[i].id+'</td>'
+                           +'<td>'+productsGlobal[i].name+'</td>'
+                           +'<td>'+productsGlobal[i].brand+'</td>'
+                           +'<td>'+productsGlobal[i].category+'</td>'
+                           +'<td>'+productsGlobal[i].price+'</td>'
+                           +'<td>'+productsGlobal[i].quantity+'</td>'
+                           +'<td>'
+                           +'<a id="'+productsGlobal[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
+                           +'<a id="'+productsGlobal[i].id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+                           +'<a id="'+productsGlobal[i].id+'" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>'
+                           +'</td>'
+                           +'</tr>');
+                   }
+               }
+
+               $('#loading_modal').modal('close');
+           }
+
+       }
+
    });
 
 
@@ -113,7 +156,7 @@ $(function(){
        var id = $(this).attr('id');
        $('#sell_product').val(id);
 
-       ajax("POST","/stock/get_product","product_id="+id,fillSellModal,"");
+        ajax("POST","/stock/get_product","product_id="+id,fillSellModal,"");
    });
 
    //Sell Product
@@ -126,35 +169,42 @@ $(function(){
     //Search By Category
 
     $('#category_search').on('change',function(){
-        var brandName = '';
-        var categoryName =  $('#category_search option:selected').text();
+        var brandId = 0;
+        var categoryId =  $('#category_search option:selected').val();
+        var word = $('#name_search').val();
         if($('#brand_search option:selected').val() != 0){
-            brandName = $('#brand_search option:selected').text();
+            brandId = $('#brand_search option:selected').val();
         }
 
         $('#loading_modal').modal('open');
-        ajax("POST","/stock/search_category_brand","category="+categoryName+'&brand='+brandName,searchResultByCategoryOrBrand,'');
+        filterSearch(categoryId,brandId,word);
     });
 
     //Search By Brand
     $('#brand_search').on('change',function(){
-        var categoryName = '';
-        var brandName = $('#brand_search option:selected').text();
-        if($('#category_search option:selected').val() != 0){
-            categoryName = $('#category_search option:selected').text();
+        var categoryId = 0;
+        var brandId = $('#brand_search option:selected').val();
+        var word = $('#name_search').val();
+        if($('#category_search option:selected ').val() != 0){
+            categoryId = $('#category_search option:selected ').val();
         }
         $('#loading_modal').modal('open');
-        ajax("POST","/stock/search_category_brand","category="+categoryName+'&brand='+brandName,searchResultByCategoryOrBrand,'');
+        filterSearch(categoryId,brandId,word);
     });
 
 
 
 });
 
+function filterSearch(category,brand,word){
+
+    ajax("POST",'/stock/search_filter','category='+category+'&brand='+brand+'&word='+word,productSearched,'');
+}
+
 function searchResultByCategoryOrBrand(params,success,responseObj){
     if(success){
 
-        var products = responseObj.products;
+        products = responseObj.products;
         $('tbody tr').remove();
         for(var i =0 ; i< products.length ; i++){
 
@@ -277,28 +327,29 @@ function productSearched(params,success,responseObj){
 
     if(success){
 
-        var products = responseObj.products;
+        productsGlobal = responseObj.products;
 
         $('tbody tr').remove();
 
-        for(var i = 0 ; i< products.length ; i++){
+        for(var i = 0 ; i< productsGlobal.length ; i++){
             $('tbody').append(
                 '<tr class="none-top-border">'
-                +'<td>'+products[i].id+'</td>'
-                +'<td>'+products[i].name+'</td>'
-                +'<td>'+products[i].brand+'</td>'
-                +'<td>'+products[i].category+'</td>'
-                +'<td>'+products[i].price+'</td>'
-                +'<td>'+products[i].quantity+'</td>'
+                +'<td>'+productsGlobal[i].id+'</td>'
+                +'<td>'+productsGlobal[i].name+'</td>'
+                +'<td>'+productsGlobal[i].brand+'</td>'
+                +'<td>'+productsGlobal[i].category+'</td>'
+                +'<td>'+productsGlobal[i].price+'</td>'
+                +'<td>'+productsGlobal[i].quantity+'</td>'
                 +'<td>'
-                +'<a id="'+products[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
-                +'<a id="'+products[i].id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
-                +'<a id="'+products[i].id+'" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>'
+                +'<a id="'+productsGlobal[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
+                +'<a id="'+productsGlobal[i].id+'" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>'
+                +'<a id="'+productsGlobal[i].id+'" href="#sellProductModal" class="btn btn-floating tooltipped waves-effect waves-light green action_button tooltipped sell_product_trigger" data-tooltip="Sell Product" data-position="top"><span class="fa fa-shopping-cart" aria-hidden="true"></span></a>'
                 +'</td>'
                 +'</tr>');
         }
         $('#loading_modal').modal('close');
-
+        $('#name_search').prop('disabled',false);
+        $('#name_search').focus();
 
     }
 }

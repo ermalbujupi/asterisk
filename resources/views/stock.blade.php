@@ -34,7 +34,7 @@
             </div>
             <div class="input-field right-align col s3" id="category_search">
                 <select>
-                    <option value="0" disabled selected>Select category</option>
+                    <option value="0"  selected>All</option>
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
@@ -43,7 +43,7 @@
 
             <div class="input-field right-align col s3" id="brand_search">
                 <select>
-                    <option value="0" disabled selected>Select brand</option>
+                    <option value="0" selected>All</option>
                     @foreach($brands as $brand)
                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                     @endforeach

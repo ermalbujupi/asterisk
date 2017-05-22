@@ -80,14 +80,61 @@ class StockController extends Controller
        return Response::json(['product'=>$product],200);
     }
 
-    public function  getProducts(){
-        $products = DB::table('products')
-            ->join('categories','categories.id','=','products.category_id')
-            ->join('brands','brands.id','=','products.brand_id')
-            ->where('products.quantity','>','0')
-            ->where('system_deleted','=','0')
-            ->select('products.*','categories.name as category','brands.name as brand')
-            ->get();
+
+    private function filterSearch($category,$brand,$word){
+
+        if(isset($brand) && isset($category) && $category >0 && $brand > 0){
+            $products = DB::table('products')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->where('products.quantity','>','0')
+                ->where('products.system_deleted','=','0')
+                ->where('categories.id','=',$category)
+                ->where('brands.id','=',$brand)
+                ->where('products.name','like','%'.($word == null ? '':$word).'%')
+                ->select('products.*','categories.name as category','brands.name as brand')
+                ->get();
+
+        }else if(isset($brand) && $brand > 0){
+            $products = DB::table('products')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->where('products.quantity','>','0')
+                ->where('products.system_deleted','=','0')
+                ->where('brands.id','=',$brand)
+                ->where('products.name','like','%'.($word == null ? '':$word).'%')
+                ->select('products.*','categories.name as category','brands.name as brand')
+                ->get();
+
+        }else if(isset($category) && $category > 0){
+            $products = DB::table('products')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->where('products.quantity','>','0')
+                ->where('products.system_deleted','=','0')
+                ->where('categories.id','=',$category)
+                ->where('products.name','like','%'.($word == null ? '':$word).'%')
+                ->select('products.*','categories.name as category','brands.name as brand')
+                ->get();
+        }else{
+            $products = DB::table('products')
+                ->join('categories','categories.id','=','products.category_id')
+                ->join('brands','brands.id','=','products.brand_id')
+                ->where('products.quantity','>','0')
+                ->where('products.system_deleted','=','0')
+                ->where('products.name','like','%'.($word == null ? '':$word).'%')
+                ->select('products.*','categories.name as category','brands.name as brand')
+                ->get();
+        }
+
+        return $products;
+    }
+
+    public function  getProducts($category,$brand){
+
+        $products =  $this->filterSearch($brand,$category,'');
+
+        return Response::json(['products'=>$products],200);
     }
 
 
@@ -127,14 +174,10 @@ class StockController extends Controller
 
     public function search(Request $req){
         $word = $req['word'];
+        $brand = $req['brand'];
+        $category = $req['category'];
 
-        $products = DB::table('products')
-            ->join('categories','categories.id','=','products.category_id')
-            ->join('brands','brands.id','=','products.brand_id')
-            ->where('products.system_deleted','=','0')
-            ->where('products.name','like','%'.$word.'%')
-            ->select('products.*','categories.name as category','brands.name as brand ')
-            ->get();
+        $products = $this->filterSearch($category,$brand,$word);
 
         Return Response::json(['products'=>$products],200);
     }
@@ -225,35 +268,7 @@ class StockController extends Controller
 
         $brand = $req['brand'];
         $category = $req['category'];
-
-        $products = null;
-
-        if(isset($brand) && isset($category) && $brand != '' && $category != ''){
-            $products = DB::table('products')
-                ->select('products.*','categories.name as category','brands.name as brand')
-                ->join('categories','categories.id','=','products.category_id')
-                ->join('brands','brands.id','=','products.brand_id')
-                ->where('brands.name','=',$brand)
-                ->where('categories.name','=',$category)
-                ->get();
-
-        }else if(isset($brand) && $brand != ''){
-            $products = DB::table('products')
-                ->select('products.*','categories.name as category','brands.name as brand')
-                ->join('categories','categories.id','=','products.category_id')
-                ->join('brands','brands.id','=','products.brand_id')
-                ->where('brands.name','=',$brand)
-                ->get();
-
-        }else if(isset($category) && $category != ''){
-            $products = DB::table('products')
-                ->select('products.*','categories.name as category','brands.name as brand')
-                ->join('categories','categories.id','=','products.category_id')
-                ->join('brands','brands.id','=','products.brand_id')
-                ->where('categories.name','=',$category)
-                ->get();
-        }
-
+        $products = $this->filterSearch($category,$brand,'');
         return Response::json(['products'=>$products],200);
     }
 

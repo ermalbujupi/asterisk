@@ -61,12 +61,12 @@ Route::group(['middleware' => ['auth']], function () {
             'as' =>'stock.delete_product'
     ]);
 
-    Route::post('/stock/search_word',[
+    Route::post('/stock/search_filter',[
         'uses' => 'StockController@search',
-        'as' => 'stock.search_word'
+        'as' => 'stock.search_filter'
     ]);
 
-    Route::get('/stock/get_all_products',[
+    Route::get('/stock/get_all_products/{category}/{brand}',[
        'uses' => 'StockController@getProducts',
         'as' => 'getAllProducts'
     ]);

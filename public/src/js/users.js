@@ -81,11 +81,11 @@ function fillUserModal(params,success,responseObj){
     $('#edit_username').val(responseObj.message.username);
     $('#edit_email').val(responseObj.message.email);
     if(responseObj.message.role === 'Admin'){
-        $('#edit_privilege').val(1);
+        $('#edit_privilege select').val(1);
     }else if(responseObj.message.privilege === 'Manager'){
-        $('#edit_privilege').val(2);
+        $('#edit_privilege select').val(2);
     }else if(responseObj.message.privilege === 'Employe'){
-        $('#edit_privilege').val(3);
+        $('#edit_privilege select').val(3);
     }
 
     Materialize.updateTextFields();

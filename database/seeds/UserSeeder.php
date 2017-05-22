@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
             'username'=>'admin',
             'password'=>bcrypt('123'),
             'email'=>'samir_hajdarpasic@hotmail.com',
-            'role'=>'Admin',
+            'role'=>'1',
             'system_deleted'=>'0'
         ]);
     }
