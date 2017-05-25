@@ -60,9 +60,25 @@
                         <input type="text" class="col s12 "  id="name_search" placeholder="Search for a product">
                     </div>
 
+                    <table id="start" border="1" class="bordered  ">
 
+                        <thead>
+                        <tr class="primary-color">
+                            <th>
+                                @foreach($products as $product)
+                                    <h5>Produktet per kategorine {{$product->category}} jane {{$product->nr}}</h5>
+                                @endforeach
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="none-top-border">
 
-                    <table id="stock_table" border="1" class="bordered  stock_table">
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table style="display: none;" id="stock_table" border="1" class="bordered  stock_table">
 
                         <thead>
                         <tr class="primary-color">
@@ -76,30 +92,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
                             <tr class="none-top-border">
-                                <td>{{$product->id}}</td>
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->brand}}</td>
-                                <td>{{$product->category}}</td>
-                                <td>{{$product->price}}&euro;</td>
-                                <td>{{$product->quantity}}</td>
-                                <td class="btn_info col s12" style="padding-left: 0;">
-                                    <div  class="col s2">
-                                        <a  id="{{$product->id}}" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light light-blue darken-4 action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>
-                                    </div>
-                                    <div class="col s2" >
-                                        <a  id="{{$product->id}}" href="#deleteProductModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_product_trigger" data-tooltip="Delete Product" data-position="top"><span class="fa fa-trash"></span></a>
-                                    </div>
-                                    <div style="margin-top:10px;" class="col s2 checking">
-                                        <input type="checkbox" class="filled-in" value="{{$product->id}}" id="product{{$product->id}}"  />
-                                        <label for="product{{$product->id}}"></label>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
 
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -357,7 +353,7 @@
         </div>
         <div class="modal-footer">
             <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
-            <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+            <a id="close_sell" class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
         </div>
     </div>
 

@@ -19,108 +19,6 @@ $(function(){
         editProduct(id);
     });
 
-    $('.filled-in').on('click',function(){
-        var countChecked = 0;
-        var countUnChecked = 0;
-        var count = 0;
-        $('.filled-in').each(function(){
-            count++;
-            if(this.checked ){
-                countChecked++;
-
-            }else{
-                countUnChecked++;
-            }
-        });
-
-        if(countChecked > 0){
-            $('#sell').show();
-        }else if(countUnChecked >= count){
-            $('#sell').hide();
-        }
-    });
-
-    //Fill Sell Modal
-    $('#sell').on('click',function(){
-        var glId = 0;
-        var count = 0;
-        var total = 0.0;
-
-        $('.filled-in').each(function(){
-            if(this.checked ){
-                glId = this.value;
-                $('tbody tr').each(function(){
-
-                    if($(this).find('td:first-child').text() == glId){
-
-                        var id = $(this).find('td:first-child').text();
-                        var name =  $(this).find('td:nth-child(2)').text();
-                        var brand = $(this).find('td:nth-child(3)').text();
-                        var category = $(this).find('td:nth-child(4)').text();
-                        var price = parseFloat($(this).find('td:nth-child(5)').text());
-                        var quantity =parseInt($(this).find('td:nth-child(6)').text());
-
-                        $('#prepare_sell').append(
-                            '<div class="grand" id="'+id+'">'
-                                +
-                                '<div class="input-field col s2">'
-                                    +'<input name="edit_name"  value="'+id+'" placeholder=""  disabled  id="sell_name" type="text" class="validate ">'
-                                    +(count == 0?'<label class="active">ID</label>':'')+
-                                '</div>'
-                                +
-                                '<div class="input-field col s2">'
-                                    +'<input name="edit_name"  value="'+name+'" placeholder=""  disabled  id="sell_name" type="text" class="validate">'
-                                    +(count == 0?'<label class="active">Name</label>':'')+
-                                '</div>'
-                                +
-                                ' <div class="input-field col s2">'
-                                    +'<input name="edit_name" value="'+brand+'" placeholder="" disabled  id="sell_brand" type="text" class="validate">'
-                                    +(count == 0?'<label class="active" for="first_name">Brand</label>':'')+
-                                '</div>'
-                                +
-                                '<div class="input-field col s2">'
-                                    +'<input name="edit_name" placeholder="" disabled  value="'+category+'" id="sell_category" type="text" class="validate">'
-                                    +(count == 0?'<label class="active" for="first_name">Category</label>':'')+
-                                '</div>'
-                                +
-                                '<div class="input-field col s2 div_price ">'
-                                    +'<input id="sell_price" placeholder="" value="'+price+'" disabled name="price" type="number" class="sell_price" >'
-                                    +(count == 0?'<label class="active" for="sell_price">Price</label>':'')+
-                                '</div>'
-                                +
-                                '<div class="input-field col s2 div_quantity">'
-                                    +'<input id="sell_quantity" placeholder="" value="'+quantity+'"  name="price" type="number" class="sell_quantity" >'
-                                    +(count == 0?'<label class="active" for="sell_quantity">Quantity</label>':'')+
-                                '</div>'
-                                +
-                            '</div>'
-                        );
-                        count++;
-                        total += price*quantity;
-                        var line = id+';'+name+';'+brand+';'+category+';'+price+';'+'quantity';
-                        sales.push(line);
-                    }
-                });
-
-                $('#total').text(total);
-            }
-        });
-
-    });
-
-
-    $('#prepare_sell').on('change','.sell_quantity',function(){
-
-        var price = 0.0;
-        var quantity = 0;
-        $(this).each(function(){
-           price += $(this).parent().parent().find('.div_price .sell_price').val();
-           quantity += $(this).val();
-        });
-
-        $('#total').text(price*quantity);
-    });
-
     //refresh button
     $('#refresh_button').on('click',function(){
         $('#loading_modal').modal('open');
@@ -147,6 +45,9 @@ $(function(){
 //Search
 
     $('#name_search').on('keyup',function(e){
+
+        $('#start').hide();
+        $('#stock_table').show();
 
         var word  = $(this).val();
         var category = $('#category_search option:selected').val();
@@ -260,8 +161,12 @@ $(function(){
 
     //Sell Product
     $('#sell_product').on('click',function(){
-        var id = $(this).val();
-        sellProduct(id);
+       sellProduct();
+    });
+
+    $('#close_sell').on('click',function(){
+        $('#prepare_sell .grand').remove();
+        sales = [];
     });
 
 
@@ -326,57 +231,48 @@ function searchResultByCategoryOrBrand(params,success,responseObj){
     }
 }
 
-function sellProduct(id){
 
-    var category = $('#sell_category').val();
-    var brand =  $('#sell_brand').val();
-    var name = $('#sell_name').val();
-    var price =  $('#sell_price').val();
-    var quantity = $('#sell_quantity').val();
 
-    if(price === ""){
-        Materialize.toast('Please Write Price',3000,'red');
-        return false;
-    }
+function sellProduct(){
 
-    if(quantity ===""){
-        Materialize.toast("Please Write Quantity",3000,'red');
-        return false;
-    }
+    var index  = 0;
 
-    ajax("POST","/stock/sell_product","id="+id+"&price="+price+"&quantity="+quantity,productSold,"");
-
+    ajax('POST','/stock/sell_product','products='+sales,productSold,'');
 
 
 }
 
 function productSold(params,success,responseObj){
 
-    var message = responseObj.message;
-    var product = responseObj.product;
+    var products= responseObj.products;
 
-    if(success){
 
-        $('tbody tr').each(function(){
 
-            if($(this).find('td:first-child').text() == product.id){
-
-                if(product.quantity == 0){
-                    $(this).remove();
-                }
-
-                $(this).find('td:nth-child(2)').text(product.name);
-                $(this).find('td:nth-child(3)').text(brand.name);
-                $(this).find('td:nth-child(4)').text(category.name);
-                $(this).find('td:nth-child(5)').text(product.price);
-                $(this).find('td:nth-child(6)').text(product.quantity);
-            }
-        });
-
-        Materialize.toast(message,3000,'green');
-    }else{
-        Materialize.toast(message,3000,'red');
-    }
+    //var message = responseObj.message;
+    //var product = responseObj.product;
+    //
+    //if(success){
+    //
+    //    $('tbody tr').each(function(){
+    //
+    //        if($(this).find('td:first-child').text() == product.id){
+    //
+    //            if(product.quantity == 0){
+    //                $(this).remove();
+    //            }
+    //
+    //            $(this).find('td:nth-child(2)').text(product.name);
+    //            $(this).find('td:nth-child(3)').text(brand.name);
+    //            $(this).find('td:nth-child(4)').text(category.name);
+    //            $(this).find('td:nth-child(5)').text(product.price);
+    //            $(this).find('td:nth-child(6)').text(product.quantity);
+    //        }
+    //    });
+    //
+    //    Materialize.toast(message,3000,'green');
+    //}else{
+    //    Materialize.toast(message,3000,'red');
+    //}
 }
 
 function fillSellModal(params,success,responseObj){

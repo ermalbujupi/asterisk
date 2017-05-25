@@ -45,7 +45,12 @@
 </header>
 <main>
         <div class="container">
+
             @yield('content')
+            <div class="right-align">
+                <a href="#sellProductModal" id="sell" class="waves-effect waves-light btn light-blue darken-4 ">Sell</a>
+            </div>
+
             @yield('modals')
 
             <div id="change_password_modal" class="modal">
@@ -91,6 +96,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
 </main>
 <script type="text/javascript">

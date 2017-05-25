@@ -186,7 +186,7 @@ Route::group(['middleware' => ['auth']], function () {
         'as' =>'tasks.delete_task'
     ]);
 
-    Route::post('/stock/sell_product',[
+    Route::any('/stock/sell_product',[
         'uses' => 'StockController@sellProduct',
         'as' => 'stock.sell_product'
     ]);
