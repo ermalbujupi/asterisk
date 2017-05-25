@@ -87,11 +87,12 @@
                             <th>Brand</th>
                             <th>Category</th>
                             <th>Price</th>
+                            <th>Selling Price</th>
                             <th>Quantity</th>
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="stock_body">
                             <tr class="none-top-border">
 
                             </tr>
@@ -166,7 +167,7 @@
                     </div>
 
                     <div class="input-field col s6">
-                        <input placeholder="" id="price_sell" name="price_sell" type="number">
+                        <input placeholder="" id="sell_price" name="price_sell" type="number">
                         <label class="active" for="price_sell">Selling Price</label>
                     </div>
 

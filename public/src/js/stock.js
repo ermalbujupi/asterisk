@@ -7,7 +7,7 @@ $(function(){
         saveProduct();
     });
 
-    $('tbody').on('click','.edit_product_trigger',function(){
+    $('#stock_body').on('click','.edit_product_trigger',function(){
         var id = $(this).attr('id');
         ajax("POST","/stock/get_product","product_id="+id,fillEditModal,"");
         $('#edit_product').val(id);
@@ -27,7 +27,7 @@ $(function(){
     });
 
     //Give id to the submit button
-    $('tbody').on('click','.delete_product_trigger',function(){
+    $('#stock_body').on('click','.delete_product_trigger',function(){
         var id = $(this).attr('id');
         $('#delete_product').val(id);
     });
@@ -54,8 +54,9 @@ $(function(){
         var brand = $('#brand_search option:selected').val();
 
         if(word.length == 0){
-            $('#loading_modal').modal('open');
-            filterSearch(category,brand,word);
+            $('#stock_body tr').remove();
+            $('#start').show();
+            $('#stock_table').hide();
         }
 
         if(word.length == 2 && e.keyCode != 8){
@@ -65,7 +66,7 @@ $(function(){
         }else{
 
             if(productsGlobal !=  null){
-                $('tbody tr').remove();
+                $('#stock_body tr').remove();
                 for(var i = 0 ; i< productsGlobal.length; i++){
 
                     word =  word.toLowerCase();
@@ -73,13 +74,14 @@ $(function(){
 
                     if(name.indexOf(word) != -1){
 
-                        $('tbody').append(
+                        $('#stock_body').append(
                             '<tr class="none-top-border">'
                             +'<td>'+productsGlobal[i].id+'</td>'
                             +'<td>'+productsGlobal[i].name+'</td>'
                             +'<td>'+productsGlobal[i].brand+'</td>'
                             +'<td>'+productsGlobal[i].category+'</td>'
                             +'<td>'+productsGlobal[i].price+'</td>'
+                            +'<td>'+productsGlobal[i].price_sold+'</td>'
                             +'<td>'+productsGlobal[i].quantity+'</td>'
                             +'<td>'
                             +'<a id="'+productsGlobal[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
@@ -151,7 +153,7 @@ $(function(){
     });
 
     // Sell trigger
-    $('tbody').on('click','.sell_product_trigger',function(){
+    $('#stock_body').on('click','.sell_product_trigger',function(){
 
         var id = $(this).attr('id');
         $('#sell_product').val(id);
@@ -161,7 +163,7 @@ $(function(){
 
     //Sell Product
     $('#sell_product').on('click',function(){
-       sellProduct();
+        sellProduct();
     });
 
     $('#close_sell').on('click',function(){
@@ -173,6 +175,8 @@ $(function(){
     //Search By Category
 
     $('#category_search').on('change',function(){
+        $('#start').hide();
+        $('#stock_table').show();
         var brandId = 0;
         var categoryId =  $('#category_search option:selected').val();
         var word = $('#name_search').val();
@@ -186,6 +190,9 @@ $(function(){
 
     //Search By Brand
     $('#brand_search').on('change',function(){
+        $('#start').hide();
+        $('#stock_table').show();
+
         var categoryId = 0;
         var brandId = $('#brand_search option:selected').val();
         var word = $('#name_search').val();
@@ -209,10 +216,10 @@ function searchResultByCategoryOrBrand(params,success,responseObj){
     if(success){
 
         products = responseObj.products;
-        $('tbody tr').remove();
+        $('#stock_body tr').remove();
         for(var i =0 ; i< products.length ; i++){
 
-            $('tbody').append(
+            $('#stock_body').append(
                 '<tr class="none-top-border">'
                 +'<td>'+products[i].id+'</td>'
                 +'<td>'+products[i].name+'</td>'
@@ -253,7 +260,7 @@ function productSold(params,success,responseObj){
     //
     //if(success){
     //
-    //    $('tbody tr').each(function(){
+    //    $('#stock_body tr').each(function(){
     //
     //        if($(this).find('td:first-child').text() == product.id){
     //
@@ -324,16 +331,17 @@ function productSearched(params,success,responseObj){
 
         productsGlobal = responseObj.products;
 
-        $('tbody tr').remove();
+        $('#stock_body tr').remove();
 
         for(var i = 0 ; i< productsGlobal.length ; i++){
-            $('tbody').append(
+            $('#stock_body').append(
                 '<tr class="none-top-border">'
                 +'<td>'+productsGlobal[i].id+'</td>'
                 +'<td>'+productsGlobal[i].name+'</td>'
                 +'<td>'+productsGlobal[i].brand+'</td>'
                 +'<td>'+productsGlobal[i].category+'</td>'
                 +'<td>'+productsGlobal[i].price+'</td>'
+                +'<td>'+productsGlobal[i].price_sold+'</td>'
                 +'<td>'+productsGlobal[i].quantity+'</td>'
                 +'<td>'
                 +'<a id="'+productsGlobal[i].id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
@@ -357,6 +365,7 @@ function saveProduct()
     var brand = $('#brand option:selected').val();
     var name = $('#name').val();
     var price = $('#price').val();
+    var priceSell = $('#sell_price').val();
     var quantity = $('#quantity').val();
     var description = $('#description').val();
     if(category == 0)
@@ -400,6 +409,12 @@ function saveProduct()
         return false;
     }
 
+    if(priceSell == ""){
+        Materialize.toast("Please write selling price",3000,'red');
+        return false;
+    }
+
+
 
     $.ajaxSetup({
         headers: {
@@ -416,18 +431,20 @@ function saveProduct()
             brand:brand,
             quantity:quantity,
             price:price,
+            sell_price:priceSell,
             description:description
         },
         success:function(responseObj){
             Materialize.toast(responseObj.message,3000,'green');
-
+            $('#start').hide();
+            $('#stock_table').show();
             var product = responseObj.product;
             var brand = responseObj.brand;
             var category = responseObj.category;
 
             var productExists = false;
 
-            $('tbody tr').each(function(){
+            $('#stock_body tr').each(function(){
 
                 if($(this).find('td:first-child').text() == product.id){
                     $(this).find('td:nth-child(6)').text(product.quantity);
@@ -436,13 +453,14 @@ function saveProduct()
             });
 
             if(!productExists){
-                $('tbody').append(
+                $('#stock_body').append(
                     '<tr class="none-top-border">'
                     +'<td>'+product.id+'</td>'
                     +'<td>'+product.name+'</td>'
                     +'<td>'+brand.name+'</td>'
                     +'<td>'+category.name+'</td>'
                     +'<td>'+product.price+'</td>'
+                    +'<td>'+product.price_sold+'</td>'
                     +'<td>'+product.quantity+'</td>'
                     +'<td>'
                     +'<a id="'+product.id+'" href="#editProductModal"  data-target="modal1" class="btn btn-floating waves-effect waves-light blue action_button tooltipped edit_product_trigger" data-tooltip="Edit Product" data-position="top"><span class="fa fa-pencil"></span></a>'
@@ -544,7 +562,7 @@ function productEdited(params,success,responseObj){
         var brand = responseObj.brand;
         var category = responseObj.category;
 
-        $('tbody tr').each(function(){
+        $('#stock_body tr').each(function(){
 
             if($(this).find('td:first-child').text() == product.id){
 

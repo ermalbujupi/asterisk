@@ -49,6 +49,7 @@ class StockController extends Controller
             }
             $product->quantity=$request['quantity'];
             $product->price = $request['price'];
+            $product->price_sold = $request['sell_price'];
             $product->description= $request['description'];
             $product->system_deleted = "0";
             if($product->save())
