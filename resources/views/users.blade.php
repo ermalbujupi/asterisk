@@ -43,7 +43,7 @@
                 <td>{{$user->full_name}}</td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->role}}</td>
+                <td>{{$user->role_name}}</td>
                 <td>
                     <a id="{{$user->id}}"   href="#editUserModal"   class="btn btn-floating light-blue darken-4 tooltipped edit_user_trigger action_button" data-position="top" data-delay="50" data-tooltip="Edit User"><span class="fa fa-pencil"></span></a></li>
                     <a id="{{$user->id}}"  href="#deleteProductModal" class="btn btn-floating red tooltipped delete_user_trigger action_button" data-position="top" data-delay="50" data-tooltip="Delete User"><span class="fa fa-trash-o"></span></a></li>
@@ -87,18 +87,17 @@
             <div class="input-field col s6">
               <select name="privilege" id="privilege" class="browser-default">
                 <option value="0" disabled selected>Choose Role</option>
-                <option value="1">Admin</option>
-                <option value="2">Manager</option>
-                <option value="3">Employee</option>
+                @foreach($roles as $role)
+                    <option value="{{$role->id}}">{{$role->name}}</option>
+                @endforeach
               </select>
             </div>
         </div>
         </div>
       </div>
       <div class="modal-footer">
-          <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
         <button  type="submit" id="save_user" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Save</button>
-
+          <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
       </div>
     </div>
     </div>
@@ -133,17 +132,17 @@
             <div class="input-field col s6">
               <select  id="edit_privilege" class="browser-default">
                 <option value="0" disabled selected>Choose Role</option>
-                <option value="1">Admin</option>
-                <option value="2">Manager</option>
-                <option value="3">Employee</option>
+                  @foreach($roles as $role)
+                      <option value="{{$role->id}}">{{$role->name}}</option>
+                  @endforeach
               </select>
             </div>
         </div>
         </div>
       </div>
       <div class="modal-footer">
-          <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
           <button  type="submit" id="edit_user" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Save</button>
+          <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
       </div>
     </div>
     </div>

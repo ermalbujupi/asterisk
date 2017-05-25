@@ -80,13 +80,7 @@ function fillUserModal(params,success,responseObj){
     $('#edit_FullName').val(responseObj.message.full_name);
     $('#edit_username').val(responseObj.message.username);
     $('#edit_email').val(responseObj.message.email);
-    if(responseObj.message.role === 'Admin'){
-        $('#edit_privilege select').val(1);
-    }else if(responseObj.message.privilege === 'Manager'){
-        $('#edit_privilege select').val(2);
-    }else if(responseObj.message.privilege === 'Employe'){
-        $('#edit_privilege select').val(3);
-    }
+    $('#edit_privilege').val(responseObj.message.role);
 
     Materialize.updateTextFields();
 }

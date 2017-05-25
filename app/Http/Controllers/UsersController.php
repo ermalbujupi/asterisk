@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\User;
+use App\Role;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
@@ -14,10 +15,14 @@ class UsersController extends Controller
 {
     public function getUsers(){
       $users = DB::table('users')
+      ->join('roles','roles.id','=','users.role')
       ->where('system_deleted','=','0')
+      ->select('users.*','roles.name as role_name')
       ->get();
 
-        return view('users',['users'=>$users]);
+      $roles = Role::all();
+
+        return view('users',['users'=>$users,'roles'=>$roles]);
     }
 
     public function getUser(Request $req){

@@ -18,7 +18,9 @@ class CreateProducts extends Migration
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
             $table->double('price');
+            $table->double('price_sold');
             $table->integer('quantity');
+            $table->string('description')->nullable();
             $table->integer('system_deleted');
             $table->timestamps();
         });

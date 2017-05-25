@@ -11,6 +11,8 @@ $(function(){
         }
     });
 
+
+
     $('#date').on('change',function(){
 
         var date =  $(this).val();

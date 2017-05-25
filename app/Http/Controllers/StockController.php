@@ -146,7 +146,6 @@ class StockController extends Controller
        $product->brand_id = $request['brand'];
        $product->price = $request['price'];
        $product->quantity = $request['quantity'];
-       $product->imei = $request['imei'];
        $product->description = $request['description'];
        if($product->save()){
            $brand =  Brand::find($product->brand_id);
