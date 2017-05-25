@@ -166,6 +166,11 @@
                     </div>
 
                     <div class="input-field col s6">
+                        <input placeholder="" id="price_sell" name="price_sell" type="number">
+                        <label class="active" for="price_sell">Selling Price</label>
+                    </div>
+
+                    <div class="input-field col s6">
                         <input id="quantity" placeholder="" name="quantity" type="number" class="validate">
                         <label class="active" for="last_name">Quantity</label>
                     </div>
@@ -352,8 +357,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
             <a id="close_sell" class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+            <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
         </div>
     </div>
 
