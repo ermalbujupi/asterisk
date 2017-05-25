@@ -66,7 +66,7 @@
                         <tr class="primary-color">
                             <th>
                                 @foreach($products as $product)
-                                    <h5>Produktet per kategorine {{$product->category}} jane {{$product->nr}}</h5>
+                                    <h5>From  {{$product->category}} there are {{$product->nr}} products</h5>
                                 @endforeach
                             </th>
                         </tr>
@@ -312,41 +312,7 @@
         </div>
     </div>
 
-    <!--/Sell Product Modal -->
-    <div id="sellProductModal" class="modal modal-sm modal-fixed-footer">
 
-        <div class="modal-content">
-            <h4>Sell Products</h4>
-            <div class="col s12"><br></div>
-            <div class="row">
-
-                <div class="card-panel large">
-                    <div class="col s4">
-                        <input type="text"   id="product_search" placeholder="Search for a product">
-                    </div>
-                    <div class="col s2">
-                        <input type="text"   id="price" placeholder="Price">
-                    </div>
-                    <div class="col s2">
-                        <input type="text"   id="price" placeholder="Quantity">
-                    </div>
-                    <h1>
-                    </h1>
-                </div>
-                <div class="col s12">
-                    <textarea id="sales_array" hidden></textarea>
-                    <div class="right-align">
-                        <h6><b>TOTAL VALUE:</b><span id="total"></span>&euro;</h6>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a id="close_sell" class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
-            <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
-        </div>
-    </div>
 
 
 @endsection
