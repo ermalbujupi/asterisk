@@ -318,35 +318,21 @@
         <div class="modal-content">
             <h4>Sell Products</h4>
             <div class="col s12"><br></div>
-          <div class="row">
-                <div id="prepare_sell" class="col s12 ">
-                    {{--<div class="input-field col s2">--}}
-                        {{--<input name="edit_name" placeholder="" disabled  id="sell_name" type="text" class="validate">--}}
-                        {{--<label class="active" for="first_name">Product Name</label>--}}
-                    {{--</div>--}}
-                    {{--<div class="input-field col s2">--}}
-                        {{--<input name="edit_name" placeholder="" disabled  id="sell_name" type="text" class="validate">--}}
-                        {{--<label class="active" for="first_name">Brand</label>--}}
-                    {{--</div>--}}
-                    {{--<div class="input-field col s2">--}}
-                        {{--<input name="edit_name" placeholder="" disabled  id="sell_name" type="text" class="validate">--}}
-                        {{--<label class="active" for="first_name">Category</label>--}}
-                    {{--</div>--}}
-                    {{--<div class="input-field col s2">--}}
-                        {{--<input id="sell_price" placeholder=""  name="price" type="number" >--}}
-                        {{--<label class="active" for="last_name">Price</label>--}}
-                    {{--</div>--}}
-                    {{--<div class="input-field col s2">--}}
-                        {{--<input id="sell_quantity" name="quantity" placeholder="" type="number" class="validate">--}}
-                        {{--<label class="active" for="last_name">Quantity</label>--}}
-                    {{--</div>--}}
+            <div class="row">
 
-                    {{--<div class="input-field col s12">--}}
-                        {{--<input id="sell_description" name="description" placeholder="" type="text" class="validate">--}}
-                        {{--<label class="active" for="description">Description</label>--}}
-                    {{--</div>--}}
+                <div class="card-panel large">
+                    <div class="col s4">
+                        <input type="text"   id="product_search" placeholder="Search for a product">
+                    </div>
+                    <div class="col s2">
+                        <input type="text"   id="price" placeholder="Price">
+                    </div>
+                    <div class="col s2">
+                        <input type="text"   id="price" placeholder="Quantity">
+                    </div>
+                    <h1>
+                    </h1>
                 </div>
-                <div class="col s12"><br></div>
                 <div class="col s12">
                     <textarea id="sales_array" hidden></textarea>
                     <div class="right-align">
