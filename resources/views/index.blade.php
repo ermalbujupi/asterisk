@@ -14,6 +14,12 @@
 
 
 @section('content')
+
+    <div class="card-panel">Hello</div>
+    <div class="card-panel teal lighten-2" style="width:400px; height:60px;">This is a card panel </div>
+    <div class="card-panel red accent-3" style="width:400px;">This is a card panel </div>
+    <div class="card-panel red accent-3" style="width:400px;">This is a card panel </div>
+
     <div class="col s6 left-align" id="date" style="height:1px;"></div>
 
     <div class="row">
