@@ -74,10 +74,10 @@
     <div class="login-form col s12 m4">
         <!--<img class="responsive-img" style="width: 250px;" src="http://i.imgur.com/ax0NCsK.gif" /> -->
         <div class="section">
-            <h3>Asterisk</h3>
+            <h3 class="waves-effect" style="font-family:GillSans, Calibri, Trebuchet, sans-serif; padding-left:10px; color:#1a237e;"  >Welcome to Asterisk</h3>
         </div>
 
-        <h5 class="indigo-text">Please, login into your account</h5>
+        <h5 class="indigo-text" style="font-family:GillSans, Calibri, Trebuchet, sans-serif; padding-left:40px;">Please, login into your account</h5>
         <div class="section"></div>
 
         <div class="">
@@ -111,7 +111,7 @@
                     <br />
                     <center>
                         <div class='row'>
-                            <button type='button' name='btn_login' class='col s12 btn btn-large waves-effect blue login_btn'>Login</button>
+                            <button type='button' name='btn_login' class='col s12 btn btn-large waves-effect  login_btn' style="background-color:#40E0D0 !important;">Login</button>
                         </div>
                     </center>
                 <!--</form>-->
@@ -134,7 +134,7 @@
 
           </div>
             <div class="modal-footer">
-              <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect waves-green btn "> Send Email</button>
+              <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect  btn" style="background-color:#40E0D0 !important;"> Send Email</button>
               <a  class="modal-action modal-close waves-effect waves-light btn">Close</a>
             </div>
           </form>

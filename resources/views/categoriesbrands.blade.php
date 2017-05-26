@@ -21,7 +21,7 @@
 
              <div class="card-content">
                  <div class="left-align">
-                     <a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect light-blue darken-4 tooltipped"><i class="material-icons">add</i></a>
+                     <a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Category" class="btn-floating btn-sm waves-effect  tooltipped" style="background-color:#40E0D0 !important;"><i class="material-icons">add</i></a>
                  </div>
                  <div class="col s12">
                      <br>
@@ -42,8 +42,8 @@
                              <td>{{$category->id}}</td>
                              <td>{{$category->name}}</td>
                              <td class="btn_info">
-                                 <a id="{{$category->id}}" href="#editCategoryModal" class="btn btn-floating waves-effect light-blue darken-4 action_button tooltipped edit_category_trigger" data-tooltip="Edit Category" data-position="top"><span class="fa fa-pencil"></span></a>
-                                 <a id="{{$category->id}}" href="#deleteCategoryModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_category_trigger" data-tooltip="Delete Category" data-position="top"><span class="fa fa-trash"></span></a>
+                                 <a id="{{$category->id}}" href="#editCategoryModal" class="btn btn-floating waves-effect light-blue darken-4 action_button tooltipped edit_category_trigger" style="background-color:#40E0D0 !important;" data-tooltip="Edit Category" data-position="top"><span class="fa fa-pencil"></span></a>
+                                 <a id="{{$category->id}}" href="#deleteCategoryModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_category_trigger"  data-tooltip="Delete Category" data-position="top"><span class="fa fa-trash"></span></a>
                              </td>
                          </tr>
                      @endforeach
@@ -63,7 +63,7 @@
 
 
                  <div class="left-align">
-                     <a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect light-blue darken-4 blue tooltipped"><i class="material-icons">add</i></a>
+                     <a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect light-blue darken-4 blue tooltipped" style="background-color:#40E0D0 !important;"><i class="material-icons">add</i></a>
                  </div>
                  <div class="col s12"><br></div>
 
@@ -84,7 +84,7 @@
                              <td>{{$brand->name}}</td>
                              <td>{{$brand->info}}</td>
                              <td class="btn_info">
-                                 <a id="{{$brand->id}}" href="#editBrandModal"  class="btn btn-floating waves-effect light-blue darken-4 action_button tooltipped edit_brand_trigger" data-tooltip="Edit Brand" data-position="top"><span class="fa fa-pencil"></span></a>
+                                 <a id="{{$brand->id}}" href="#editBrandModal"  class="btn btn-floating waves-effect light-blue darken-4 action_button tooltipped edit_brand_trigger"  style="background-color:#40E0D0 !important;" data-tooltip="Edit Brand" data-position="top"><span class="fa fa-pencil"></span></a>
                                  <a id="{{$brand->id}}" href="#deleteBrandModal" class="btn btn-floating tooltipped waves-effect waves-light red action_button tooltipped delete_brand_trigger" data-tooltip="Delete Brand" data-position="top"><span class="fa fa-trash"></span></a>
                              </td>
                          </tr>
