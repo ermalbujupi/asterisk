@@ -14,7 +14,7 @@
 
 <body cz-shortcut-listen="true">
 <header>
-    <nav class="top-nav light-blue darken-4">
+    <nav class="top-nav  " style="background-color:#171a37 !important;">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
         <div class="nav-wrapper ">
                 <ul id="dropdown1" class="dropdown-content">
@@ -33,7 +33,7 @@
     <div class="container"></div>
     <ul id="nav-mobile" class="side-nav fixed blue-grey lighten-5" style="transform: translateX(0%);">
 
-        <img src="{{ URL::asset('src/img/asteriskLogo1.png') }}">
+        <img src="{{ URL::asset('src/img/logo5.png') }}" style="padding-left:50px;">
         <li class="bold {{Request::is('/') ? 'active':''}}"><a href="{{route('index')}}" class="waves-effect waves-teal"><i class="fa fa-bar-chart menu-item"></i>Dashboard  </a></li>
         <li class="bold {{Request::is('stock') ? 'active':''}}"><a href="{{route('stock')}}" class="waves-effect waves-teal"><i class="fa fa-rocket"></i>Products</a></li>
         <li class="bold {{Request::is('users') ? 'active':''}}"><a href="{{route('users')}}" class="waves-effect waves-teal"><i class="fa fa-users"></i>Users</a></li>
@@ -48,7 +48,7 @@
 
             @yield('content')
             <div class="right-align">
-                <a href="#sellProductModal" id="sell" class="waves-effect waves-light btn light-blue darken-4 ">Sell</a>
+                <a href="#sellProductModal" id="sell" class="waves-effect waves-light btn" style="background-color: #40E0D0 !important;">Sell</a>
             </div>
 
             <!--/Sell Product Modal -->
