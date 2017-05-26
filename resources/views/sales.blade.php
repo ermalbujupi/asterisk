@@ -19,7 +19,7 @@
                 <div class="card-content">
                     <div class="form-group col s1" id="refresh_button">
                         <br>
-                        <a class="btn-floating waves-effect light-blue darken-4 tooltipped" data-position="top" data-tooltip="Refresh Table">
+                        <a class="btn-floating waves-effect  tooltipped" style="background-color:#40E0D0 !important;" data-position="top" data-tooltip="Refresh Table">
                             <i class="large material-icons">loop</i>
                         </a>
                     </div>
