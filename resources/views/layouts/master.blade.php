@@ -15,7 +15,7 @@
 
 <body cz-shortcut-listen="true">
 <header>
-    <nav class="top-nav  " style="background-color:#171a37 !important;">
+    <nav class="top-nav" style="background-color:#171a37 !important;">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
         <div class="nav-wrapper ">
                 <ul id="dropdown1" class="dropdown-content">

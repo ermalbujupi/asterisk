@@ -21,7 +21,7 @@
                 <div class="card-content">
                     <div class="left-align">
                         <div  class="col s2" style="padding-left: 0;: ">
-                            <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a>
+                            <a href="#addNewProductModal"  data-position="top"  data-tooltip="Add New Product" class="btn-floating btn-sm waves-effect waves-light  tooltipped" style="background-color:#40E0D0 !important;"><i class="material-icons">add</i></a>
                         </div>
                         <div class="col s7 push-s8">
                             <a href="#sellProductModal" style="display: none;" id="sell" class="waves-effect waves-light btn light-blue darken-4 ">Sell</a>
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="col s1 " id="refresh_button">
-                        <a class="btn-floating waves-effect light-blue darken-4 tooltipped" data-position="top" data-tooltip="Refresh Table">
+                        <a class="btn-floating waves-effect  tooltipped" style="background-color:#40E0D0 !important;" data-position="top" data-tooltip="Refresh Table">
                             <i class="large material-icons">loop</i>
                         </a>
                     </div>
@@ -131,7 +131,7 @@
                         </select>
                     </div>
                     <div class="col s2" style="padding-left: 0">
-                        <a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a>
+                        <a href="#addNewCategoryModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light  tooltipped" style="background-color:#40E0D0 !important;"><i class="material-icons">add</i></a>
                     </div>
 
                 </div>
@@ -149,7 +149,7 @@
                         </select>
                     </div>
                     <div class="col s2" style="padding-left: 0">
-                        <a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light light-blue darken-4 tooltipped"><i class="material-icons">add</i></a>
+                        <a href="#addNewBrandModal"  data-position="top"  data-tooltip="Add New Brand" class="btn-floating btn-sm waves-effect waves-light  tooltipped" style="background-color:#40E0D0 !important;"><i class="material-icons">add</i></a>
                     </div>
 
                 </div>
@@ -184,8 +184,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn "> Save</button>
             <a class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+            <button  type="submit" id="save_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn "> Save</button>
         </div>
     </div>
 
