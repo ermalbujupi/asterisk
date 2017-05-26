@@ -10,6 +10,8 @@ use App\Brand;
 use App\Category;
 use App\Product;
 use App\Sellings;
+use App\Payment;
+use App\ProductPayment;
 
 
 class StockController extends Controller
@@ -29,6 +31,18 @@ class StockController extends Controller
         $brands = Brand::where('system_deleted','=','0')->get();
         $categories = Category::where('system_deleted','=','0')->get();
         return view('stock',['products'=>$products,'brands'=>$brands,'categories'=>$categories]);
+    }
+
+    public function getProductsName(){
+
+        $products = DB::table('products')
+        ->select('products.*','brands.name as brand','categories.name as category')
+        ->join('brands','brands.id','=','products.brand_id')
+        ->join('categories','categories.id','=','products.category_id')
+        ->where('products.system_deleted','=','0')
+        ->get();
+
+        return Response::json(['products'=>$products],200);
     }
 
     public function saveProduct(Request $request)
@@ -226,69 +240,51 @@ class StockController extends Controller
 
 
     public function sellProduct(Request $request){
+
          $products = explode(',', $request['products']);
-        //id+';'+name+';'+brand+';'+category+';'+price+';'+quantity;
+
+        $sold = false;
+        //productsSell[i].id+';'+productsSell[i].price_sold+';'+productsSell[i].quantity
          foreach($products as $productString){
 
              $fields = explode(';',$productString);
              $id = ((int)$fields[0]);
              $product = Product::find($id);
-             $quantity =(int)$fields[5];
+             $quantity_sold =(int)$fields[2];
+             $price_sold = (float)$fields[1];
 
-             if($quantity > $product->quantity){
+             if($quantity_sold > $product->quantity){
                  return Response::json(["message"=>"You can't sell the product with higher quantity!"],400);
              }
 
-             $product->quantity -= $quantity;
+             $product->quantity -= $quantity_sold;
             if($product->quantity == 0){
                 $product->system_deleted = 1;
             }
-            $sell = new Sellings();
-            $sell->product = $id;
-            $sell->seller = Auth::user()->id;
-            $sell->quantity_sold = $quantity;
 
-            if($product->save()){
-                if($sell->save()){
-                    return Response::json(['message'=>'Product Sold','product'=>$product],200);
-                }else{
-                    return Response::json(['message'=>'Error Selling Product'],400);
-                }
-            }else{
-                return Response::json(['message'=>'Error Selling Product 2',400]);
+           $product->save();
+
+            $payment = new Payment();
+            $payment->price_sold = $price_sold;
+            $payment->quantity_sold = $quantity_sold;
+            $payment->user_id = Auth::user()->id;
+            $payment->save();
+
+            $product_payment = new ProductPayment();
+            $product_payment->product_id = $product->id;
+            $product_payment->payment_id = $payment->id;
+
+            if($product_payment->save()){
+                $sold = true;
             }
          }
 
-//        $id = $request['id'];
-//        $product = Product::find($id);
-//        $quantity = $request['quantity'];
-//        $price = $request['price'];
-//
-//        if($quantity > $product->quantity){
-//            return Response::json(["message"=>"You can't sell the product with higher quantity!"],400);
-//        }
-//
-//        $product->quantity -= $quantity;
-//
-//        if($product->quantity == 0){
-//            $product->system_deleted = 1;
-//        }
-//
-//        $sell = new Sellings();
-//        $sell->product = $id;
-//        $sell->seller = Auth::user()->id;
-//        $sell->price_sold = $price;
-//        $sell->quantity_sold = $quantity;
-//
-//        if($product->save()){
-//            if($sell->save()){
-//                return Response::json(['message'=>'Product Sold','product'=>$product],200);
-//            }else{
-//                return Response::json(['message'=>'Error Selling Product'],400);
-//            }
-//        }else{
-//            return Response::json(['message'=>'Error Selling Product 2',400]);
-//        }
+         if($sold){
+             return Response::json(['message'=>'All Products have benn sold successfully!'],200);
+         }else{
+             return Response::json(['message'=>'Products failed saving!']);
+         }
+
 
     }
 

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{URL::asset('src/css/style.css')}}">
     <link rel="stylesheet" href="{{URL::asset('src/material-icons/iconfont/material-icons.css')}}">
 
+
     @yield('styles')
 </head>
 
@@ -67,7 +68,7 @@
                                 <input type="text"   id="price" placeholder="Price">
                             </div>
                             <div class="col s2">
-                                <input type="text"   id="price" placeholder="Quantity">
+                                <input type="text"   id="quantity" placeholder="Quantity">
                             </div>
                             <h1></h1>
 
@@ -89,7 +90,7 @@
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody id="stock_body">
+                                <tbody id="sell_body">
                                 <tr class="none-top-border">
 
                                 </tr>
@@ -106,7 +107,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button  type="submit" id="sell_product" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
+                    <button  type="submit" id="master_sell" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
                     <a id="close_sell" class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
                 </div>
             </div>
@@ -251,6 +252,7 @@ function passwordChanged(params,success,responseObj){
 }
 
 </script>
+
 <script type="text/javascript" src="{{URL::asset('src/js/index.js')}}"></script>
 @yield('scripts')
 </body>

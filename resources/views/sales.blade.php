@@ -36,9 +36,10 @@
 
                     <div class="input-field col s2">
                         <select id="year_select">
-                            <option disabled selected value="0">All</option><?php
+                            <option  selected value="0">All</option><?php
                             $year = date("Y");
                             $year_temp= 2016;
+
                             while ($year_temp<=$year)
                             {
                                 echo'<option value="'.$year_temp.'" >'.$year_temp.'</option>';
@@ -51,7 +52,7 @@
 
                     <div class="input-field col s2">
                         <select  id="month_select">
-                            <option value="0" disabled selected>All</option>
+                            <option value="0" >All</option>
                             <option value="1" >January</option>
                             <option value="2" >February</option>
                             <option value="3" >March</option>
@@ -70,7 +71,7 @@
 
                     <div class="form-group col s3">
                         <label class = "control-label" for="name">Date:</label>
-                        <input type="date" id="date" value="<?= date('Y-m-d'); ?>"/>
+                        <input  type="date" id="date" value="<?= date('Y-m-d'); ?>"/>
                         <input type="hidden" id="delivery_time" value="">
                     </div>
 
@@ -84,7 +85,7 @@
                             <th>Brand</th>
                             <th>Category</th>
                             <th>Quantity</th>
-                            <th>Price</th>
+                            <th>Price Sold</th>
                             <th>Date Sold</th>
                         </tr>
 
@@ -105,6 +106,11 @@
                         </tbody>
 
                     </table>
+                    <div><br></div>
+                    <div class="right-align">
+                        <button id="export_pdf" class="waves-effect waves-light btn red darken-4 tooltipped" data-position="top" data-tooltip="Export to PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
+                        <button id="export_xls" class="waves-effect waves-light btn green darken-4 tooltipped" data-position="top" data-tooltip="Export to Excel"><i class="fa fa-file-excel-o" aria-hidden="true"></i></button>
+                    </div>
              </div>
          </div>
      </div>
