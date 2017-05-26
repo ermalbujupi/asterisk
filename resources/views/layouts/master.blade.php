@@ -31,7 +31,7 @@
             </div>
     </nav>
     <div class="container"></div>
-    <ul id="nav-mobile" class="side-nav fixed" style="transform: translateX(0%);">
+    <ul id="nav-mobile" class="side-nav fixed blue-grey lighten-5" style="transform: translateX(0%);">
 
         <img src="{{ URL::asset('src/img/asteriskLogo1.png') }}">
         <li class="bold {{Request::is('/') ? 'active':''}}"><a href="{{route('index')}}" class="waves-effect waves-teal"><i class="fa fa-bar-chart menu-item"></i>Dashboard  </a></li>
