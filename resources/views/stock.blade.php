@@ -66,7 +66,7 @@
                         <tr class="primary-color">
                             <th>
                                 @foreach($products as $product)
-                                    <h5>From  {{$product->category}} there are {{$product->nr}} products</h5>
+                                    <h5 style="font-family: Calibri;">From <b> {{$product->category}}</b> there are <b>{{$product->nr}}</b> products</h5>
                                 @endforeach
                             </th>
                         </tr>
