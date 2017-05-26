@@ -180,23 +180,19 @@ class SellingController extends Controller
     public function exportToExcel($user,$year,$month,$date){
         $sellings = $this->filterSearch($user,$year,$month,$date);
 
-        $paymentsArray[] = ['ID', 'User','Product','Brand','Category','Quantity','Price Sold','Date Sold'];
+        $paymentsArray[] = ['ID', 'User','Product Name','Brand','Category','Quantity','Price Sold','Date Sold'];
 
-        foreach ($sellings as $payment) {
-            $paymentsArray['ID'] = $payment->id;
-            $paymentsArray['Poduct'] = $payment->product;
-            $paymentsArray['Brand'] = $payment->brand;
-            $paymentsArray['Category'] = $payment->category;
-            $paymentsArray['Quantity'] = $payment->quantity_sold;
-            $paymentsArray['Price Sold'] = $payment->price_sold;
-            $paymentsArray['Date Sold'] = $payment->created_at;
+        foreach($sellings as $sell){
+            $paymentsArray[] = (array)$sell;
         }
 
-        Excel::create('payments', function($excel) use ($paymentsArray) {
+
+
+        Excel::create(('payments_'.date('m_d_Y_h_i_s ', time())), function($excel) use ($paymentsArray) {
 
             // Set the spreadsheet title, creator, and description
             $excel->setTitle('Payments');
-            $excel->setCreator('Laravel')->setCompany('WJ Gilmore, LLC');
+            $excel->setCreator('Laravel')->setCompany('W    J Gilmore, LLC');
             $excel->setDescription('payments file');
 
             // Build the spreadsheet, passing in the payments array
@@ -204,7 +200,37 @@ class SellingController extends Controller
                 $sheet->fromArray($paymentsArray, null, 'A1', false, false);
             });
 
-        })->download('xlsx');
+        })->store('xls',storage_path('\\reports\\excel'));
+
+        return Response::json(['message'=>'Table successfully exported to excel'],200);
+    }
+
+    public function exportToPDF($user,$year,$month,$date){
+        $sellings = $this->filterSearch($user,$year,$month,$date);
+
+        $paymentsArray[] = ['ID', 'User','Product Name','Brand','Category','Quantity','Price Sold','Date Sold'];
+
+        foreach($sellings as $sell){
+            $paymentsArray[] = (array)$sell;
+        }
+
+
+
+        Excel::create(('payments_'.date('m_d_Y_h_i_s ', time())), function($excel) use ($paymentsArray) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Payments');
+            $excel->setCreator('Laravel')->setCompany('W    J Gilmore, LLC');
+            $excel->setDescription('payments file');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
+                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+            });
+
+        })->store('pdf',storage_path('\\excel\\pdf'));
+
+        return Response::json(['message'=>'Table successfully exported to pdf'],200);
     }
 
 

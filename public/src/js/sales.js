@@ -76,6 +76,15 @@ $(function(){
         ajax("GET",'/sales/export_excel/'+user+'/'+year+'/'+month+'/'+date,'',exported,'');
     });
 
+    $('#export_pdf').on('click',function(){
+        var date =  $('#date').val();
+        var user = $('#user_select').val();
+        var month = $('#month_select').val();
+        var year = $('#year_select').val();
+
+        ajax("GET",'/sales/export_pdf/'+user+'/'+year+'/'+month+'/'+date,'',exported,'');
+    });
+
 });
 
 function salesFilter(user,year,month,date){
