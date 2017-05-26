@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'getAllProducts'
     ]);
 
+    Route::get('/home/get_products',['uses'=>'StockController@getProductsName']);
+
 
 
     Route::post('/stock/add_brand',[
@@ -181,6 +183,9 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'SellingController@getSales'
     ]);
 
+    Route::get('/sales/sales_filter/{user}/{year}/{month}/{date}',['uses'=>'SellingController@salesFilter']);
+    Route::get('/sales/export_excel/{user}/{year}/{month}/{date}',['uses'=>'SellingController@exportToExcel']);
+
     Route::post('/todo/delete_task',[
         'uses' => 'TasksController@deleteTask',
         'as' =>'tasks.delete_task'
@@ -197,5 +202,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/getsize/{year}/{month}',['uses'=>'UsersController@getCountByDate','as'=>'getsize']);
 
     Route::any('stock/search_category_brand',['uses'=>'StockController@getProductsByBrandOrCategory']);
+
+
 
 });

@@ -249,38 +249,7 @@ function sellProduct(){
 
 }
 
-function productSold(params,success,responseObj){
 
-    var products= responseObj.products;
-
-
-
-    //var message = responseObj.message;
-    //var product = responseObj.product;
-    //
-    //if(success){
-    //
-    //    $('#stock_body tr').each(function(){
-    //
-    //        if($(this).find('td:first-child').text() == product.id){
-    //
-    //            if(product.quantity == 0){
-    //                $(this).remove();
-    //            }
-    //
-    //            $(this).find('td:nth-child(2)').text(product.name);
-    //            $(this).find('td:nth-child(3)').text(brand.name);
-    //            $(this).find('td:nth-child(4)').text(category.name);
-    //            $(this).find('td:nth-child(5)').text(product.price);
-    //            $(this).find('td:nth-child(6)').text(product.quantity);
-    //        }
-    //    });
-    //
-    //    Materialize.toast(message,3000,'green');
-    //}else{
-    //    Materialize.toast(message,3000,'red');
-    //}
-}
 
 function fillSellModal(params,success,responseObj){
 

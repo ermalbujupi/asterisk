@@ -3,44 +3,91 @@ $(function(){
     $('select').material_select();
 
     $('#year_select').on('change',function () {
-        var year = this.value;
-
-        if(year!=0)
-        {
-            $('#month_select').removeAttr('disabled');
+        if(this.value != 0) {
+            $('#date').prop('disabled', true);
+            $('#date').val("");
         }
+        else {
+            $('#date').prop('disabled', false);
+            $('#date').val();
+        }
+
+
+        var user = $('#user_select').val();
+        var month = $('#month_select').val();
+        var year = $('#year_select').val();
+
+        salesFilter(user,year,month,0);
+    });
+
+    $('#month_select').on('change',function () {
+        if(this.value != 0) {
+            $('#date').prop('disabled', true);
+            $('#date').val("");
+        }
+        else {
+            $('#date').prop('disabled', false);
+            $('#date').val();
+        }
+
+        var user = $('#user_select').val();
+        var month = $('#month_select').val();
+        var year = $('#year_select').val();
+
+        salesFilter(user,year,month,0);
     });
 
 
 
     $('#date').on('change',function(){
 
-        var date =  $(this).val();
-        $('#loading_modal').modal('open');
-        ajax("GET",'/sales/filter_date/'+date,'',reloadTable,'');
+        var date =  $('#date').val();
+        var user = $('#user_select').val();
+        var month = $('#month_select').val();
+        var year = $('#year_select').val();
+
+        salesFilter(user,year,month,date);
     });
 
     //refresh table
     $('#refresh_button').click(function(){
-        $('#loading_modal').modal('open');
-        ajax('GET','/sales/refresh_sales','',reloadTable,'');
+        var date =  $('#date').val();
+        salesFilter(0,0,0,date);
     });
 
     //list sales by user
     $('#user_select').on('change',function(){
 
-        var user_id = $(this).val();
-        $('#loading_modal').modal('open');
-        ajax('GET','/sales/filter_user/'+user_id,'',reloadTable,'');
+        var date =  $('#date').val();
+        var user = $('#user_select').val();
+        var month = $('#month_select').val();
+        var year = $('#year_select').val();
+
+        salesFilter(user,year,month,(date==''?0:date));
+    });
+
+    //export to excel
+    $('#export_xls').on('click',function(){
+        var date =  $('#date').val();
+        var user = $('#user_select').val();
+        var month = $('#month_select').val();
+        var year = $('#year_select').val();
+
+        ajax("GET",'/sales/export_excel/'+user+'/'+year+'/'+month+'/'+date,'',exported,'');
     });
 
 });
+
+function salesFilter(user,year,month,date){
+    $('#loading_modal').modal('open');
+    ajax("GET",'/sales/sales_filter/'+user+'/'+year+'/'+month+'/'+date,'',reloadTable,'');
+}
 
 function reloadTable(params,success,responseObj){
 
     if(success){
         $('#sales_tbody tr').remove();
-        var sales = responseObj.sales;
+        var sales = responseObj.sellings;
 
         for(var i =0; i< sales.length; i++){
 
@@ -59,5 +106,13 @@ function reloadTable(params,success,responseObj){
         }
 
         $('#loading_modal').modal('close');
+    }
+}
+
+function exported(params,success,responseObj){
+    if(success){
+        Materialize.toast(responseObj.message,3000,'green');
+    }else{
+        Materialize.toast(responseObj.message,3000,'red');
     }
 }
