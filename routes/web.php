@@ -15,9 +15,9 @@ Route::any('logout',[
     'as'=>'logout'
 ]);
 
-Route::get('/password_reset',function(){
-    return view('password_reset');
-});
+Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+Route::post('password/reset', 'Auth\PasswordController@reset');
 
 Route::any('/password_reset/send_mail',[
   'uses'=>'LoginController@sendMailForPasswordReset',
@@ -196,6 +196,8 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'StockController@sellProduct',
         'as' => 'stock.sell_product'
     ]);
+
+    Route::get('/sales/download_excel_file/{file}',['uses'=>'SellingController@downloadExcelFile']);
 
 
     Route::get('/get_dates',['uses'=>'UsersController@getDateOfCreatedUsers']);

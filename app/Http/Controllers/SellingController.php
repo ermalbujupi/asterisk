@@ -186,9 +186,9 @@ class SellingController extends Controller
             $paymentsArray[] = (array)$sell;
         }
 
+        $file_name = ('payments_'.date('m_d_Y_h_i_s ', time()));
 
-
-        Excel::create(('payments_'.date('m_d_Y_h_i_s ', time())), function($excel) use ($paymentsArray) {
+        Excel::create($file_name, function($excel) use ($paymentsArray) {
 
             // Set the spreadsheet title, creator, and description
             $excel->setTitle('Payments');
@@ -200,9 +200,13 @@ class SellingController extends Controller
                 $sheet->fromArray($paymentsArray, null, 'A1', false, false);
             });
 
-        })->store('xls',storage_path('\\reports\\excel'));
+        })->store('xls',storage_path().'\\reports\\excel');
 
-        return Response::json(['message'=>'Table successfully exported to excel'],200);
+        return Response::json(['file'=>($file_name.'.xls')],200);
+    }
+
+    public function downloadExcelFile($file){
+        return response()->download(storage_path().'\\reports\\excel\\'.$file,200);
     }
 
     public function exportToPDF($user,$year,$month,$date){

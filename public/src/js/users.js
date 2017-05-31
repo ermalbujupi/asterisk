@@ -38,7 +38,7 @@ function saveUser(){
     var password = $('#password').val();
     var email  = $('#email').val();
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var privilege = $('#privilege :selected').text();
+    var privilege = $('#privilege option:selected').val();
     if(fullName === ""){
         Materialize.toast('Please Write Full Name',3000,'red');
         return false;
@@ -59,7 +59,7 @@ function saveUser(){
         Materialize.toast('Invalid Email',3000,'red');
         return false;
     }
-    if(privilege != 'Employee' && privilege != 'Manager' && privilege != 'Admin'){
+    if(!(privilege > 0)){
         Materialize.toast('Please Select a privilege',3000,'red');
         return
     }
@@ -91,7 +91,7 @@ function edit_user(id){
     var username = $('#edit_username').val();
     var email = $('#edit_email').val();
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var privilege = $('#edit_privilege :selected').text();
+    var privilege = $('#edit_privilege :selected').val();
     if(fullName === ""){
         Materialize.toast('Please Write Full Name',3000,'red');
         return false;
@@ -108,7 +108,7 @@ function edit_user(id){
         Materialize.toast('Invalid Email',3000,'red');
         return false;
     }
-    if(privilege != 'Employee' && privilege != 'Manager' && privilege != 'Admin'){
+    if(!(privilege >0)){
         Materialize.toast('Please Select a privilege',3000,'red')
         return
     }

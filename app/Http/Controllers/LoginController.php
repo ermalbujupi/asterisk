@@ -24,13 +24,20 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if(!Auth::attempt(['username' => $request['username'], 'password' => $request['password']]))
-        {
-            return Response::json(['message'=>'Email or Password Incorrect'],400);
+        try{
+            if(!Auth::attempt(['username' => $request['username'], 'password' => $request['password']]))
+            {
+                return Response::json(['message'=>'Email or Password Incorrect'],400);
+            }
+            else{
+                return Response::json(['message'=>'OK'],200);
+            }
+
+        }catch(\Exception $exe){
+            return Response::json(['message'=>'Couldn\'t establish connection to database'],400);
         }
-        else{
-            return Response::json(['message'=>'OK'],200);
-        }
+
+
     }
 
     public function logout(){
@@ -63,11 +70,9 @@ class LoginController extends Controller
             $id = $user->id;
 
             $user = User::find($id);
-            $user->password = $random_password;
-            $user->save();
+
 
             Mail::send('emails.password_reset',['password'=>$random_password] , function ($message) use($user) {
-                $message->from('bicajfidan@gmail.com','Fidan Bicaj');
                 $message->to($user->email,$user->full_name);
                 $message->subject("Asterisk Password Reset");});
 
@@ -75,8 +80,8 @@ class LoginController extends Controller
 
         }
 
-        //$password_reset = new PasswordReset();
-        //$password_reset->password_code =  $this->generateRandomString(10);
+        $user->password = bcrypt($random_password);
+        $user->save();
         return Response::json(['message'=>'Something went wrong, Please try again !'],400);
     }
 

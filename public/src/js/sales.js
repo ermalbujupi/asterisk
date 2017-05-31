@@ -120,8 +120,15 @@ function reloadTable(params,success,responseObj){
 
 function exported(params,success,responseObj){
     if(success){
-        Materialize.toast(responseObj.message,3000,'green');
+        var file = responseObj.file;
+        window.open("http://localhost:8000/sales/download_excel_file/"+file);
     }else{
         Materialize.toast(responseObj.message,3000,'red');
+    }
+}
+
+function downloaded(params,success,responseObj){
+    if(success){
+        Materialize.toast('File has begin download !',3000,'green');
     }
 }
