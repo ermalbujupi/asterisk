@@ -4,9 +4,13 @@ var productsSell = [];
 var count = 0;
 $(function(){
 
-    ajax('GET','/home/get_products','',getNames,'');
+    $('#sell').on('click',function(){
+        ajax('GET','/home/get_products','',getNames,'');
+    });
+
 
     $('.autocomplete').on('click',function(){
+
         $('input.autocomplete').autocomplete({
             data:names,
             limit: 20, // The max amount of results that can be shown at once. Default: Infinity.

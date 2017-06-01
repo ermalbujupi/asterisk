@@ -23,8 +23,8 @@
             </div>
 
             <div class="input-field col s3" style="padding-left:20px;">
-                <select name="priority" id="priority">
-                    <option value="" disabled selected>Priority</option>
+                <select  id="priority">
+                    <option value="0" disabled selected>Priority</option>
                     <option value="1">Low</option>
                     <option value="2">Normal</option>
                     <option value="3">High</option>
@@ -50,15 +50,7 @@
                 @foreach($tasks as $task)
                     <tr class="none-top-border">
                         <td>{{$task->name}}</td>
-                        <td>
-                            @if(($task->priority) === 1)
-                                Low
-                            @elseif(($task->priority) === 2)
-                                Normal
-                            @else
-                                High
-                            @endif
-                        </td>
+                        <td>{{$task->priority}}</td>
                         <td>
                             @if(($task->status) === 0)
                                 Active
@@ -67,7 +59,7 @@
                             @endif
                         </td>
                         <td class="status_buttons">
-                            <input id="{{$task->id}}" type="checkbox" class="filled-in" >
+                            <input class="check_task" id="{{$task->id}}" <?= $task->status == 0?"unchecked":"checked" ?> type="checkbox" class="filled-in" >
                             <label for="{{$task->id}}"></label>
 
                         </td>

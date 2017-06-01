@@ -44,4 +44,15 @@ class TasksController extends Controller
             return Response::json(['message'=>'Task wasnt deleted'],400);
         }
     }
+
+    public function editStatus(Request $req){
+        $id = $req['id'];
+        $task = Task::find($id);
+
+        $task->status = 1;
+
+        if($task->save()){
+            return Response::json(['message'=>'Status of task edited successfully','task'=>$task],200);
+        }
+    }
 }

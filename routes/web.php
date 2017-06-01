@@ -128,6 +128,11 @@ Route::group(['middleware' => ['auth']], function () {
         'as'=>'todo.save_task'
     ]);
 
+    Route::post('/todo/edit_status',[
+        'uses'=>'TasksController@editStatus',
+        'as'=>'todo.save_task'
+    ]);
+
     Route::get('/categories_brands',[
         'uses' =>'CatBrandsController@getAll',
         'as' => 'categories_brands'
