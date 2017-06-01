@@ -185,7 +185,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/sales/sales_filter/{user}/{year}/{month}/{date}',['uses'=>'SellingController@salesFilter']);
     Route::get('/sales/export_excel/{user}/{year}/{month}/{date}',['uses'=>'SellingController@exportToExcel']);
-    Route::get('/sales/export_pdf/{user}/{year}/{month}/{date}',['uses'=>'SellingController@exportToPDF']);
+    Route::any('/sales/export_pdf/{user}/{year}/{month}/{date}',['uses'=>'SellingController@exportToPDF']);
 
     Route::post('/todo/delete_task',[
         'uses' => 'TasksController@deleteTask',
@@ -198,6 +198,7 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::get('/sales/download_excel_file/{file}',['uses'=>'SellingController@downloadExcelFile']);
+    Route::get('/sales/download_pdf_file/{file}',['uses'=>'SellingController@downloadPdfFile']);
 
 
     Route::get('/get_dates',['uses'=>'UsersController@getDateOfCreatedUsers']);

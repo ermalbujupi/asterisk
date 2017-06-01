@@ -73,7 +73,7 @@ $(function(){
         var month = $('#month_select').val();
         var year = $('#year_select').val();
 
-        ajax("GET",'/sales/export_excel/'+user+'/'+year+'/'+month+'/'+date,'',exported,'');
+        ajax("GET",'/sales/export_excel/'+(user==''?0:user)+'/'+(year==''?0:year)+'/'+(month==''?0:month)+'/'+(date == ''?0:date),'',exportedExcel,'');
     });
 
     $('#export_pdf').on('click',function(){
@@ -82,7 +82,9 @@ $(function(){
         var month = $('#month_select').val();
         var year = $('#year_select').val();
 
-        ajax("GET",'/sales/export_pdf/'+user+'/'+year+'/'+month+'/'+date,'',exported,'');
+        alert(date+" - "+user+" - "+month+ " - "+year);
+
+        ajax("GET",'/sales/export_pdf/'+(user==''?0:user)+'/'+(year==''?0:year)+'/'+(month==''?0:month)+'/'+(date == ''?0:date),'',exportedPdf,'');
     });
 
 });
@@ -118,17 +120,20 @@ function reloadTable(params,success,responseObj){
     }
 }
 
-function exported(params,success,responseObj){
+function exportedExcel(params,success,responseObj){
     if(success){
         var file = responseObj.file;
-        window.open("http://localhost:8000/sales/download_excel_file/"+file);
+        window.location.assign("http://localhost:8000/sales/download_excel_file/"+file);
     }else{
         Materialize.toast(responseObj.message,3000,'red');
     }
 }
 
-function downloaded(params,success,responseObj){
+function exportedPdf(params,success,responseObj){
     if(success){
-        Materialize.toast('File has begin download !',3000,'green');
+        var file = responseObj.file;
+        window.location.assign("http://localhost:8000/sales/download_pdf_file/"+file);
+    }else{
+        Materialize.toast(responseObj.message,3000,'red');
     }
 }
