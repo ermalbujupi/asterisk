@@ -167,6 +167,7 @@
 </script>
 <script type="text/javascript" src="{{URL::asset('src/js/jquery-3.1.1.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('src/js/materialize.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('src/js/index.js')}}"></script>
 <script>
     $('.button-collapse').sideNav();
     function ajax(method, url, params, callback, callbackParams) {
@@ -253,7 +254,7 @@ function passwordChanged(params,success,responseObj){
 
 </script>
 
-<script type="text/javascript" src="{{URL::asset('src/js/index.js')}}"></script>
+
 @yield('scripts')
 </body>
 </html>

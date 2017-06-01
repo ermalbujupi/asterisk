@@ -11,6 +11,10 @@ $(document).ready(function() {
     });
 });
 
+$('.check_task').on('change',function(){
+
+});
+
 $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
@@ -52,8 +56,9 @@ $('#delete_task').on('click',function(){
 function saveTask()
 {
     var task = $('#task').val();
-    var priority = $('#priority option:selected').val();
+    var priority = $('#priority option:selected').text();
 
+    alert(priority);
 
     $.ajaxSetup({
         headers: {

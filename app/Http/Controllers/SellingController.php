@@ -200,13 +200,17 @@ class SellingController extends Controller
                 $sheet->fromArray($paymentsArray, null, 'A1', false, false);
             });
 
-        })->store('xls',storage_path().'\\reports\\excel');
+        })->store('xlsx',storage_path().'\\reports\\excel');
 
-        return Response::json(['file'=>($file_name.'.xls')],200);
+        return Response::json(['file'=>($file_name.'.xlsx')],200);
     }
 
     public function downloadExcelFile($file){
-        return response()->download(storage_path().'\\reports\\excel\\'.$file,200);
+        return response()->download(storage_path().'\\reports\\excel\\'.$file);
+    }
+
+    public function downloadPdfFile($file){
+        return response()->download(storage_path().'\\reports\\pdf\\'.$file);
     }
 
     public function exportToPDF($user,$year,$month,$date){
@@ -218,9 +222,9 @@ class SellingController extends Controller
             $paymentsArray[] = (array)$sell;
         }
 
+        $file_name = ('payments_'.date('m_d_Y_h_i_s ', time()));
 
-
-        Excel::create(('payments_'.date('m_d_Y_h_i_s ', time())), function($excel) use ($paymentsArray) {
+        Excel::create($file_name, function($excel) use ($paymentsArray) {
 
             // Set the spreadsheet title, creator, and description
             $excel->setTitle('Payments');
@@ -232,9 +236,9 @@ class SellingController extends Controller
                 $sheet->fromArray($paymentsArray, null, 'A1', false, false);
             });
 
-        })->store('pdf',storage_path('\\excel\\pdf'));
+        })->store('pdf',storage_path().'\\reports\\pdf');
 
-        return Response::json(['message'=>'Table successfully exported to pdf'],200);
+        return Response::json(['file'=>($file_name.'.pdf')],200);
     }
 
 
