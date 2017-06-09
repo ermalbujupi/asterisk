@@ -60,7 +60,7 @@
         }
 
         #send_email,#password_reset_confirm_code{
-          margin-left: 11px;
+            margin-left: 11px;
         }
 
 
@@ -84,76 +84,64 @@
             <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
                 <!--<form class="col s12" method="post" action="{{route('login')}}">-->
-                    <div class='row'>
-                        <div class='col s12'>
-                        </div>
+                <div class='row'>
+                    <div class='col s12'>
                     </div>
+                </div>
 
-                    <div class='row'>
-                        <div class='input-field col s12'>
-                            <input class='validate' placeholder="Please enter your username" type='text' name='username' id='username' />
-                            <label for='email'>Username</label>
-                        </div>
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input class='validate' placeholder="Please enter your username" type='text' name='username' id='username' />
+                        <label for='email'>Username</label>
                     </div>
+                </div>
 
-                    <div class='row'>
-                        <div class='input-field col s12'>
-                            <input class='validate' placeholder="Please enter password" type='password' name='password' id='password' />
-                            <label for='password'>Password</label>
-                        </div>
-                        <label style='float: right;'>
-                            <a class='pink-text' href='#passwordForgetModal'><b>Forgot Password?</b></a>
-                        </label>
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input class='validate' placeholder="Please enter password" type='password' name='password' id='password' />
+                        <label for='password'>Password</label>
                     </div>
+                    <label style='float: right;'>
+                        <a class='pink-text' href='#passwordForgetModal'><b>Forgot Password?</b></a>
+                    </label>
+                </div>
 
-                    <input type="hidden" name="_token" value="{{ Session::token() }}">
+                <input type="hidden" name="_token" value="{{ Session::token() }}">
 
-                    <br />
-                    <center>
-                        <div class='row'>
-                            <button type='button' name='btn_login' class='col s12 btn btn-large waves-effect  login_btn' style="background-color:#40E0D0 !important;">Login</button>
-                        </div>
-                    </center>
+                <br />
+                <center>
+                    <div class='row'>
+                        <button type='button' name='btn_login' class='col s12 btn btn-large waves-effect  login_btn' style="background-color:#40E0D0 !important;">Login</button>
+                    </div>
+                </center>
                 <!--</form>-->
             </div>
         </div>
     </div>
     <!--Password Forget Modal -->
     <div id="passwordForgetModal" class="modal">
-      <div id="password_forget_modal" class="col s12">
-        <form action="{{route('password_reset.send_mail')}}">
-          {{ csrf_field() }}
-          <div class="modal-content">
-            <h4>Reset Password</h4>
-            <div class="row">
-                <div class="col s12">
-                    <label>Email:</label>
-                    <input name="email" type="text" id="password_reset_email"/>
-                </div>
-            </div>
-
-          </div>
-            <div class="modal-footer">
-              <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect  btn" style="background-color:#40E0D0 !important;"> Send Email</button>
-              <a  class="modal-action modal-close waves-effect waves-light btn">Close</a>
-            </div>
-          </form>
-        </div>
-        <div id="confirm_code_modal" class="col s12" style="display:none;">
+        <div id="password_forget_modal" class="col s12">
+            {{--<form action="{{route('password_reset.send_mail')}}">--}}
+            <input type="hidden" id="pass_token" name="csrf-token" value="{{ csrf_token() }}">
             <div class="modal-content">
-                  <h4>Enter Code</h4>
-                  <div class="col s12">
-                      <label>Code:</label>
-                      <input type="text" id="password_reset_code"/>
-                  </div>
+                <h4>Reset Password</h4>
+                <div class="row">
+                    <div class="col s12">
+                        <label>Email:</label>
+                        <input name="email" type="text" id="password_reset_email"/>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
-              <button  type="submit" id="password_reset_confirm_code" href="#!" class="modal-action  waves-effect waves-green btn "> Confirm</button>
-              <a  id="close_password_forget_modal" class="modal-action modal-close waves-effect waves-light btn">Close</a>
+                <button  type="submit" id="send_email" href="#!" class="modal-action  waves-effect  btn" style="background-color:#40E0D0 !important;"> Send Email</button>
+                <a  class="modal-action modal-close waves-effect waves-light btn">Close</a>
             </div>
+            {{--</form>--}}
         </div>
-      </div>
-      </div>
+
+    </div>
+</div>
     <!--/password Forget Modal -->
 
     <!-- Modal Structure -->
@@ -249,6 +237,7 @@
 
         var email = $('#password_reset_email').val();
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var token = $('#pass_token').val();
 
         if(email == ""){
             Materialize.toast("Please Write Email",3000,'red');
@@ -260,34 +249,23 @@
             return false;
         }
         $('#loading_modal').modal('open');
-        ajax("POST","/password_reset/send_mail","email="+email,emailSent,"");
+        ajax("POST","/password_reset/send_mail","email="+email+'&token='+token,emailSent,"");
 
 
     });
-
-
 
     function emailSent(params,success,responseObj){
         $('#loading_modal').modal('close');
 
         if(success){
             Materialize.toast(responseObj.message,5000,'green');
-            closePasswordForget();
+
         }else{
             Materialize.toast(responseObj.message,5000,'red');
-            closePasswordConfirm();
         }
     }
 
-    function closePasswordForget(){
-      $('#password_forget_modal').show();
-      $('#confirm_code_modal').hide();
-    }
 
-    function closePasswordConfirm(){
-      $('#password_forget_modal').hide();
-      $('#confirm_code_modal').show();
-    }
-//# sourceURL=login.js
+    //# sourceURL=login.js
 </script>
 </body></html>

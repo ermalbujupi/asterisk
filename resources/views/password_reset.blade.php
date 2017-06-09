@@ -3,9 +3,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Password Reset</title>
     <link rel="stylesheet" href="{{URL::asset('src\font-awesome-4.7.0\css\font-awesome.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{URL::asset('src/css/materialize.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('src/css/style.css')}}">
     <style>
         body {
             display: flex;
@@ -65,6 +66,7 @@
 
 
     </style>
+
 </head>
 
 
@@ -80,9 +82,8 @@
         <h5 class="indigo-text">Password Reset</h5>
         <div class="section"></div>
 
-        <div class="">
-            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-
+        <div class="col s6">
+            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;max-width: 700px;">
                 <!--<form class="col s12" method="post" action="{{route('login')}}">-->
                     <div class='row'>
                         <div class='col s12'>
@@ -91,25 +92,26 @@
 
                     <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' placeholder="" type='text' name='username' id='username' />
+                            <input  placeholder="" type="password"  id="password" />
                             <label for='email'>New Passowrd</label>
                         </div>
                     </div>
 
                     <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' placeholder="" type='password' name='password' id='password' />
+                            <input  placeholder="" type="password"  id="password_repeat" />
                             <label for='password'>Repeat New Password</label>
+                            <span id="alert_password_error">Password doesn't match<i class="fa fa-times" aria-hidden="true"></i></span>
                         </div>
 
                     </div>
 
-
-
                     <br />
                     <center>
                         <div class='row'>
-                            <button type='button' name='btn_login' class='col s12 btn btn-large waves-effect blue login_btn'>Confirm</button>
+                            <input type="hidden" id="user" value="{{$user_id}}"/>
+                            <input type="hidden" id="pass_token" name="csrf-token" value="{{ csrf_token() }}">
+                            <button id="confirm" type='button' name='btn_login' class='col s12 btn btn-large waves-effect blue login_btn'>Confirm</button>
                         </div>
                     </center>
                 <!--</form>-->
@@ -157,6 +159,7 @@
 </main>
 <script type="text/javascript" src="{{URL::asset('src/js/jquery-3.1.1.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('src/js/materialize.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('src/js/password_reset.js')}}"></script>
 <script>
 </script>
 </body></html>

@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+date_default_timezone_set('Europe/Belgrade');
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Excel;
+use Maatwebsite\Excel\Facades\Excel;
 class SellingController extends Controller
 {
 
@@ -180,27 +180,40 @@ class SellingController extends Controller
     public function exportToExcel($user,$year,$month,$date){
         $sellings = $this->filterSearch($user,$year,$month,$date);
 
-        $paymentsArray[] = ['ID', 'User','Product Name','Brand','Category','Quantity','Price Sold','Date Sold'];
 
-        foreach($sellings as $sell){
-            $paymentsArray[] = (array)$sell;
-        }
+        $yyear = date('m/d/Y H:II',time());
+        $file_name = ('payments_'.date('m_d_Y', time()));
 
-        $file_name = ('payments_'.date('m_d_Y_h_i_s ', time()));
+        Excel::load('templates\\template.xlsx',function($excel) use($sellings,$yyear){
 
-        Excel::create($file_name, function($excel) use ($paymentsArray) {
+            $excel->sheet('Report',function($sheet) use($sellings,$yyear){
 
-            // Set the spreadsheet title, creator, and description
-            $excel->setTitle('Payments');
-            $excel->setCreator('Laravel')->setCompany('W    J Gilmore, LLC');
-            $excel->setDescription('payments file');
+                $sheet->setCellValue('B1',$yyear);
+                $count = 3;
+                $total = 0.0;
+                foreach($sellings as $sell){
+                    $sheet->setCellValue('A'.$count,$sell->user);
+                    $sheet->setCellValue('B'.$count,$sell->product);
+                    $sheet->setCellValue('C'.$count,$sell->brand);
+                    $sheet->setCellValue('D'.$count,$sell->category);
+                    $sheet->setCellValue('E'.$count,$sell->quantity_sold);
+                    $sheet->setCellValue('F'.$count,$sell->price_sold);
+                    $sheet->setCellValue('G'.$count,$sell->created_at);
+                    $total += $sell->price_sold*$sell->quantity_sold;
+                    $count++;
+                }
 
-            // Build the spreadsheet, passing in the payments array
-            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
-                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+
+                $sheet->cell('G'.($count+1),function($cell) use($total){
+                    $cell->setFontSize(12);
+                    $cell->setFontWeight('bold');
+                    $cell->setValue('Total:'.$total);
+                });
             });
+        })->setFileName($file_name)->store('xlsx',storage_path().'\\reports\\excel');
 
-        })->store('xlsx',storage_path().'\\reports\\excel');
+
+
 
         return Response::json(['file'=>($file_name.'.xlsx')],200);
     }
@@ -216,27 +229,50 @@ class SellingController extends Controller
     public function exportToPDF($user,$year,$month,$date){
         $sellings = $this->filterSearch($user,$year,$month,$date);
 
-        $paymentsArray[] = ['ID', 'User','Product Name','Brand','Category','Quantity','Price Sold','Date Sold'];
 
-        foreach($sellings as $sell){
-            $paymentsArray[] = (array)$sell;
-        }
+        $yyear = date('m/d/Y h:i',time());
+        $file_name = ('payments_'.date('m_d_Y', time()));
 
-        $file_name = ('payments_'.date('m_d_Y_h_i_s ', time()));
+        Excel::load('templates\\template2.xlsx',function($excel) use($sellings,$yyear){
 
-        Excel::create($file_name, function($excel) use ($paymentsArray) {
+            $excel->sheet('Report',function($sheet) use($sellings,$yyear){
+                $sheet->setOrientation('landscape');
+                $sheet->setCellValue('B1',$yyear);
+                $count = 3;
+                $total = 0.0;
 
-            // Set the spreadsheet title, creator, and description
-            $excel->setTitle('Payments');
-            $excel->setCreator('Laravel')->setCompany('W    J Gilmore, LLC');
-            $excel->setDescription('payments file');
+                foreach($sellings as $sell){
+                    $sheet->setCellValue('A'.$count,$sell->user);
+                    $sheet->setCellValue('B'.$count,$sell->product);
+                    $sheet->setCellValue('C'.$count,$sell->brand);
+                    $sheet->setCellValue('D'.$count,$sell->category);
+                    $sheet->setCellValue('E'.$count,$sell->quantity_sold);
+                    $sheet->setCellValue('F'.$count,$sell->price_sold);
+                    $sheet->setCellValue('G'.$count,$sell->created_at);
 
-            // Build the spreadsheet, passing in the payments array
-            $excel->sheet('sheet1', function($sheet) use ($paymentsArray) {
-                $sheet->fromArray($paymentsArray, null, 'A1', false, false);
+                    //set borders
+                    $sheet->setBorder('A'.$count, 'thin');
+                    $sheet->setBorder('B'.$count, 'thin');
+                    $sheet->setBorder('C'.$count, 'thin');
+                    $sheet->setBorder('D'.$count, 'thin');
+                    $sheet->setBorder('E'.$count, 'thin');
+                    $sheet->setBorder('F'.$count, 'thin');
+                    $sheet->setBorder('G'.$count, 'thin');
+
+                    $total += $sell->price_sold*$sell->quantity_sold;
+                    $count++;
+                }
+
+
+                $sheet->cell('G'.($count+1),function($cell) use($total){
+                    $cell->setFontSize(12);
+                    $cell->setFontWeight('bold');
+                    $cell->setValue('Total:'.$total);
+                });
             });
+        })->setFileName($file_name)->store('pdf',storage_path().'\\reports\\pdf');
 
-        })->store('pdf',storage_path().'\\reports\\pdf');
+
 
         return Response::json(['file'=>($file_name.'.pdf')],200);
     }

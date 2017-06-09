@@ -18,18 +18,18 @@
     <nav class="top-nav" style="background-color:#171a37 !important;">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
         <div class="nav-wrapper ">
-                <ul id="dropdown1" class="dropdown-content">
-                   <!-- <li><a href="#!">Account</a></li>-->
-                    <li><a href="#change_password_modal">Change Password</a></li>
-                    <li><a href="{{route('logout')}}">Log Out</a></li>
-                </ul>
-                <h4 class="brand-logo center">@yield('page')</h4>
+            <ul id="dropdown1" class="dropdown-content">
+                <!-- <li><a href="#!">Account</a></li>-->
+                <li><a href="#change_password_modal">Change Password</a></li>
+                <li><a href="{{route('logout')}}">Log Out</a></li>
+            </ul>
+            <h4 class="brand-logo center">@yield('page')</h4>
 
-                <ul class="right user-menu">
-                    <li><i class="fa fa-user fa-fw dropdown-button" href='#' data-activates='dropdown1'></i></li>
-                    <li><i class="fa fa-caret-down dropdown-button"  data-activates='dropdown1'></i></li>
-                </ul>
-            </div>
+            <ul class="right user-menu">
+                <li><i class="fa fa-user fa-fw dropdown-button" href='#' data-activates='dropdown1'></i></li>
+                <li><i class="fa fa-caret-down dropdown-button"  data-activates='dropdown1'></i></li>
+            </ul>
+        </div>
     </nav>
     <div class="container"></div>
     <ul id="nav-mobile" class="side-nav fixed blue-grey lighten-5" style="transform: translateX(0%);">
@@ -45,78 +45,78 @@
     </ul>
 </header>
 <main>
-        <div class="container">
+    <div class="container">
 
-            @yield('content')
-            <div class="right-align">
-                <a href="#sellProductModal" id="sell" class="waves-effect waves-light btn" style="background-color: #40E0D0 !important;">Sell</a>
-            </div>
+        @yield('content')
+        <div class="right-align">
+            <a href="#sellProductModal" id="master_sell" class="waves-effect waves-light btn" style="background-color: #40E0D0 !important;">Sell</a>
+        </div>
 
-            <!--/Sell Product Modal -->
-            <div id="sellProductModal" class="modal modal-sm modal-fixed-footer">
+        <!--/Sell Product Modal -->
+        <div id="sellProductModal" class="modal modal-sm modal-fixed-footer">
 
-                <div class="modal-content">
-                    <h4>Sell Products</h4>
-                    <div class="col s12"><br></div>
-                    <div class="row">
+            <div class="modal-content">
+                <h4>Sell Products</h4>
+                <div class="col s12"><br></div>
+                <div class="row">
 
-                        <div class="card-panel large">
-                            <div class="col s4">
-                                <input type="text" id="autocomplete-input"  class="autocomplete " placeholder="Search for a product">
-                            </div>
-                            <div class="col s2">
-                                <input type="text"   id="price" placeholder="Price">
-                            </div>
-                            <div class="col s2">
-                                <input type="text"   id="quantity" placeholder="Quantity">
-                            </div>
-                            <h1></h1>
-
+                    <div class="card-panel large">
+                        <div class="col s4">
+                            <input type="text" id="autocomplete-input"  class="autocomplete " placeholder="Search for a product">
                         </div>
-
-                        <div class="card-panel large">
-                            <h5><b>Products to Sell</b></h5>
-                            <table  id="sell_table" border="1" class="bordered  stock_table">
-
-                                <thead>
-                                <tr class="primary-color">
-                                    <th>ID</th>
-                                    <th>Product Name</th>
-                                    <th>Brand</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Selling Price</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody id="sell_body">
-                                <tr class="none-top-border">
-
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="col s2">
+                            <input type="text"   id="master_price" placeholder="Price">
                         </div>
-
-                        <div class="col s12">
-                            <div class="right-align">
-                                <h6><b>TOTAL VALUE:</b><span id="total"></span>&euro;</h6>
-                            </div>
+                        <div class="col s2">
+                            <input type="text"   id="master_quantity" placeholder="Quantity">
                         </div>
+                        <h1></h1>
 
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button  type="submit" id="master_sell" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
-                    <a id="close_sell" class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+
+                    <div class="card-panel large">
+                        <h5><b>Products to Sell</b></h5>
+                        <table  id="master_sell_table" border="1" class="bordered  stock_table">
+
+                            <thead>
+                            <tr class="primary-color">
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Brand</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Selling Price</th>
+                                <th>Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="master_sell_body">
+                            <tr class="none-top-border">
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col s12">
+                        <div class="right-align">
+                            <h6><b>TOTAL VALUE:</b><span id="total"></span>&euro;</h6>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            <div class="modal-footer">
+                <button  type="submit" id="final_sell" href="#!" class="modal-action waves-effect light-blue darken-4 btn ">Sell</button>
+                <a id="close_sell" class="modal-action modal-close waves-effect red darken-4 btn">Cancel</a>
+            </div>
+        </div>
 
-            @yield('modals')
+        @yield('modals')
 
-            <div id="change_password_modal" class="modal">
-              <div  class="col s12">
-                  <div class="modal-content">
+        <div id="change_password_modal" class="modal">
+            <div  class="col s12">
+                <div class="modal-content">
                     <h4>Change Password</h4>
                     <div class="row">
                         <div class="input-field col s12">
@@ -134,32 +134,32 @@
                         </div>
                     </div>
 
-                  </div>
-                    <div class="modal-footer">
-                      <button  type="submit" id="submit" href="#!" class="modal-action  waves-effect waves-green btn ">Submit</button>
-                      <a  class="modal-action modal-close waves-effect waves-light btn">Close</a>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button  type="submit" id="submit" href="#!" class="modal-action  waves-effect waves-green btn ">Submit</button>
+                    <a  class="modal-action modal-close waves-effect waves-light btn">Close</a>
                 </div>
             </div>
+        </div>
 
-            <div id="loading_modal" class="modal loading_modal">
-                <div class="modal-content">
-                    <div class="preloader-wrapper active loader">
-                        <div class="spinner-layer spinner-blue-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div><div class="gap-patch">
-                                <div class="circle"></div>
-                            </div><div class="circle-clipper right">
-                                <div class="circle"></div>
-                            </div>
+        <div id="loading_modal" class="modal loading_modal">
+            <div class="modal-content">
+                <div class="preloader-wrapper active loader">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
+    </div>
 </main>
 <script type="text/javascript">
     var baseUrl = "{{ URL::to('/') }}";
@@ -167,7 +167,6 @@
 </script>
 <script type="text/javascript" src="{{URL::asset('src/js/jquery-3.1.1.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('src/js/materialize.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('src/js/index.js')}}"></script>
 <script>
     $('.button-collapse').sideNav();
     function ajax(method, url, params, callback, callbackParams) {
@@ -216,45 +215,44 @@
     })
 </script>
 <script type="text/javascript">
-  $(function(){
+    $(function(){
 
-    $('#repeat_new_password').on('keyup',function(){
+        $('#repeat_new_password').on('keyup',function(){
 
-       var repeatPassword = $(this).val();
-       var password = $('#new_password').val();
+            var repeatPassword = $(this).val();
+            var password = $('#new_password').val();
 
 
-       if(repeatPassword != password){
-          $('#alert_password_error').show();
-       }else{
-         $('#alert_password_error').hide();
-       }
+            if(repeatPassword != password){
+                $('#alert_password_error').show();
+            }else{
+                $('#alert_password_error').hide();
+            }
+
+        });
+
+        $('#submit').on('click',function(){
+
+            var actual_password = $('#actual_password').val();
+            var password = $('#repeat_new_password').val();
+            //   ajax("POST","/stock/delete_product","id="+this.value,productDeleted,"");
+            ajax('POST','/user/change_password','password='+password+'&actual_password='+actual_password,passwordChanged,"");
+            //# sourceURL=password_change.js
+        });
 
     });
 
-      $('#submit').on('click',function(){
+    function passwordChanged(params,success,responseObj){
 
-          var actual_password = $('#actual_password').val();
-          var password = $('#repeat_new_password').val();
-          //   ajax("POST","/stock/delete_product","id="+this.value,productDeleted,"");
-          ajax('POST','/user/change_password','password='+password+'&actual_password='+actual_password,passwordChanged,"");
-          //# sourceURL=password_change.js
-      });
-
-    });
-
-function passwordChanged(params,success,responseObj){
-
-    if(success){
-        Materialize.toast(responseObj.message,4000,'green');
-    }else{
-        Materialize.toast(responseObj.message,4000,'red');
+        if(success){
+            Materialize.toast(responseObj.message,4000,'green');
+        }else{
+            Materialize.toast(responseObj.message,4000,'red');
+        }
     }
-}
 
 </script>
-
-
+<script type="text/javascript" src="{{URL::asset('src/js/index.js')}}"></script>
 @yield('scripts')
 </body>
 </html>

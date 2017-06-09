@@ -51,8 +51,13 @@ $(function(){
 
     //refresh table
     $('#refresh_button').click(function(){
-        var date =  $('#date').val();
+        var date =  new Date();
         salesFilter(0,0,0,date);
+        $('#user_select').val(0);
+        $('#month_select').val(0);
+        $('#year_select').val(0);
+        $('#date').val(date.getTime());
+        $('#date').prop('disabled',false);
     });
 
     //list sales by user
@@ -91,7 +96,7 @@ $(function(){
 
 function salesFilter(user,year,month,date){
     $('#loading_modal').modal('open');
-    ajax("GET",'/sales/sales_filter/'+user+'/'+year+'/'+month+'/'+date,'',reloadTable,'');
+    ajax("GET",'/sales/sales_filter/'+(user==''?0:user)+'/'+(year==''?0:year)+'/'+(month==''?0:month)+'/'+(date == ''?0:date),'',reloadTable,'');
 }
 
 function reloadTable(params,success,responseObj){
@@ -120,10 +125,16 @@ function reloadTable(params,success,responseObj){
     }
 }
 
+var protocol = window.location.protocol;
+var host = window.location.host;
+var port = window.location.port;
+
+
 function exportedExcel(params,success,responseObj){
     if(success){
         var file = responseObj.file;
-        window.location.assign("http://localhost:8000/sales/download_excel_file/"+file);
+
+        window.location.assign("/sales/download_excel_file/"+file);
     }else{
         Materialize.toast(responseObj.message,3000,'red');
     }
@@ -132,7 +143,7 @@ function exportedExcel(params,success,responseObj){
 function exportedPdf(params,success,responseObj){
     if(success){
         var file = responseObj.file;
-        window.location.assign("http://localhost:8000/sales/download_pdf_file/"+file);
+        window.location.assign("/sales/download_pdf_file/"+file);
     }else{
         Materialize.toast(responseObj.message,3000,'red');
     }

@@ -45,44 +45,65 @@ class LoginController extends Controller
         return redirect()->route('login');
     }
 
-    public function generateRandomString($length) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
+
 
 
     public function sendMailForPasswordReset(Request $request)
     {
         $email = $request['email'];
-        $user = User::where('email','=',$email)->first();
+        $token = $request['token'];
+        $user =  null;
+        try{
+            $user = User::where('email','=',$email)->first();
+        }catch(\Exception $exe){
+            return Response::json(['message'=>'Couldn\'t establish connection to database'],400);
+        }
+
 
         if($user == null)
         {
             return Response::json(['message'=>'Error ! No User Registered with the provided E-Mail'],400);
         }
         else{
-            $random_password = $this->generateRandomString(10);
             $id = $user->id;
 
-            $user = User::find($id);
 
+            try{
+                $reset = new PasswordReset();
+                $reset->user = $id;
+                $reset->token = $token;
+                $reset->save();
 
-            Mail::send('emails.password_reset',['password'=>$random_password] , function ($message) use($user) {
-                $message->to($user->email,$user->full_name);
-                $message->subject("Asterisk Password Reset");});
+                Mail::send('emails.password_reset',['token'=> $token] , function ($message) use($user) {
+                    $message->to($user->email,$user->full_name);
+                    $message->subject("Asterisk Password Reset");
+                });
 
-                return Response::json(['message'=>'Email with generated password has been sent'],200);
-
+            }catch(\Exception $exe){
+                return Response::json(['message'=>$exe->getMessage()],400);
+            }
+            return Response::json(['message'=>'A link has been send to your email for reseting the password'],200);
         }
 
-        $user->password = bcrypt($random_password);
-        $user->save();
+
+
         return Response::json(['message'=>'Something went wrong, Please try again !'],400);
+    }
+
+    public function showResetForm($token =  null){
+        if(!isset($token)){
+            return redirect('login');
+        }
+
+        $reset = PasswordReset::where('token','=',$token)->first();
+
+        if($reset !=  null){
+            return view('password_reset',['user_id'=>$reset->user]);
+        }else{
+            return redirect('login');
+        }
+
+
     }
 
 
@@ -103,6 +124,23 @@ class LoginController extends Controller
             }
         }
 
+    }
+
+    public function changePasswordReset(Request $req){
+        $password = $req['password'];
+        $id = $req['user'];
+
+        $user = User::find($id);
+        $user->password = bcrypt($password);
+
+        if($user->save()){
+            $reset  = PasswordReset::where('user','=',$id)->first();
+            $reset->delete();
+            return Response::json(['message'=>'Pasword Reseted Successfully'],200);
+
+        }else{
+            return Request::json(['message'=>'Failed Reseting Password'],400);
+        }
     }
 
 

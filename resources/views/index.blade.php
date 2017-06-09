@@ -5,7 +5,12 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <style>
+        #card1{
+            max-height: 400px;
+        }
+    </style>
 @endsection
 
 @section('page')
@@ -14,28 +19,29 @@
 
 
 @section('content')
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel">
 
-    <div class="card-panel">Hello
-        <div class="col s6 right-align" id="date" style="height:1px;"></div>
-    </div>
-    <div class="card-panel teal lighten-2" style="width:400px; height:60px;">This is a card panel </div>
-    <div class="card-panel red accent-3" style="width:400px;">This is a card panel </div>
-    <div class="card-panel red accent-3" style="width:400px;">This is a card panel </div>
+            <div class="card-panel ">
+                <h4>Users</h4>
+                <div class="ct-chart "></div>
 
-    <div class="col s6 left-align" id="date" style="height:1px;"></div>
+            </div>
 
-    <div class="row">
-        <div class="col s6 right-align">
-            Hello
+            <div class="card-panel " >
+                <div class="ct-chart2"></div>
+                <div class="col-md-12">
+                    <h5>Users Added</h5>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <div class"row">
-        <div class="col-sm-6 text-center">
-            <label class="label label-success">Area Chart</label>
-            <div id="area-chart" ></div>
-        </div>
-     </div>
+
+
+
 
 
 @endsection
@@ -45,25 +51,26 @@
 @endsection
 
 @section('scripts')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script type="text/javascript" src="{{URL::asset('src/js/dashboard.js')}}"></script>
-
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script>
-        function formatDate(date) {
-            var d = new Date(date),
-                    month = '' + (d.getMonth() + 1),
-                    day = '' + d.getDate(),
-                    year = d.getFullYear();
-                    hour = d.getHours();
+        new Chartist.Line('.ct-chart', {
+            labels: [1, 2, 3, 4, 5, 6, 7, 8],
+            series: [
+                [5, 9, 7, 8, 5, 3, 5, 4]
+            ]
+        }, {
+            low: 0,
+            showArea: true
+        });
 
-
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
-
-            return [year, month, day].join('-');
-        }
-
-        document.getElementById("date").innerHTML = formatDate(new Date());
+        new Chartist.Line('.ct-chart2', {
+            labels: [1, 2, 3, 4, 5, 6, 7, 8],
+            series: [
+                [5, 9, 7, 8, 5, 3, 5, 4]
+            ]
+        }, {
+            low: 0,
+            showArea: true
+        });
     </script>
 @endsection

@@ -10,19 +10,15 @@ Route::post('login',[
     'as'=>'login'
 ]);
 
+
 Route::any('logout',[
     'uses'=>'LoginController@logout',
     'as'=>'logout'
 ]);
 
-Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
-Route::post('password/reset', 'Auth\PasswordController@reset');
-
-Route::any('/password_reset/send_mail',[
-  'uses'=>'LoginController@sendMailForPasswordReset',
-  'as' =>'password_reset.send_mail'
-]);
+Route::get('/password/reset/{token?}',['uses'=>'LoginController@showResetForm']);
+Route::post('/password/reset_password',['uses'=>'LoginController@changePasswordReset']);
+Route::post('/password_reset/send_mail',['uses'=>'LoginController@sendMailForPasswordReset']);
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -202,8 +198,8 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'stock.sell_product'
     ]);
 
-    Route::get('/sales/download_excel_file/{file}',['uses'=>'SellingController@downloadExcelFile']);
-    Route::get('/sales/download_pdf_file/{file}',['uses'=>'SellingController@downloadPdfFile']);
+    Route::get('/sales/download_excel_file/{file}',['uses'=>'SellingController@downloadExcelFile','as'=>'excel']);
+    Route::get('/sales/download_pdf_file/{file}',['uses'=>'SellingController@downloadPdfFile','as'=>'pdf']);
 
 
     Route::get('/get_dates',['uses'=>'UsersController@getDateOfCreatedUsers']);
