@@ -61,20 +61,6 @@
 
 @section('scripts')
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-    <script>
 
-
-        new Chartist.Line('.ct-chart2', {
-            labels: [1],
-            series: [
-                [5]
-            ]
-        }, {
-            low: 0,
-            showArea: true,
-            width: '100%',
-            height: '200px'
-        });
-    </script>
     <script type="text/javascript" src="{{URL::asset('src/js/dashboard.js')}}"></script>
 @endsection
