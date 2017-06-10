@@ -1,9 +1,7 @@
 $(function(){
 
-    $('#button1').on('click',function(){
+   ajax('GET','/get_user_stats','',showResult,'');
 
-        ajax('GET','/get_dates','',showResult,'');
-    });
 
 
 });
@@ -15,51 +13,34 @@ $(function(){
 function showResult(params,success,responseObj){
 
     if(success){
-        var dates = responseObj.dates;
 
-        for(var i = 0; i< dates.length ; ++i){
+        var stats = responseObj.stats;
 
-            var date = new Date(dates[i]);
-            var value = 0;
+        var dates = [];
+        var tempValArray = [];
+        var finalValArray = [];
 
-            $.ajax({
-                url:'/getsize/'+date.getFullYear()+'/'+(date.getMonth()+1)+'',
-                type:'GET',
-                success:function(responseObj){
-                    alert(responseObj.count);
-                    data.push({year:(date.getDate()+"."+(date.getMonth()+1)+"."+date.getFullYear()),value:responseObj.count});
-
-                },
-                error:function(responseObj){
-                    alert(responseObj.responseText);
-                }
-            });
-
+        for(var i =0 ; i< stats.length; i++){
+            var date = stats[i].date;
+            dates.push(date);
+            tempValArray.push(stats[i].count);
 
         }
 
-        alert(data);
+        finalValArray.push(tempValArray);
 
-        new Morris.Line({
-            // ID of the element in which to draw the chart.
-            element: 'myfirstchart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
-            data: [
-                {year:'2015',value:1},
-                {year:'2016',value:2},
-                {year:'2017',value:3}
-
-            ],
-            // The name of the data record attribute that contains x-values.
-            xkey: 'year',
-            // A list of names of data record attributes that contain y-values.
-            ykeys: ['value'],
-            // Labels for the ykeys -- will be displayed when you hover over the
-            // chart.
-            labels: ['Value']
+        new Chartist.Line('.ct-chart', {
+            labels: date,
+            series: finalValArray
+        }, {
+            low: 0,
+            showArea: true,
+            width: '100%',
+            height: '200px'
         });
     }
+
+
 }
 
 

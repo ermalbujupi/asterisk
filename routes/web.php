@@ -202,7 +202,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/sales/download_pdf_file/{file}',['uses'=>'SellingController@downloadPdfFile','as'=>'pdf']);
 
 
-    Route::get('/get_dates',['uses'=>'UsersController@getDateOfCreatedUsers']);
+    Route::get('/get_user_stats',['uses'=>'HomeController@getUserStats']);
 
     Route::get('/getsize/{year}/{month}',['uses'=>'UsersController@getCountByDate','as'=>'getsize']);
 
