@@ -17,17 +17,21 @@
 <header>
     <nav class="top-nav" style="background-color:#171a37 !important;">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="fa fa-bars"></i></a>
-        <div class="nav-wrapper ">
+
+        <div class="nav-wrapper">
+
             <ul id="dropdown1" class="dropdown-content">
                 <!-- <li><a href="#!">Account</a></li>-->
                 <li><a href="#change_password_modal">Change Password</a></li>
                 <li><a href="{{route('logout')}}">Log Out</a></li>
             </ul>
             <h4 class="brand-logo center">@yield('page')</h4>
-
             <ul class="right user-menu">
                 <li><i class="fa fa-user fa-fw dropdown-button" href='#' data-activates='dropdown1'></i></li>
                 <li><i class="fa fa-caret-down dropdown-button"  data-activates='dropdown1'></i></li>
+            </ul>
+            <ul class="right" style="padding-right:200px; padding-top:10px;">
+                <a href="#sellProductModal" id="master_sell" class="waves-effect waves-light btn" style="background-color: #40E0D0 !important;">Sell</a>
             </ul>
         </div>
     </nav>
@@ -41,7 +45,7 @@
         <li class="bold {{Request::is('todo') ? 'active':''}}"><a href="{{route('todo')}}" class="waves-effect waves-teal"><i class="fa fa-tasks"></i>To Do List</a></li>
         <li class="bold {{Request::is('categories_brands') ? 'active':''}} "><a href="{{route('categories_brands')}}" class="waves-effect waves-teal"><i class="fa fa-apple"></i>Categories & Brands</a></li>
         <li class="bold {{Request::is('sellings') ? 'active':''}}"><a href="{{route('sellings')}}"><i class="fa fa-eur" aria-hidden="true"></i>Sales</a></li>
-        <li class="bold {{Request::is('log') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>
+       <!-- <li class="bold {{Request::is('log') ? 'active':''}}"><a href="#" class="waves-effect waves-teal"><i class="fa fa-clipboard"></i>Log</a></li>-->
     </ul>
 </header>
 <main>
@@ -49,7 +53,7 @@
 
         @yield('content')
         <div class="right-align">
-            <a href="#sellProductModal" id="master_sell" class="waves-effect waves-light btn" style="background-color: #40E0D0 !important;">Sell</a>
+            <!--<a href="#sellProductModal" id="master_sell" class="waves-effect waves-light btn" style="background-color: #40E0D0 !important;">Sell</a>-->
         </div>
 
         <!--/Sell Product Modal -->
